@@ -116,11 +116,15 @@ def validate(regs: dict[str, pd.DataFrame]) -> list[Issue]:
                 err("risks", r.risk_id, f"{field} must be 1 to 5")
         if r.inherent_score != r.likelihood * r.impact:
             err("risks", r.risk_id, f"inherent score {r.inherent_score} is not L x I = {r.likelihood * r.impact}")
-        if r.inherent_rating != rating_for(r.inherent_score):
+        if not 1 <= r.inherent_score <= 25:
+            err("risks", r.risk_id, f"inherent score {r.inherent_score} is outside 1 to 25")
+        elif r.inherent_rating != rating_for(r.inherent_score):
             err("risks", r.risk_id, f"rating {r.inherent_rating} does not match the band for {r.inherent_score}")
         if r.target_score != r.target_likelihood * r.target_impact:
             err("risks", r.risk_id, "target score is not target L x target I")
-        if r.target_rating != rating_for(r.target_score):
+        if not 1 <= r.target_score <= 25:
+            err("risks", r.risk_id, f"target score {r.target_score} is outside 1 to 25")
+        elif r.target_rating != rating_for(r.target_score):
             err("risks", r.risk_id, "target rating does not match its band")
         if r.target_score > r.inherent_score:
             err("risks", r.risk_id, "target residual score is higher than the inherent score")

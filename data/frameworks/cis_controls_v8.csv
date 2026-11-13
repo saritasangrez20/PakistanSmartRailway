@@ -1,0 +1,19 @@
+framework,req_id,title,group,description,match_key
+CIS Controls,CIS 1,Inventory and Control of Enterprise Assets,CIS Controls v8,Inventory and manage all enterprise assets including OT and IoT devices,CIS 1
+CIS Controls,CIS 2,Inventory and Control of Software Assets,CIS Controls v8,Inventory and manage software so only authorised software runs,CIS 2
+CIS Controls,CIS 3,Data Protection,CIS Controls v8,Processes and technical controls to identify classify handle retain and dispose of data; data access control lists,CIS 3
+CIS Controls,CIS 4,Secure Configuration of Enterprise Assets and Software,CIS Controls v8,Secure configuration baselines for devices software and cloud; change default credentials,CIS 4
+CIS Controls,CIS 5,Account Management,CIS Controls v8,Manage credentials for user administrator and service accounts; disable dormant accounts,CIS 5
+CIS Controls,CIS 6,Access Control Management,CIS Controls v8,Grant and revoke access; MFA for remote and administrative access; role based access,CIS 6
+CIS Controls,CIS 7,Continuous Vulnerability Management,CIS Controls v8,Assess and track vulnerabilities and remediate through patching,CIS 7
+CIS Controls,CIS 8,Audit Log Management,CIS Controls v8,Collect alert review and retain audit logs; centralised log management,CIS 8
+CIS Controls,CIS 9,Email and Web Browser Protections,CIS Controls v8,Protect against threats through email and web browsers; anti-phishing filtering,CIS 9
+CIS Controls,CIS 10,Malware Defenses,CIS Controls v8,Prevent or control malware and ransomware,CIS 10
+CIS Controls,CIS 11,Data Recovery,CIS Controls v8,Data recovery practices to restore assets to a trusted state; isolated backups and recovery testing,CIS 11
+CIS Controls,CIS 12,Network Infrastructure Management,CIS Controls v8,Manage network devices and architecture; network segmentation,CIS 12
+CIS Controls,CIS 13,Network Monitoring and Defense,CIS Controls v8,Monitor and defend networks; intrusion detection and traffic filtering between segments,CIS 13
+CIS Controls,CIS 14,Security Awareness and Skills Training,CIS Controls v8,Security awareness programme for the workforce,CIS 14
+CIS Controls,CIS 15,Service Provider Management,CIS Controls v8,Evaluate and manage service providers that hold sensitive data or access,CIS 15
+CIS Controls,CIS 16,Application Software Security,CIS Controls v8,Manage the security lifecycle of in house and acquired software and APIs; security testing,CIS 16
+CIS Controls,CIS 17,Incident Response Management,CIS Controls v8,Incident response capability: plans roles communications and exercises,CIS 17
+CIS Controls,CIS 18,Penetration Testing,CIS Controls v8,Test the effectiveness and resilience of assets by simulating attacks,CIS 18

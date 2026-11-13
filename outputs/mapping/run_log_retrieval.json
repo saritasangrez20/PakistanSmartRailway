@@ -1,0 +1,238 @@
+{
+  "backend": "retrieval",
+  "model": null,
+  "run_at": "2026-11-13T08:57:19+00:00",
+  "runtime_seconds": 0.19,
+  "controls": 25,
+  "mappings": 87,
+  "rejected_ids_total": 0,
+  "parse_failures": 0,
+  "injection_flagged_controls": [],
+  "per_control": [
+    {
+      "control_id": "CTL-01",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-02",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 8
+    },
+    {
+      "control_id": "CTL-03",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 2
+    },
+    {
+      "control_id": "CTL-04",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 3
+    },
+    {
+      "control_id": "CTL-05",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 3
+    },
+    {
+      "control_id": "CTL-06",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 1
+    },
+    {
+      "control_id": "CTL-07",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 4
+    },
+    {
+      "control_id": "CTL-08",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 3
+    },
+    {
+      "control_id": "CTL-09",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 2
+    },
+    {
+      "control_id": "CTL-10",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 2
+    },
+    {
+      "control_id": "CTL-11",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 3
+    },
+    {
+      "control_id": "CTL-12",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 3
+    },
+    {
+      "control_id": "CTL-13",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 1
+    },
+    {
+      "control_id": "CTL-14",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 3
+    },
+    {
+      "control_id": "CTL-15",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 1
+    },
+    {
+      "control_id": "CTL-16",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 4
+    },
+    {
+      "control_id": "CTL-17",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-18",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-19",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 8
+    },
+    {
+      "control_id": "CTL-20",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 3
+    },
+    {
+      "control_id": "CTL-21",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 2
+    },
+    {
+      "control_id": "CTL-22",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 3
+    },
+    {
+      "control_id": "CTL-23",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 6
+    },
+    {
+      "control_id": "CTL-24",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 1
+    },
+    {
+      "control_id": "CTL-25",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "parse_error": null,
+      "seconds": 0.0,
+      "mappings": 6
+    }
+  ]
+}

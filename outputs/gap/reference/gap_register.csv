@@ -1,0 +1,123 @@
+gap_id,family,framework,req_id,title,mapped_controls,control_statuses,compliance_status,score,linked_risks,max_inherent_risk
+GAP-001,CIS Controls,CIS Controls,CIS 17,Incident Response Management,CTL-25,Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-002,ISO 27001,ISO 27001,A.5.24,Information security incident management planning and preparation,CTL-25,Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-003,ISO 27001,ISO 27001,A.5.26,Response to information security incidents,CTL-25,Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-004,ISO 27001,ISO 27001,A.5.27,Learning from information security incidents,CTL-25,Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-005,ISO 27001,ISO 27001,A.5.29,Information security during disruption,CTL-19;CTL-25,Gap;Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-006,ISO 27001,ISO 27001,A.5.30,ICT readiness for business continuity,CTL-19;CTL-25,Gap;Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-007,ISO 27001,ISO 27001,A.8.12,Data leakage prevention,CTL-15,Gap,Gap (control planned),0.0,R-09,20
+GAP-008,NIST CSF,NIST CSF,RS.MA,Incident Management,CTL-25,Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-009,NIST CSF,NIST CSF,RS.AN,Incident Analysis,CTL-25,Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-010,NIST CSF,NIST CSF,RS.CO,Incident Response Reporting and Communication,CTL-25,Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-011,NIST CSF,NIST CSF,RS.MI,Incident Mitigation,CTL-25,Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
+GAP-012,CIS Controls,CIS Controls,CIS 1,Inventory and Control of Enterprise Assets,CTL-03;CTL-05,Partial;Gap,Partially satisfied,0.5,R-03;R-04,20
+GAP-013,CIS Controls,CIS Controls,CIS 5,Account Management,CTL-05;CTL-08;CTL-09;CTL-16,Gap;Partial;Gap;Gap,Partially satisfied,0.5,R-04;R-09;R-10;R-15,20
+GAP-014,CIS Controls,CIS Controls,CIS 7,Continuous Vulnerability Management,CTL-12;CTL-17,Gap;Partial,Partially satisfied,0.5,R-03;R-05;R-06;R-07,20
+GAP-015,CIS Controls,CIS Controls,CIS 8,Audit Log Management,CTL-04;CTL-15;CTL-24,Gap;Gap;Partial,Partially satisfied,0.5,R-02;R-05;R-09;R-17,20
+GAP-016,CIS Controls,CIS Controls,CIS 12,Network Infrastructure Management,CTL-01,Partial,Partially satisfied,0.5,R-01;R-02;R-03,20
+GAP-017,CIS Controls,CIS Controls,CIS 13,Network Monitoring and Defense,CTL-01;CTL-13;CTL-15;CTL-24,Partial;Partial;Gap;Partial,Partially satisfied,0.5,R-01;R-02;R-03;R-05;R-07;R-09;R-17,20
+GAP-018,COBIT,COBIT,BAI09,Managed Assets,CTL-03,Partial,Partially satisfied,0.5,R-03,20
+GAP-019,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.1,Human user identification and authentication,CTL-02;CTL-05;CTL-07,Gap;Gap;Partial,Partially satisfied,0.5,R-01;R-04;R-05;R-09;R-10;R-14;R-15;R-16,20
+GAP-020,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.3,Account management,CTL-08;CTL-09,Partial;Gap,Partially satisfied,0.5,R-09;R-15,20
+GAP-021,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.13,Access via untrusted networks,CTL-02;CTL-07,Gap;Partial,Partially satisfied,0.5,R-01;R-05;R-09;R-10;R-14;R-15;R-16,20
+GAP-022,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.8,Auditable events,CTL-04;CTL-24,Gap;Partial,Partially satisfied,0.5,R-02;R-05;R-17,20
+GAP-023,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.2,Malicious code protection,CTL-17,Partial,Partially satisfied,0.5,R-03;R-05,20
+GAP-024,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 4.1,Information confidentiality,CTL-14,Partial,Partially satisfied,0.5,R-09;R-10,20
+GAP-025,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 4.3,Use of cryptography,CTL-14,Partial,Partially satisfied,0.5,R-09;R-10,20
+GAP-026,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 5.1,Network segmentation,CTL-01,Partial,Partially satisfied,0.5,R-01;R-02;R-03,20
+GAP-027,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 5.2,Zone boundary protection,CTL-01,Partial,Partially satisfied,0.5,R-01;R-02;R-03,20
+GAP-028,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 6.1,Audit log accessibility,CTL-24,Partial,Partially satisfied,0.5,R-05;R-17,20
+GAP-029,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 6.2,Continuous monitoring,CTL-04;CTL-24,Gap;Partial,Partially satisfied,0.5,R-02;R-05;R-17,20
+GAP-030,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 7.8,Control system component inventory,CTL-03,Partial,Partially satisfied,0.5,R-03,20
+GAP-031,OT (IEC 62443 / SP 800-82),IEC 62443,62443-2-1,Security program requirements for IACS asset owners,CTL-03;CTL-17,Partial;Partial,Partially satisfied,0.5,R-03;R-05,20
+GAP-032,OT (IEC 62443 / SP 800-82),NIST SP 800-82,SP800-82 OT program,Establishing an OT cybersecurity program,CTL-01;CTL-02;CTL-03;CTL-04;CTL-17;CTL-24,Partial;Gap;Partial;Gap;Partial;Partial,Partially satisfied,0.5,R-01;R-02;R-03;R-05;R-16;R-17,20
+GAP-033,OT (IEC 62443 / SP 800-82),NIST SP 800-82,SP800-82 OT risk,Risk management for OT systems,CTL-01;CTL-02;CTL-03;CTL-04;CTL-17;CTL-24,Partial;Gap;Partial;Gap;Partial;Partial,Partially satisfied,0.5,R-01;R-02;R-03;R-05;R-16;R-17,20
+GAP-034,OT (IEC 62443 / SP 800-82),NIST SP 800-82,SP800-82 OT architecture,OT cybersecurity architecture,CTL-01;CTL-02;CTL-03;CTL-04;CTL-17;CTL-24,Partial;Gap;Partial;Gap;Partial;Partial,Partially satisfied,0.5,R-01;R-02;R-03;R-05;R-16;R-17,20
+GAP-035,OT (IEC 62443 / SP 800-82),NIST SP 800-82,SP800-82 OT controls,Applying security controls to OT,CTL-01;CTL-02;CTL-03;CTL-04;CTL-17;CTL-24,Partial;Gap;Partial;Gap;Partial;Partial,Partially satisfied,0.5,R-01;R-02;R-03;R-05;R-16;R-17,20
+GAP-036,ISO 27001,ISO 27001,A.5.3,Segregation of duties,CTL-08,Partial,Partially satisfied,0.5,R-09;R-15,20
+GAP-037,ISO 27001,ISO 27001,A.5.9,Inventory of information and other associated assets,CTL-03;CTL-20,Partial;Gap,Partially satisfied,0.5,R-03;R-11,20
+GAP-038,ISO 27001,ISO 27001,A.5.14,Information transfer,CTL-14,Partial,Partially satisfied,0.5,R-09;R-10,20
+GAP-039,ISO 27001,ISO 27001,A.5.16,Identity management,CTL-05;CTL-07;CTL-09,Gap;Partial;Gap,Partially satisfied,0.5,R-01;R-04;R-05;R-09;R-10;R-14;R-15,20
+GAP-040,ISO 27001,ISO 27001,A.5.17,Authentication information,CTL-05;CTL-07,Gap;Partial,Partially satisfied,0.5,R-01;R-04;R-05;R-09;R-10;R-14;R-15,20
+GAP-041,ISO 27001,ISO 27001,A.8.2,Privileged access rights,CTL-02;CTL-07;CTL-08;CTL-16,Gap;Partial;Partial;Gap,Partially satisfied,0.5,R-01;R-05;R-09;R-10;R-14;R-15;R-16,20
+GAP-042,ISO 27001,ISO 27001,A.8.5,Secure authentication,CTL-02;CTL-05;CTL-07,Gap;Gap;Partial,Partially satisfied,0.5,R-01;R-04;R-05;R-09;R-10;R-14;R-15;R-16,20
+GAP-043,ISO 27001,ISO 27001,A.8.8,Management of technical vulnerabilities,CTL-03;CTL-12;CTL-17,Partial;Gap;Partial,Partially satisfied,0.5,R-03;R-05;R-06;R-07,20
+GAP-044,ISO 27001,ISO 27001,A.8.15,Logging,CTL-04;CTL-15;CTL-24,Gap;Gap;Partial,Partially satisfied,0.5,R-02;R-05;R-09;R-17,20
+GAP-045,ISO 27001,ISO 27001,A.8.16,Monitoring activities,CTL-04;CTL-13;CTL-15;CTL-24,Gap;Partial;Gap;Partial,Partially satisfied,0.5,R-02;R-05;R-07;R-09;R-17,20
+GAP-046,ISO 27001,ISO 27001,A.8.17,Clock synchronization,CTL-24,Partial,Partially satisfied,0.5,R-05;R-17,20
+GAP-047,ISO 27001,ISO 27001,A.8.18,Use of privileged utility programs,CTL-08,Partial,Partially satisfied,0.5,R-09;R-15,20
+GAP-048,ISO 27001,ISO 27001,A.8.19,Installation of software on operational systems,CTL-17,Partial,Partially satisfied,0.5,R-03;R-05,20
+GAP-049,ISO 27001,ISO 27001,A.8.20,Networks security,CTL-01,Partial,Partially satisfied,0.5,R-01;R-02;R-03,20
+GAP-050,ISO 27001,ISO 27001,A.8.22,Segregation of networks,CTL-01,Partial,Partially satisfied,0.5,R-01;R-02;R-03,20
+GAP-051,ISO 27001,ISO 27001,A.8.24,Use of cryptography,CTL-13;CTL-14,Partial;Partial,Partially satisfied,0.5,R-07;R-09;R-10,20
+GAP-052,ISO 27001,ISO 27001,A.8.32,Change management,CTL-17;CTL-20,Partial;Gap,Partially satisfied,0.5,R-03;R-05;R-11,20
+GAP-053,NIST CSF,NIST CSF,ID.AM,Asset Management,CTL-03;CTL-12;CTL-17;CTL-19;CTL-25,Partial;Gap;Partial;Gap;Gap,Partially satisfied,0.5,R-03;R-05;R-06;R-07;R-12;R-17,20
+GAP-054,NIST CSF,NIST CSF,ID.RA,Risk Assessment,CTL-03;CTL-12;CTL-17;CTL-19;CTL-25,Partial;Gap;Partial;Gap;Gap,Partially satisfied,0.5,R-03;R-05;R-06;R-07;R-12;R-17,20
+GAP-055,NIST CSF,NIST CSF,ID.IM,Improvement,CTL-03;CTL-12;CTL-17;CTL-19;CTL-25,Partial;Gap;Partial;Gap;Gap,Partially satisfied,0.5,R-03;R-05;R-06;R-07;R-12;R-17,20
+GAP-056,NIST CSF,NIST CSF,DE.CM,Continuous Monitoring,CTL-04;CTL-06;CTL-13;CTL-15;CTL-21;CTL-24,Gap;Gap;Partial;Gap;Gap;Partial,Partially satisfied,0.5,R-02;R-04;R-05;R-07;R-09;R-11;R-17,20
+GAP-057,NIST CSF,NIST CSF,DE.AE,Adverse Event Analysis,CTL-04;CTL-06;CTL-13;CTL-15;CTL-21;CTL-24,Gap;Gap;Partial;Gap;Gap;Partial,Partially satisfied,0.5,R-02;R-04;R-05;R-07;R-09;R-11;R-17,20
+GAP-058,PISF 2026,PISF 2026,PISF-AST,Asset management,CTL-03,Partial,Partially satisfied,0.5,R-03,20
+GAP-059,PISF 2026,PISF 2026,PISF-NET,Network security and segmentation,CTL-01,Partial,Partially satisfied,0.5,R-01;R-02;R-03,20
+GAP-060,PISF 2026,PISF 2026,PISF-OT,OT and safety systems,CTL-01;CTL-02;CTL-03;CTL-04;CTL-05;CTL-06;CTL-17,Partial;Gap;Partial;Gap;Gap;Gap;Partial,Partially satisfied,0.5,R-01;R-02;R-03;R-04;R-05;R-11;R-16,20
+GAP-061,PISF 2026,PISF 2026,PISF-LOG,"Logging, monitoring and detection",CTL-15;CTL-24,Gap;Partial,Partially satisfied,0.5,R-05;R-09;R-17,20
+GAP-062,CIS Controls,CIS Controls,CIS 4,Secure Configuration of Enterprise Assets and Software,CTL-05;CTL-16,Gap;Gap,Gap (control planned),0.0,R-04;R-10,16
+GAP-063,CIS Controls,CIS Controls,CIS 18,Penetration Testing,CTL-12,Gap,Gap (control planned),0.0,R-06;R-07,16
+GAP-064,COBIT,COBIT,BAI10,Managed Configuration,CTL-16,Gap,Gap (control planned),0.0,R-10,16
+GAP-065,ISO 27001,ISO 27001,A.5.23,Information security for use of cloud services,CTL-16,Gap,Gap (control planned),0.0,R-10,16
+GAP-066,ISO 27001,ISO 27001,A.8.9,Configuration management,CTL-05;CTL-16,Gap;Gap,Gap (control planned),0.0,R-04;R-10,16
+GAP-067,ISO 27001,ISO 27001,A.8.25,Secure development life cycle,CTL-12,Gap,Gap (control planned),0.0,R-06;R-07,16
+GAP-068,ISO 27001,ISO 27001,A.8.29,Security testing in development and acceptance,CTL-12,Gap,Gap (control planned),0.0,R-06;R-07,16
+GAP-069,PISF 2026,PISF 2026,PISF-CLD,Cloud security,CTL-16,Gap,Gap (control planned),0.0,R-10,16
+GAP-070,CIS Controls,CIS Controls,CIS 16,Application Software Security,CTL-11;CTL-12,Partial;Gap,Partially satisfied,0.5,R-06;R-07,16
+GAP-071,ISO 27001,ISO 27001,A.8.26,Application security requirements,CTL-11;CTL-13,Partial;Partial,Partially satisfied,0.5,R-06;R-07,16
+GAP-072,ISO 27001,ISO 27001,A.8.27,Secure system architecture and engineering principles,CTL-11,Partial,Partially satisfied,0.5,R-06,16
+GAP-073,ISO 27001,ISO 27001,A.8.28,Secure coding,CTL-11;CTL-12,Partial;Gap,Partially satisfied,0.5,R-06;R-07,16
+GAP-074,PISF 2026,PISF 2026,PISF-APP,Application and API security,CTL-11;CTL-12;CTL-13,Partial;Gap;Partial,Partially satisfied,0.5,R-06;R-07,16
+GAP-075,CIS Controls,CIS Controls,CIS 15,Service Provider Management,CTL-02;CTL-23,Gap;Gap,Gap (control planned),0.0,R-01;R-16,15
+GAP-076,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.4,Identifier management,CTL-09,Gap,Gap (control planned),0.0,R-15,15
+GAP-077,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.6,Remote session termination,CTL-02,Gap,Gap (control planned),0.0,R-01;R-16,15
+GAP-078,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 7.4,Control system recovery and reconstitution,CTL-19,Gap,Gap (control planned),0.0,R-12,15
+GAP-079,OT (IEC 62443 / SP 800-82),IEC 62443,62443-2-4,Security program requirements for IACS service providers,CTL-02;CTL-23,Gap;Gap,Gap (control planned),0.0,R-01;R-16,15
+GAP-080,ISO 27001,ISO 27001,A.5.11,Return of assets,CTL-09,Gap,Gap (control planned),0.0,R-15,15
+GAP-081,ISO 27001,ISO 27001,A.5.19,Information security in supplier relationships,CTL-02;CTL-23,Gap;Gap,Gap (control planned),0.0,R-01;R-16,15
+GAP-082,ISO 27001,ISO 27001,A.6.5,Responsibilities after termination or change of employment,CTL-09,Gap,Gap (control planned),0.0,R-15,15
+GAP-083,ISO 27001,ISO 27001,A.6.7,Remote working,CTL-02,Gap,Gap (control planned),0.0,R-01;R-16,15
+GAP-084,PISF 2026,PISF 2026,PISF-TPR,Third-party and supply chain,CTL-02;CTL-23,Gap;Gap,Gap (control planned),0.0,R-01;R-16,15
+GAP-085,COBIT,COBIT,APO10,Managed Vendors,CTL-23,Gap,Gap (control planned),0.0,R-16,12
+GAP-086,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.2,Software process and device identification and authentication,CTL-05,Gap,Gap (control planned),0.0,R-04,12
+GAP-087,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.5,Authenticator management,CTL-05,Gap,Gap (control planned),0.0,R-04,12
+GAP-088,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.7,Strength of password-based authentication,CTL-05,Gap,Gap (control planned),0.0,R-04,12
+GAP-089,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.1,Communication integrity,CTL-04;CTL-06,Gap;Gap,Gap (control planned),0.0,R-02;R-04;R-11,12
+GAP-090,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.4,Software and information integrity,CTL-04;CTL-06,Gap;Gap,Gap (control planned),0.0,R-02;R-04;R-11,12
+GAP-091,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.5,Input validation,CTL-06,Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-092,ISO 27001,ISO 27001,A.5.20,Addressing information security within supplier agreements,CTL-23,Gap,Gap (control planned),0.0,R-16,12
+GAP-093,ISO 27001,ISO 27001,A.5.21,Managing information security in the ICT supply chain,CTL-23,Gap,Gap (control planned),0.0,R-16,12
+GAP-094,ISO 27001,ISO 27001,A.5.22,"Monitoring, review and change management of supplier services",CTL-23,Gap,Gap (control planned),0.0,R-16,12
+GAP-095,NIST AI RMF,NIST AI RMF,MAP 1,Context of the AI system established and understood,CTL-06;CTL-20,Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-096,NIST AI RMF,NIST AI RMF,MAP 2,Categorisation of the AI system,CTL-06;CTL-20,Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-097,NIST AI RMF,NIST AI RMF,MAP 3,"AI capabilities, targeted usage, goals and expected benefits and costs understood",CTL-06;CTL-20,Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-098,NIST AI RMF,NIST AI RMF,MAP 4,Risks and benefits mapped for all components including third party data and software,CTL-06;CTL-20,Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-099,NIST AI RMF,NIST AI RMF,MAP 5,"Impacts to individuals, groups, organisations and society characterised",CTL-06;CTL-20,Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-100,NIST AI RMF,NIST AI RMF,MEASURE 1,Appropriate methods and metrics identified and applied,CTL-06;CTL-21,Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-101,NIST AI RMF,NIST AI RMF,MEASURE 2,"AI systems evaluated for trustworthy characteristics including validity, safety and security",CTL-06;CTL-21,Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-102,NIST AI RMF,NIST AI RMF,MEASURE 3,Mechanisms for tracking identified AI risks over time such as drift,CTL-06;CTL-21,Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-103,NIST AI RMF,NIST AI RMF,MEASURE 4,Feedback about the efficacy of measurement gathered and assessed,CTL-06;CTL-21,Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-104,NIST CSF,NIST CSF,GV.OC,Organizational Context,CTL-20;CTL-23,Gap;Gap,Gap (control planned),0.0,R-11;R-16,12
+GAP-105,NIST CSF,NIST CSF,GV.RM,Risk Management Strategy,CTL-20;CTL-23,Gap;Gap,Gap (control planned),0.0,R-11;R-16,12
+GAP-106,NIST CSF,NIST CSF,GV.RR,"Roles, Responsibilities, and Authorities",CTL-20;CTL-23,Gap;Gap,Gap (control planned),0.0,R-11;R-16,12
+GAP-107,NIST CSF,NIST CSF,GV.PO,Policy,CTL-20;CTL-23,Gap;Gap,Gap (control planned),0.0,R-11;R-16,12
+GAP-108,NIST CSF,NIST CSF,GV.OV,Oversight,CTL-20;CTL-23,Gap;Gap,Gap (control planned),0.0,R-11;R-16,12
+GAP-109,NIST CSF,NIST CSF,GV.SC,Cybersecurity Supply Chain Risk Management,CTL-20;CTL-23,Gap;Gap,Gap (control planned),0.0,R-11;R-16,12
+GAP-110,PISF 2026,PISF 2026,PISF-AI,AI governance,CTL-06;CTL-20;CTL-21,Gap;Gap;Gap,Gap (control planned),0.0,R-04;R-11,12
+GAP-111,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.12,Non-repudiation,CTL-04,Gap,Gap (control planned),0.0,R-02,10
+GAP-112,OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.3,Security functionality verification,CTL-04,Gap,Gap (control planned),0.0,R-02,10
+GAP-113,NIST AI RMF,NIST AI RMF,GOVERN 1,"Policies, processes, procedures and practices for mapping, measuring and managing AI risk are in place and implemented",CTL-20,Gap,Gap (control planned),0.0,R-11,10
+GAP-114,NIST AI RMF,NIST AI RMF,GOVERN 2,Accountability structures so the right teams are responsible for AI risk,CTL-20,Gap,Gap (control planned),0.0,R-11,10
+GAP-115,NIST AI RMF,NIST AI RMF,GOVERN 3,"Workforce diversity, equity, inclusion and accessibility in AI risk decisions",CTL-20,Gap,Gap (control planned),0.0,R-11,10
+GAP-116,NIST AI RMF,NIST AI RMF,GOVERN 4,Organisational culture that considers and communicates AI risk,CTL-20,Gap,Gap (control planned),0.0,R-11,10
+GAP-117,NIST AI RMF,NIST AI RMF,GOVERN 5,Engagement with relevant AI actors and affected stakeholders,CTL-20,Gap,Gap (control planned),0.0,R-11,10
+GAP-118,NIST AI RMF,NIST AI RMF,GOVERN 6,"Policies for third party AI software, data and supply chain risk",CTL-20,Gap,Gap (control planned),0.0,R-11,10
+GAP-119,NIST AI RMF,NIST AI RMF,MANAGE 1,"AI risks prioritised, responded to and managed based on assessments",CTL-21,Gap,Gap (control planned),0.0,R-11,10
+GAP-120,NIST AI RMF,NIST AI RMF,MANAGE 2,"Strategies to maximise benefits and minimise negative impacts, including human oversight",CTL-21,Gap,Gap (control planned),0.0,R-11,10
+GAP-121,NIST AI RMF,NIST AI RMF,MANAGE 3,AI risks and benefits from third party entities managed,CTL-21,Gap,Gap (control planned),0.0,R-11,10
+GAP-122,NIST AI RMF,NIST AI RMF,MANAGE 4,"Risk treatments including response, recovery and monitoring documented and reviewed",CTL-21,Gap,Gap (control planned),0.0,R-11,10

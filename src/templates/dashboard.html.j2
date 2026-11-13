@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PSR CISO Dashboard</title>
+<style>
+  :root {
+    --surface: #fcfcfb; --card: #ffffff; --border: #e4e3df;
+    --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #77766f;
+    --series-1: #2a78d6; --track: #f0efec; --target: #0b0b0b;
+    --good: #0ca30c; --warning: #fab219; --serious: #ec835a; --critical: #d03b3b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--surface); color: var(--text-primary);
+         font: 12px/1.4 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 18px 16px 12px; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+           border-bottom: 2px solid var(--text-primary); padding-bottom: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  h1 { font-size: 20px; margin: 0; letter-spacing: .02em; }
+  .sub { color: var(--text-secondary); margin-top: 2px; }
+  .overall { text-align: right; }
+  .overall .label { color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+  .overall .value { font-size: 18px; font-weight: 700; }
+  h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-secondary);
+       margin: 0 0 6px; font-weight: 600; }
+  .tiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 12px; }
+  .tile { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; }
+  .tile .k { color: var(--text-secondary); font-size: 11px; }
+  .tile .v { font-size: 22px; font-weight: 700; line-height: 1.15; margin: 2px 0; font-variant-numeric: tabular-nums; }
+  .tile .v small { font-size: 12px; font-weight: 500; color: var(--text-secondary); }
+  .tile .d { color: var(--text-muted); font-size: 10.5px; }
+  .chip { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; color: var(--text-primary); }
+  .chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .panel { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; }
+  ol { margin: 0; padding-left: 18px; }
+  ol li { margin-bottom: 5px; }
+  .meta { color: var(--text-muted); font-size: 10.5px; }
+  .bar-row { display: grid; grid-template-columns: 132px 1fr 44px; align-items: center; gap: 6px; margin: 3px 0; }
+  .bar-row .name { color: var(--text-secondary); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-row .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 11px; }
+  .track { position: relative; height: 10px; background: var(--track); border-radius: 2px; }
+  .fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--series-1); border-radius: 0 4px 4px 0; }
+  .tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--target); }
+  .ai-table { width: 100%; border-collapse: collapse; }
+  .ai-table td:first-child { color: var(--text-secondary); padding-right: 8px; }
+  .ai-table td { padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .ai-table td:last-child { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .big { font-size: 26px; font-weight: 700; }
+  .note { margin-top: 10px; color: var(--text-muted); font-size: 10px; }
+  @media (max-width: 900px) { .tiles { grid-template-columns: repeat(3, 1fr); } .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+  @page { size: A4 landscape; margin: 8mm; }
+  @media print { body { background: #fff; font-size: 10.5px; } .page { max-width: none; padding: 0; }
+    .tile .v { font-size: 18px; } .tile { padding: 6px 8px; } .tiles { gap: 6px; margin-bottom: 8px; }
+    .grid { gap: 8px; } .panel { padding: 8px 10px; } ol li { margin-bottom: 3px; } .big { font-size: 20px; }
+    header { margin-bottom: 8px; } .note { margin-top: 6px; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div>
+      <h1>ENTERPRISE INFORMATION ASSURANCE DASHBOARD</h1>
+      <div class="sub">{{ org }} · CISO executive view · generated {{ generated }}</div>
+    </div>
+    <div class="overall">
+      <div class="label">Overall IA status</div>
+      <div class="value">{{ m.maturity.status }}</div>
+      <div class="meta">from governance maturity {{ m.maturity.score }}/5</div>
+    </div>
+  </header>
+
+  <div class="tiles">
+  {% for t in tiles %}
+    <div class="tile" title="{{ t.help }}">
+      <div class="k">{{ t.label }}</div>
+      <div class="v">{{ t.value }}{% if t.unit %}<small>{{ t.unit }}</small>{% endif %}</div>
+      <div class="chip"><i style="background: var(--{{ t.status }})"></i>{{ t.status_label }}</div>
+      <div class="d">{{ t.detail }}</div>
+    </div>
+  {% endfor %}
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>Top 5 risks (current residual)</h2>
+      <ol>
+      {% for r in m.risk.top5 %}
+        <li><b>{{ r.risk_id }}</b> {{ r.title }} <span class="meta">· {{ r.current }}/25 {{ r.rating }} (inherent {{ r.inherent }})</span></li>
+      {% endfor %}
+      </ol>
+      <h2 style="margin-top:10px">Top 5 recommendations</h2>
+      <ol>
+      {% for x in m.recommendations %}
+        <li><b>{{ x.control_id }}</b> {{ x.control }} <span class="meta">· {{ x.status }} · owner {{ x.owner }}</span></li>
+      {% endfor %}
+      </ol>
+    </div>
+
+    <div class="panel">
+      <h2>Governance maturity by capability (score / 5, bar = target Year 3)</h2>
+      {% for name, score in m.maturity.by_capability.items() %}
+      <div class="bar-row" title="{{ name }}: {{ score }} of 5, Year 3 target {{ targets[name] }}">
+        <div class="name">{{ name }}</div>
+        <div class="track"><div class="fill" style="width: {{ score / 5 * 100 }}%"></div>
+          <div class="tick" style="left: calc({{ targets[name] / 5 * 100 }}% - 1px)"></div></div>
+        <div class="val">{{ '%.0f' % score }} → {{ '%.0f' % targets[name] }}</div>
+      </div>
+      {% endfor %}
+      <h2 style="margin-top:10px">Compliance by framework (A2 heat map, %)</h2>
+      {% for fw, pct in m.compliance.by_framework_pct.items() %}
+      <div class="bar-row" title="{{ fw }}: {{ pct }}% compliant">
+        <div class="name">{{ fw }}</div>
+        <div class="track"><div class="fill" style="width: {{ pct }}%"></div></div>
+        <div class="val">{{ pct }}%</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="panel">
+      <h2>AI automation</h2>
+      {% if ai %}
+      <table class="ai-table">
+        <tr><td>Process</td><td>{{ ai.process }}</td></tr>
+        <tr><td>Method</td><td>{{ ai.method }}</td></tr>
+        <tr><td>Manual effort</td><td>{{ ai.manual_hrs }} hrs</td></tr>
+        <tr><td>AI assisted effort</td><td>{{ ai.ai_hrs }} hrs</td></tr>
+        <tr><td>Human approval</td><td>{{ ai.human_approval }}</td></tr>
+        <tr><td>AI Trust Score</td><td>{{ ai.correct }}/{{ ai.total }} = {{ ai.trust_score_pct }}%</td></tr>
+        <tr><td>Recall of manual mapping</td><td>{{ ai.recall_primary_pct }}%</td></tr>
+        <tr><td>Hallucinated IDs blocked</td><td>{{ ai.hallucinated_ids_rejected }}</td></tr>
+      </table>
+      <div style="margin-top:8px">Estimated improvement <span class="big">{{ ai.automation_gain_pct }}%</span></div>
+      {% if not ai.manual_measured %}<div class="meta">Manual time is an estimate until timed.</div>{% endif %}
+      {% else %}
+      <p class="meta">Run <code>python run.py map</code> and <code>python run.py evaluate</code> to fill this panel.</p>
+      {% endif %}
+      <h2 style="margin-top:10px">Risk position</h2>
+      <table class="ai-table">
+        <tr><td>Inherent average</td><td>{{ m.risk.avg_inherent }}/25</td></tr>
+        <tr><td>Current residual average</td><td>{{ m.risk.avg_current }}/25</td></tr>
+        <tr><td>Target after treatment</td><td>{{ m.risk.avg_target }}/25</td></tr>
+        <tr><td>Evidence available</td><td>{{ m.evidence.available_pct }}% of {{ m.evidence['items'] }} items</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="note">All values are calculated by <code>scoring.py</code> and <code>evaluate.py</code> from the master registers
+  (assets, risks, controls, compliance, evidence, audit findings). Control effectiveness counts Implemented controls only;
+  weighted figure treats Partial as 0.5. Compliance uses the A2 weights (Compliant 1, Partial 0.5, Weak 0.25, Non-compliant 0).</div>
+</div>
+</body>
+</html>

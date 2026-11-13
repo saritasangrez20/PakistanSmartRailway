@@ -31,35 +31,35 @@
     "top5": [
       {
         "risk_id": "R-06",
-        "title": "Broken access control in the app and portal APIs exposes ot\u2026",
+        "title": "Broken access control in app and portal APIs",
         "inherent": 16,
         "current": 16,
         "rating": "Critical"
       },
       {
         "risk_id": "R-03",
-        "title": "Legacy and end-of-life OT components cannot be patched with\u2026",
+        "title": "Unpatched legacy and end-of-life OT",
         "inherent": 20,
         "current": 15,
         "rating": "High"
       },
       {
         "risk_id": "R-05",
-        "title": "Ransomware encrypts the e-ticketing and reservation platfor\u2026",
+        "title": "Ransomware on ticketing and reservations",
         "inherent": 20,
         "current": 15,
         "rating": "High"
       },
       {
         "risk_id": "R-09",
-        "title": "Mass exfiltration of the passenger master database includin\u2026",
+        "title": "Mass exfiltration of passenger data",
         "inherent": 20,
         "current": 15,
         "rating": "High"
       },
       {
         "risk_id": "R-01",
-        "title": "Malware or unauthorised access reaches the CTC/SCADA networ\u2026",
+        "title": "Compromise of the centralized train control system",
         "inherent": 15,
         "current": 15,
         "rating": "High"
@@ -239,5 +239,33 @@
     },
     "available_pct": 25.0,
     "audited_items": 19
+  },
+  "ai_automation": {
+    "process": "Control mapping and gap analysis",
+    "backend": "retrieval",
+    "model": null,
+    "run_at": "2026-11-13T08:57:19+00:00",
+    "controls": 25,
+    "suggestions": 87,
+    "trust_score_pct": 87.1,
+    "correct": 74,
+    "incorrect": 11,
+    "total": 85,
+    "recall_primary_pct": 50.0,
+    "f1_pct": 63.5,
+    "hallucinated_ids_rejected": 0,
+    "parse_failures": 0,
+    "injection_flagged_controls": 0,
+    "flagged_for_priority_review_pct": 60.9,
+    "human_verified_pct": 0.0,
+    "human_rejected": 0,
+    "manual_minutes": 495,
+    "ai_runtime_minutes": 0.0,
+    "human_review_minutes": 100,
+    "ai_assisted_minutes": 100.0,
+    "automation_gain_pct": 79.8,
+    "manual_measured": false,
+    "review_measured": false,
+    "human_approval": "Required"
   }
 }

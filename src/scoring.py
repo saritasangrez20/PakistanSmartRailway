@@ -49,7 +49,7 @@ def score_risks(regs) -> pd.DataFrame:
         cur_l = round_half_up(r.likelihood - (r.likelihood - r.target_likelihood) * credit)
         cur_i = round_half_up(r.impact - (r.impact - r.target_impact) * credit)
         rows.append({
-            "risk_id": r.risk_id, "risk_scenario": r.risk_scenario, "risk_owner": r.risk_owner,
+            "risk_id": r.risk_id, "risk_title": r.risk_title, "risk_scenario": r.risk_scenario, "risk_owner": r.risk_owner,
             "treatment": r.treatment, "control_ids": r.control_ids,
             "likelihood": r.likelihood, "impact": r.impact,
             "inherent_score": r.inherent_score, "inherent_rating": r.inherent_rating,
@@ -60,11 +60,6 @@ def score_risks(regs) -> pd.DataFrame:
             "target_score": r.target_score, "target_rating": r.target_rating,
         })
     return pd.DataFrame(rows)
-
-
-def short_title(text: str, limit: int = 60) -> str:
-    text = text.split(",")[0]
-    return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
 
 
 def compute(regs=None) -> dict:
@@ -90,7 +85,7 @@ def compute(regs=None) -> dict:
         "risk_reduction_planned_pct": round((1 - risks.target_score.sum() / risks.inherent_score.sum()) * 100, 1),
     }
     top = risks.sort_values(["current_score", "inherent_score", "impact"], ascending=False).head(5)
-    risk["top5"] = [{"risk_id": r.risk_id, "title": short_title(r.risk_scenario), "inherent": int(r.inherent_score),
+    risk["top5"] = [{"risk_id": r.risk_id, "title": r.risk_title, "inherent": int(r.inherent_score),
                      "current": int(r.current_score), "rating": r.current_rating} for r in top.itertuples()]
 
     # Controls

@@ -1,0 +1,43 @@
+type,control_id,match_key
+False positive (not in acceptable set),CTL-02,62443-3-3 SR 1.6
+False positive (not in acceptable set),CTL-02,COBIT APO10
+False positive (not in acceptable set),CTL-04,62443-3-3 SR 3.8
+False positive (not in acceptable set),CTL-05,PISF-AST
+False positive (not in acceptable set),CTL-08,62443-3-3 SR 1.6
+False positive (not in acceptable set),CTL-16,AI RMF MEASURE
+False positive (not in acceptable set),CTL-19,62443-3-3 SR 7.3
+False positive (not in acceptable set),CTL-20,AI RMF MEASURE
+False positive (not in acceptable set),CTL-25,62443-3-3 SR 7.3
+False positive (not in acceptable set),CTL-25,A.8.13
+False positive (not in acceptable set),CTL-25,CSF RECOVER
+False negative (A2/A3 mapping missed),CTL-01,SP800-82
+False negative (A2/A3 mapping missed),CTL-02,A.5.15
+False negative (A2/A3 mapping missed),CTL-03,CIS 1
+False negative (A2/A3 mapping missed),CTL-03,SP800-82
+False negative (A2/A3 mapping missed),CTL-04,CSF DETECT
+False negative (A2/A3 mapping missed),CTL-05,62443-3-3 SR 1.1
+False negative (A2/A3 mapping missed),CTL-05,CIS 4
+False negative (A2/A3 mapping missed),CTL-06,62443-3-3 SR 3.4
+False negative (A2/A3 mapping missed),CTL-06,62443-3-3 SR 3.5
+False negative (A2/A3 mapping missed),CTL-06,AI RMF MAP
+False negative (A2/A3 mapping missed),CTL-08,CIS 5
+False negative (A2/A3 mapping missed),CTL-09,COBIT DSS05
+False negative (A2/A3 mapping missed),CTL-10,CIS 3
+False negative (A2/A3 mapping missed),CTL-13,A.8.26
+False negative (A2/A3 mapping missed),CTL-13,CIS 13
+False negative (A2/A3 mapping missed),CTL-15,A.8.16
+False negative (A2/A3 mapping missed),CTL-15,CIS 8
+False negative (A2/A3 mapping missed),CTL-16,CIS 5
+False negative (A2/A3 mapping missed),CTL-16,CSF PROTECT
+False negative (A2/A3 mapping missed),CTL-17,A.8.8
+False negative (A2/A3 mapping missed),CTL-20,AI RMF GOVERN
+False negative (A2/A3 mapping missed),CTL-21,AI RMF MANAGE
+False negative (A2/A3 mapping missed),CTL-22,CIS 14
+False negative (A2/A3 mapping missed),CTL-23,A.5.21
+False negative (A2/A3 mapping missed),CTL-24,A.8.15
+False negative (A2/A3 mapping missed),CTL-24,CIS 8
+False negative (A2/A3 mapping missed),CTL-24,CSF DETECT
+False negative (A2/A3 mapping missed),CTL-25,A.5.24
+False negative (A2/A3 mapping missed),CTL-25,A.5.30
+False negative (A2/A3 mapping missed),CTL-25,CIS 17
+False negative (A2/A3 mapping missed),CTL-25,CSF RESPOND
