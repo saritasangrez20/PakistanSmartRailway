@@ -1,56 +1,34 @@
 type,control_id,match_key
-False positive (not in acceptable set),CTL-01,PISF-AST
-False positive (not in acceptable set),CTL-02,CIS 3
-False positive (not in acceptable set),CTL-03,COBIT APO01
-False positive (not in acceptable set),CTL-04,CIS 10
-False positive (not in acceptable set),CTL-06,CSF GOVERN
+False positive (not in acceptable set),CTL-02,COBIT APO01
+False positive (not in acceptable set),CTL-02,COBIT APO13
+False positive (not in acceptable set),CTL-06,COBIT APO01
 False positive (not in acceptable set),CTL-06,CSF IDENTIFY
-False positive (not in acceptable set),CTL-13,CIS 8
-False positive (not in acceptable set),CTL-19,CIS 17
-False positive (not in acceptable set),CTL-20,CIS 1
-False positive (not in acceptable set),CTL-20,CIS 10
-False positive (not in acceptable set),CTL-20,PISF-AST
-False positive (not in acceptable set),CTL-23,COBIT APO13
-False positive (not in acceptable set),CTL-24,COBIT APO13
-False positive (not in acceptable set),CTL-24,COBIT MEA01
-False positive (not in acceptable set),CTL-25,PISF-AST
-False negative (A2/A3 mapping missed),CTL-01,62443-3-3 SR 5.1
+False positive (not in acceptable set),CTL-07,COBIT APO01
+False positive (not in acceptable set),CTL-08,COBIT APO01
+False positive (not in acceptable set),CTL-08,PISF-AST
+False positive (not in acceptable set),CTL-09,COBIT APO01
+False positive (not in acceptable set),CTL-13,A.8.15
+False positive (not in acceptable set),CTL-13,A.8.29
+False positive (not in acceptable set),CTL-16,AI RMF MEASURE
+False positive (not in acceptable set),CTL-17,CIS 1
+False positive (not in acceptable set),CTL-21,AI RMF GOVERN
+False positive (not in acceptable set),CTL-21,CSF GOVERN
+False positive (not in acceptable set),CTL-22,CSF GOVERN
+False positive (not in acceptable set),CTL-24,PISF-AST
 False negative (A2/A3 mapping missed),CTL-01,SP800-82
-False negative (A2/A3 mapping missed),CTL-02,62443-2-4
 False negative (A2/A3 mapping missed),CTL-02,A.5.15
 False negative (A2/A3 mapping missed),CTL-03,SP800-82
+False negative (A2/A3 mapping missed),CTL-04,62443-3-3 SR 3.1
 False negative (A2/A3 mapping missed),CTL-05,62443-3-3 SR 1.1
 False negative (A2/A3 mapping missed),CTL-06,62443-3-3 SR 3.4
-False negative (A2/A3 mapping missed),CTL-06,62443-3-3 SR 3.5
 False negative (A2/A3 mapping missed),CTL-06,AI RMF MAP
-False negative (A2/A3 mapping missed),CTL-08,A.8.2
 False negative (A2/A3 mapping missed),CTL-08,CIS 5
-False negative (A2/A3 mapping missed),CTL-10,A.5.15
-False negative (A2/A3 mapping missed),CTL-10,CIS 3
-False negative (A2/A3 mapping missed),CTL-11,A.8.26
-False negative (A2/A3 mapping missed),CTL-11,CIS 16
-False negative (A2/A3 mapping missed),CTL-12,A.8.29
-False negative (A2/A3 mapping missed),CTL-13,A.8.26
 False negative (A2/A3 mapping missed),CTL-13,CIS 13
-False negative (A2/A3 mapping missed),CTL-14,A.8.24
-False negative (A2/A3 mapping missed),CTL-14,PISF-DAT
 False negative (A2/A3 mapping missed),CTL-15,A.8.16
-False negative (A2/A3 mapping missed),CTL-15,CIS 8
 False negative (A2/A3 mapping missed),CTL-16,CIS 5
-False negative (A2/A3 mapping missed),CTL-16,CSF PROTECT
 False negative (A2/A3 mapping missed),CTL-17,A.8.8
-False negative (A2/A3 mapping missed),CTL-18,A.8.13
-False negative (A2/A3 mapping missed),CTL-19,A.5.30
-False negative (A2/A3 mapping missed),CTL-19,CSF RECOVER
-False negative (A2/A3 mapping missed),CTL-20,AI RMF GOVERN
-False negative (A2/A3 mapping missed),CTL-20,AI RMF MAP
 False negative (A2/A3 mapping missed),CTL-21,AI RMF MANAGE
-False negative (A2/A3 mapping missed),CTL-21,AI RMF MEASURE
-False negative (A2/A3 mapping missed),CTL-22,A.6.3
 False negative (A2/A3 mapping missed),CTL-23,A.5.19
 False negative (A2/A3 mapping missed),CTL-23,A.5.21
-False negative (A2/A3 mapping missed),CTL-24,A.8.15
-False negative (A2/A3 mapping missed),CTL-24,CSF DETECT
 False negative (A2/A3 mapping missed),CTL-25,A.5.24
-False negative (A2/A3 mapping missed),CTL-25,A.5.30
 False negative (A2/A3 mapping missed),CTL-25,CSF RESPOND

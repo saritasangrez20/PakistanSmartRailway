@@ -1,5 +1,4 @@
 family,framework,req_id,title,mapped_controls,control_statuses,compliance_status,score,linked_risks,max_inherent_risk
-CIS Controls,CIS Controls,CIS 2,Inventory and Control of Software Assets,,,Not addressed,0.0,,0
 COBIT,COBIT,EDM03,Ensured Risk Optimization,,,Not addressed,0.0,,0
 COBIT,COBIT,APO01,Managed I&T Management Framework,,,Not addressed,0.0,,0
 COBIT,COBIT,APO12,Managed Risk,,,Not addressed,0.0,,0
