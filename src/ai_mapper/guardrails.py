@@ -1,6 +1,7 @@
 """Guardrails around the LLM, one per AI governance risk the project brief lists.
 
-  Hallucination     -> validate_mappings drops any requirement ID that was not in the shortlist
+  Hallucination     -> validate_mappings drops any requirement ID that was not in the shortlist;
+                       real IDs in the wrong format are repaired first (resolve_id) and counted
   Prompt injection  -> scan_for_injection flags instruction-like text inside control data, and the
                        prompt fences data in tags and tells the model to treat it as data only
   Data leakage      -> assert_local_endpoint refuses to send register data to a non-local host
@@ -56,17 +57,54 @@ def extract_json(text: str) -> dict:
     return json.loads(match.group(0))
 
 
-def validate_mappings(payload: dict, allowed_ids: set[str]) -> tuple[list[dict], list[str]]:
-    """Return (clean mappings, rejected IDs). Keeps only shortlisted IDs, clamps confidence."""
-    clean, rejected, seen = [], [], set()
+def resolve_id(raw: str, allowed_ids: set[str]) -> str | None:
+    """Match a model supplied ID to a shortlisted ID, tolerating formatting noise.
+
+    Small models often return real IDs in the wrong shape, for example "ISO 27001 A.8.22",
+    "A.8.2 | ISO 27001" or "PISF 2026 PISF-BDR". Those are repaired to the shortlisted ID.
+    The match is on whole tokens (so "A.8.2" never matches inside "A.8.22") and the longest
+    shortlisted ID found wins. Anything that matches no shortlisted ID is still rejected.
+    """
+    raw = " ".join(str(raw).split())
+    if raw in allowed_ids:
+        return raw
+    # also accept IEC IDs given without the part prefix, e.g. "SR 5.1" for "62443-3-3 SR 5.1"
+    aliases = {}
+    for aid in allowed_ids:
+        aliases[aid] = aid
+        if aid.startswith("62443-3-3 "):
+            aliases[aid.removeprefix("62443-3-3 ")] = aid
+        if aid.startswith("CIS "):
+            aliases["CIS Control " + aid.removeprefix("CIS ")] = aid
+    hits = []
+    for alias, aid in aliases.items():
+        pattern = r"(?<![\w.])" + re.escape(alias) + r"(?!\w)(?!\.\d)"
+        if re.search(pattern, raw, flags=re.IGNORECASE):
+            hits.append((len(alias), aid))
+    if not hits:
+        return None
+    hits.sort(reverse=True)
+    best = [aid for length, aid in hits if length == hits[0][0]]
+    return best[0] if len(set(best)) == 1 else None
+
+
+def validate_mappings(payload: dict, allowed_ids: set[str]) -> tuple[list[dict], list[str], list[dict]]:
+    """Return (clean mappings, rejected IDs, repaired IDs).
+
+    Keeps only shortlisted IDs, repairs IDs that are shortlisted but badly formatted, clamps confidence.
+    """
+    clean, rejected, repaired, seen = [], [], [], set()
     items = payload.get("mappings", []) if isinstance(payload, dict) else []
     for item in items if isinstance(items, list) else []:
         if not isinstance(item, dict):
             continue
-        rid = str(item.get("req_id", "")).strip()
-        if rid not in allowed_ids:
-            rejected.append(rid)
+        raw = str(item.get("req_id", "")).strip()
+        rid = resolve_id(raw, allowed_ids)
+        if rid is None:
+            rejected.append(raw)
             continue
+        if rid != raw:
+            repaired.append({"raw": raw, "resolved": rid})
         if rid in seen:
             continue
         seen.add(rid)
@@ -76,4 +114,4 @@ def validate_mappings(payload: dict, allowed_ids: set[str]) -> tuple[list[dict],
             conf = 0.5
         clean.append({"req_id": rid, "confidence": min(max(conf, 0.0), 1.0),
                       "rationale": str(item.get("rationale", "")).strip()[:300]})
-    return clean, rejected
+    return clean, rejected, repaired

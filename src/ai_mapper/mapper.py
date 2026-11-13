@@ -71,7 +71,7 @@ def run(backend: str = "ollama", model: str | None = None, base_url: str | None 
         cands = retriever.candidates(ctl.text, per_family=per_family)
         flags = scan_for_injection(ctl.text)
         entry = {"control_id": ctl.control_id, "candidates": len(cands), "injection_flags": flags,
-                 "rejected_ids": [], "parse_error": None, "seconds": 0.0}
+                 "rejected_ids": [], "repaired_ids": [], "parse_error": None, "seconds": 0.0}
 
         if backend == "retrieval":
             chosen = Retriever.select(cands)
@@ -84,13 +84,15 @@ def run(backend: str = "ollama", model: str | None = None, base_url: str | None 
                 reply, seconds = client.chat(SYSTEM_PROMPT, prompt)
                 entry["seconds"] += round(seconds, 2)
                 try:
-                    picks, rejected = validate_mappings(extract_json(reply), set(cands.req_id))
+                    picks, rejected, repaired = validate_mappings(extract_json(reply), set(cands.req_id))
                     entry["rejected_ids"] = rejected
+                    entry["repaired_ids"] = repaired
                     entry["parse_error"] = None
                     break
                 except (ValueError, json.JSONDecodeError) as exc:
                     entry["parse_error"] = str(exc)
-            print(f"  {ctl.control_id}: {len(picks)} mappings, {len(entry['rejected_ids'])} rejected, "
+            print(f"  {ctl.control_id}: {len(picks)} mappings, {len(entry['repaired_ids'])} reformatted, "
+                  f"{len(entry['rejected_ids'])} rejected, "
                   f"{entry['seconds']:.1f}s")
 
         sim = dict(zip(cands.req_id, cands.similarity))
@@ -118,6 +120,7 @@ def run(backend: str = "ollama", model: str | None = None, base_url: str | None 
         "controls": len(controls),
         "mappings": len(mapping),
         "rejected_ids_total": sum(len(c["rejected_ids"]) for c in log_controls),
+        "repaired_ids_total": sum(len(c["repaired_ids"]) for c in log_controls),
         "parse_failures": sum(1 for c in log_controls if c["parse_error"]),
         "injection_flagged_controls": [c["control_id"] for c in log_controls if c["injection_flags"]],
         "per_control": log_controls,
@@ -145,6 +148,7 @@ def main(backend: str = "ollama", model: str | None = None, base_url: str | None
     mapping.to_csv(path, index=False)
     (MAPPING_DIR / f"run_log_{backend}.json").write_text(json.dumps(log, indent=2), encoding="utf-8")
     print(f"{log['mappings']} mappings for {log['controls']} controls in {log['runtime_seconds']}s "
-          f"({log['rejected_ids_total']} hallucinated IDs rejected, {log['parse_failures']} parse failures)")
+          f"({log['repaired_ids_total']} badly formatted IDs repaired, {log['rejected_ids_total']} invented IDs rejected, "
+          f"{log['parse_failures']} parse failures)")
     print(f"Written: {path.relative_to(OUTPUTS.parent)}. Review it: fill human_decision with accept or reject.")
     return mapping

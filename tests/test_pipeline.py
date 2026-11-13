@@ -53,9 +53,21 @@ def test_course_numbers(regs):
 def test_hallucinated_ids_are_rejected():
     payload = {"mappings": [{"req_id": "A.8.5", "confidence": 0.9, "rationale": "ok"},
                             {"req_id": "A.99.1", "confidence": 0.9, "rationale": "made up"}]}
-    clean, rejected = guardrails.validate_mappings(payload, {"A.8.5", "CIS 6"})
+    clean, rejected, repaired = guardrails.validate_mappings(payload, {"A.8.5", "CIS 6"})
     assert [c["req_id"] for c in clean] == ["A.8.5"]
     assert rejected == ["A.99.1"]
+    assert repaired == []
+
+
+@pytest.mark.parametrize("raw,expected", [
+    ("ISO 27001 A.8.22", "A.8.22"), ("A.8.2 | ISO 27001", "A.8.2"), ("PISF 2026 PISF-BDR", "PISF-BDR"),
+    ("DE.CM | NIST CSF", "DE.CM"), ("SR 1.13", "62443-3-3 SR 1.13"), ("CIS Control 12", "CIS 12"),
+    ("A.8.99", None), ("CIS 13", None), ("PISF-AI", None),
+])
+def test_badly_formatted_ids_are_repaired_not_invented(raw, expected):
+    allowed = {"A.8.2", "A.8.22", "CIS 1", "CIS 12", "PISF-AST", "PISF-BDR", "DE.CM", "62443-3-3 SR 1.1",
+               "62443-3-3 SR 1.13"}
+    assert guardrails.resolve_id(raw, allowed) == expected
 
 
 def test_injection_is_flagged():
@@ -92,8 +104,9 @@ class FakeOllama(BaseHTTPRequestHandler):
     def do_POST(self):
         req = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
         prompt = req["messages"][1]["content"]
-        ids = [line.split(" | ")[0] for line in prompt.splitlines() if " | " in line and not line.startswith("CANDIDATES")]
+        ids = [line.split("ID: ")[1].split("  Title:")[0] for line in prompt.splitlines() if line.startswith("- ID: ")]
         picks = [{"req_id": i, "confidence": 0.8, "rationale": "test"} for i in ids[:3]]
+        picks.append({"req_id": f"{ids[3]} | some framework", "confidence": 0.7, "rationale": "badly formatted"})
         picks.append({"req_id": "INVENTED-1", "confidence": 0.9, "rationale": "hallucination"})
         self._send({"message": {"content": json.dumps({"mappings": picks})}})
 
@@ -111,7 +124,8 @@ def test_ollama_mapping_end_to_end(fake_ollama):
     client = OllamaClient(model="fake-model", base_url=fake_ollama)
     mapping, log = mapper.run(backend="ollama", client=client)
     assert log["controls"] == 25
-    assert len(mapping) == 25 * 3
+    assert len(mapping) == 25 * 4                     # 3 exact IDs plus 1 repaired ID per control
+    assert log["repaired_ids_total"] == 25
     assert log["rejected_ids_total"] == 25            # the invented ID is dropped for every control
     assert "INVENTED-1" not in set(mapping.req_id)
     assert set(mapping.human_decision) == {""}
