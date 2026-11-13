@@ -53,4 +53,4 @@
 ## AI automation
 
 * Trust score (accuracy): 79.7%
-* Automation gain: 70.5%
+* Automation gain: 81.4%

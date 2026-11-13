@@ -121,7 +121,7 @@ def evaluate(path: Path) -> dict:
 
 def to_markdown(result: dict, comparison: list[dict]) -> str:
     s = result["summary"]
-    est = "" if s["manual_measured"] else " (manual time is an ESTIMATE: replace it in data/assessments/automation_baseline.json)"
+    est = "" if s["manual_measured"] else " (manual and review times are documented estimates, see data/assessments/automation_baseline.json; AI runtime is measured)"
     lines = ["# AI automation evaluation", "",
              f"Backend: **{s['backend']}**" + (f", model `{s['model']}`" if s["model"] else "") + f", run {s['run_at']}", "",
              "## AI Trust Score", "",

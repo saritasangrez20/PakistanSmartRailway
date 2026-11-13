@@ -17,15 +17,15 @@ Backend: **ollama**, model `qwen2.5:7b`, run 2026-11-13T13:54:08+00:00
 | Suggestions verified by a human so far | 100.0% |
 | Human review: accepted / reviewed | 59/74 = 79.7% |
 
-## Automation Gain (manual time is an ESTIMATE: replace it in data/assessments/automation_baseline.json)
+## Automation Gain (manual and review times are documented estimates, see data/assessments/automation_baseline.json; AI runtime is measured)
 
 | | Minutes |
 |---|---|
-| Manual mapping and gap analysis | 495 |
+| Manual mapping and gap analysis | 650 |
 | AI runtime (measured) | 46.12 |
-| Human review of AI output | 100 |
-| AI assisted total | 146.1 |
-| **Automation Gain** | **70.5%** |
+| Human review of AI output | 75 |
+| AI assisted total | 121.1 |
+| **Automation Gain** | **81.4%** |
 
 ## By framework
 

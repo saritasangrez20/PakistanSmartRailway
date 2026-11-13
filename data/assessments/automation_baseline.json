@@ -1,14 +1,16 @@
 {
-  "_note": "Manual figures are ESTIMATES until the group times a real manual mapping. Replace them with measured values and set measured to true.",
+  "_note": "Documented estimates, not stopwatch measurements. If the group times a real manual mapping, replace the numbers and set measured to true.",
   "manual": {
     "measured": false,
-    "mapping_minutes_per_control": 15,
-    "gap_analysis_minutes": 120,
+    "mapping_minutes_per_control": 20,
+    "gap_analysis_minutes": 150,
+    "basis": "Seven frameworks with 235 requirements. Reading one control and scanning each catalog takes about 2 to 3 minutes per framework, so about 20 minutes per control (A2 spent similar effort to map only 2 or 3 requirements per control). Working out requirement status for 235 requirements from 25 control statuses and ranking the gaps by risk takes about 2.5 hours.",
     "description": "Analyst reads each control, searches framework catalogs, records mappings, then works out requirement coverage by hand"
   },
   "ai_assisted": {
     "measured": false,
-    "review_minutes_per_control": 4,
+    "review_minutes_per_control": 3,
+    "basis": "The Ollama run produced 74 suggestions for 25 controls, about 3 per control. Each has a title and a one line rationale, so accepting or rejecting one takes about 1 minute.",
     "description": "Analyst reviews and approves each AI suggested mapping; AI runtime is measured automatically from the run log"
   }
 }

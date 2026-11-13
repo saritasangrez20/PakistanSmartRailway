@@ -1,6 +1,6 @@
 # Requirement level gap analysis
 
-Mapping used: `outputs\mapping\ai_mapping_ollama.csv`
+Mapping used: `outputs/mapping/ai_mapping_ollama.csv`
 
 | Framework | Requirements | Addressed | Satisfied | Partial | Gap | Not addressed | Coverage % | Compliance of addressed % |
 |---|---|---|---|---|---|---|---|---|
