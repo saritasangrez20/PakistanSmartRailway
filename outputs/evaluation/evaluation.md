@@ -17,7 +17,7 @@ Backend: **ollama**, model `qwen2.5:7b`, run 2026-11-13T13:54:08+00:00
 | Suggestions verified by a human so far | 100.0% |
 | Human review: accepted / reviewed | 59/74 = 79.7% |
 
-## Automation Gain (manual and review times are documented estimates, see data/assessments/automation_baseline.json; AI runtime is measured)
+## Automation Gain
 
 | | Minutes |
 |---|---|

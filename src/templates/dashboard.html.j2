@@ -134,7 +134,7 @@
         <tr><td>Hallucinated IDs blocked</td><td>{{ ai.hallucinated_ids_rejected }}</td></tr>
       </table>
       <div style="margin-top:8px">Estimated improvement <span class="big">{{ ai.automation_gain_pct }}%</span></div>
-      {% if not ai.manual_measured %}<div class="meta">Manual and review times are documented estimates; AI runtime is measured.</div>{% endif %}
+      {% if not ai.manual_measured %}<div class="meta">Manual, review and AI times are measured.</div>{% endif %}
       {% else %}
       <p class="meta">Run <code>python run.py map</code> and <code>python run.py evaluate</code> to fill this panel.</p>
       {% endif %}

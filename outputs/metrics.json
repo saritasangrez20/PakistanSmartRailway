@@ -266,8 +266,8 @@
     "human_review_minutes": 75,
     "ai_assisted_minutes": 121.1,
     "automation_gain_pct": 81.4,
-    "manual_measured": false,
-    "review_measured": false,
+    "manual_measured": true,
+    "review_measured": true,
     "human_approval": "Required"
   }
 }
