@@ -129,6 +129,7 @@
         <tr><td>AI assisted effort</td><td>{{ ai.ai_hrs }} hrs</td></tr>
         <tr><td>Human approval</td><td>{{ ai.human_approval }}</td></tr>
         <tr><td>AI Trust Score</td><td>{{ ai.correct }}/{{ ai.total }} = {{ ai.trust_score_pct }}%</td></tr>
+        {% if ai.human_verified_pct == 100 %}<tr><td>Accepted by reviewers</td><td>{{ ai.human_accepted }}/{{ ai.human_accepted + ai.human_rejected }} = {{ ai.human_trust_score_pct }}%</td></tr>{% endif %}
         <tr><td>Recall of manual mapping</td><td>{{ ai.recall_primary_pct }}%</td></tr>
         <tr><td>Hallucinated IDs blocked</td><td>{{ ai.hallucinated_ids_rejected }}</td></tr>
       </table>

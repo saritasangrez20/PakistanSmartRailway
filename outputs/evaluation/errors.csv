@@ -1,8 +1,6 @@
 type,control_id,match_key
 False positive (not in acceptable set),CTL-02,62443-3-3 SR 1.6
 False positive (not in acceptable set),CTL-02,COBIT APO10
-False positive (not in acceptable set),CTL-04,62443-3-3 SR 3.8
-False positive (not in acceptable set),CTL-05,PISF-AST
 False positive (not in acceptable set),CTL-08,62443-3-3 SR 1.6
 False positive (not in acceptable set),CTL-16,AI RMF MEASURE
 False positive (not in acceptable set),CTL-19,62443-3-3 SR 7.3

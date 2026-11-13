@@ -24,8 +24,6 @@ OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.10,Response to audit process
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.11,Timestamps,,,Not addressed,0.0,,0
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.6,Deterministic output,,,Not addressed,0.0,,0
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.7,Error handling,,,Not addressed,0.0,,0
-OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.8,Session integrity,,,Not addressed,0.0,,0
-OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.9,Protection of audit information,,,Not addressed,0.0,,0
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 4.2,Information persistence,,,Not addressed,0.0,,0
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 5.3,General purpose person-to-person communication restrictions,,,Not addressed,0.0,,0
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 5.4,Application partitioning,,,Not addressed,0.0,,0

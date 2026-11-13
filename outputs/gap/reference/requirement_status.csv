@@ -14,7 +14,7 @@ CIS Controls,CIS Controls,CIS 12,Network Infrastructure Management,CTL-01,Partia
 CIS Controls,CIS Controls,CIS 13,Network Monitoring and Defense,CTL-01;CTL-13;CTL-15;CTL-24,Partial;Partial;Gap;Partial,Partially satisfied,0.5,R-01;R-02;R-03;R-05;R-07;R-09;R-17,20
 CIS Controls,CIS Controls,CIS 14,Security Awareness and Skills Training,CTL-22,Implemented,Satisfied,1.0,R-14,15
 CIS Controls,CIS Controls,CIS 15,Service Provider Management,CTL-02;CTL-23,Gap;Gap,Gap (control planned),0.0,R-01;R-16,15
-CIS Controls,CIS Controls,CIS 16,Application Software Security,CTL-11;CTL-12,Partial;Gap,Partially satisfied,0.5,R-06;R-07,16
+CIS Controls,CIS Controls,CIS 16,Application Software Security,CTL-11;CTL-12;CTL-13,Partial;Gap;Partial,Partially satisfied,0.5,R-06;R-07,16
 CIS Controls,CIS Controls,CIS 17,Incident Response Management,CTL-25,Gap,Gap (control planned),0.0,R-05;R-12;R-17,20
 CIS Controls,CIS Controls,CIS 18,Penetration Testing,CTL-12,Gap,Gap (control planned),0.0,R-06;R-07,16
 COBIT,COBIT,EDM03,Ensured Risk Optimization,,,Not addressed,0.0,,0
@@ -62,8 +62,8 @@ OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.4,Software and information i
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.5,Input validation,CTL-06,Gap,Gap (control planned),0.0,R-04;R-11,12
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.6,Deterministic output,,,Not addressed,0.0,,0
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.7,Error handling,,,Not addressed,0.0,,0
-OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.8,Session integrity,,,Not addressed,0.0,,0
-OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.9,Protection of audit information,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.8,Session integrity,CTL-04,Gap,Gap (control planned),0.0,R-02,10
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.9,Protection of audit information,CTL-04,Gap,Gap (control planned),0.0,R-02,10
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 4.1,Information confidentiality,CTL-14,Partial,Partially satisfied,0.5,R-09;R-10,20
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 4.2,Information persistence,,,Not addressed,0.0,,0
 OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 4.3,Use of cryptography,CTL-14,Partial,Partially satisfied,0.5,R-09;R-10,20
@@ -222,15 +222,15 @@ NIST CSF,NIST CSF,RS.MI,Incident Mitigation,CTL-25,Gap,Gap (control planned),0.0
 NIST CSF,NIST CSF,RC.RP,Incident Recovery Plan Execution,CTL-18;CTL-19,Implemented;Gap,Satisfied,1.0,R-05;R-12,20
 NIST CSF,NIST CSF,RC.CO,Incident Recovery Communication,CTL-18;CTL-19,Implemented;Gap,Satisfied,1.0,R-05;R-12,20
 PISF 2026,PISF 2026,PISF-GOV,Governance and policy,CTL-22,Implemented,Satisfied,1.0,R-14,15
-PISF 2026,PISF 2026,PISF-AST,Asset management,CTL-03,Partial,Partially satisfied,0.5,R-03,20
+PISF 2026,PISF 2026,PISF-AST,Asset management,CTL-03;CTL-05,Partial;Gap,Partially satisfied,0.5,R-03;R-04,20
 PISF 2026,PISF 2026,PISF-RSK,Risk management,,,Not addressed,0.0,,0
-PISF 2026,PISF 2026,PISF-IAM,Identity and access management,CTL-02;CTL-05;CTL-07;CTL-08;CTL-09;CTL-10,Gap;Gap;Partial;Partial;Gap;Implemented,Satisfied,1.0,R-01;R-04;R-05;R-09;R-10;R-14;R-15;R-16,20
+PISF 2026,PISF 2026,PISF-IAM,Identity and access management,CTL-02;CTL-05;CTL-07;CTL-08;CTL-09;CTL-10;CTL-11,Gap;Gap;Partial;Partial;Gap;Implemented;Partial,Satisfied,1.0,R-01;R-04;R-05;R-06;R-09;R-10;R-14;R-15;R-16,20
 PISF 2026,PISF 2026,PISF-NET,Network security and segmentation,CTL-01,Partial,Partially satisfied,0.5,R-01;R-02;R-03,20
 PISF 2026,PISF 2026,PISF-OT,OT and safety systems,CTL-01;CTL-02;CTL-03;CTL-04;CTL-05;CTL-06;CTL-17,Partial;Gap;Partial;Gap;Gap;Gap;Partial,Partially satisfied,0.5,R-01;R-02;R-03;R-04;R-05;R-11;R-16,20
 PISF 2026,PISF 2026,PISF-APP,Application and API security,CTL-11;CTL-12;CTL-13,Partial;Gap;Partial,Partially satisfied,0.5,R-06;R-07,16
 PISF 2026,PISF 2026,PISF-DAT,Data protection and privacy,CTL-10;CTL-14;CTL-15,Implemented;Partial;Gap,Satisfied,1.0,R-09;R-10,20
 PISF 2026,PISF 2026,PISF-CLD,Cloud security,CTL-16,Gap,Gap (control planned),0.0,R-10,16
-PISF 2026,PISF 2026,PISF-LOG,"Logging, monitoring and detection",CTL-15;CTL-24,Gap;Partial,Partially satisfied,0.5,R-05;R-09;R-17,20
+PISF 2026,PISF 2026,PISF-LOG,"Logging, monitoring and detection",CTL-04;CTL-13;CTL-15;CTL-24,Gap;Partial;Gap;Partial,Partially satisfied,0.5,R-02;R-05;R-07;R-09;R-17,20
 PISF 2026,PISF 2026,PISF-BDR,Backup and disaster recovery,CTL-18;CTL-19;CTL-25,Implemented;Gap;Gap,Satisfied,1.0,R-05;R-12;R-17,20
 PISF 2026,PISF 2026,PISF-TPR,Third-party and supply chain,CTL-02;CTL-23,Gap;Gap,Gap (control planned),0.0,R-01;R-16,15
 PISF 2026,PISF 2026,PISF-AI,AI governance,CTL-06;CTL-20;CTL-21,Gap;Gap;Gap,Gap (control planned),0.0,R-04;R-11,12

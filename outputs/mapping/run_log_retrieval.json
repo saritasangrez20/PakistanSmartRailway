@@ -1,8 +1,8 @@
 {
   "backend": "retrieval",
   "model": null,
-  "run_at": "2026-11-13T08:57:19+00:00",
-  "runtime_seconds": 0.19,
+  "run_at": "2026-11-13T14:18:39+00:00",
+  "runtime_seconds": 0.12,
   "controls": 25,
   "mappings": 87,
   "rejected_ids_total": 0,

@@ -110,6 +110,8 @@ def evaluate(path: Path) -> dict:
         "flagged_for_priority_review_pct": pct((mapping.review_priority != "Normal").sum(), len(mapping)),
         "human_verified_pct": pct(len(reviewed), len(mapping)),
         "human_rejected": int((reviewed.human_decision.str.lower() == "reject").sum()),
+        "human_accepted": int((reviewed.human_decision.str.lower() == "accept").sum()),
+        "human_trust_score_pct": pct((reviewed.human_decision.str.lower() == "accept").sum(), len(reviewed)),
         **gain,
         "human_approval": "Required",
     }
@@ -132,7 +134,9 @@ def to_markdown(result: dict, comparison: list[dict]) -> str:
              f"| F1 | {s['f1_pct']}% |",
              f"| Hallucinated IDs rejected by guardrail | {s['hallucinated_ids_rejected']} |",
              f"| Suggestions flagged for priority human review | {s['flagged_for_priority_review_pct']}% |",
-             f"| Suggestions verified by a human so far | {s['human_verified_pct']}% |", "",
+             f"| Suggestions verified by a human so far | {s['human_verified_pct']}% |",
+             f"| Human review: accepted / reviewed | {s['human_accepted']}/{s['human_accepted'] + s['human_rejected']} "
+             f"= {s['human_trust_score_pct']}% |", "",
              "## Automation Gain" + est, "",
              "| | Minutes |", "|---|---|",
              f"| Manual mapping and gap analysis | {s['manual_minutes']} |",
