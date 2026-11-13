@@ -1,0 +1,14 @@
+framework,req_id,title,group,description,match_key
+PISF 2026,PISF-GOV,Governance and policy,PISF 2026 (domain level placeholder),"Information security governance, policies and roles",PISF-GOV
+PISF 2026,PISF-AST,Asset management,PISF 2026 (domain level placeholder),"Inventory and ownership of information, IT, OT and IoT assets",PISF-AST
+PISF 2026,PISF-RSK,Risk management,PISF 2026 (domain level placeholder),Risk assessment and treatment,PISF-RSK
+PISF 2026,PISF-IAM,Identity and access management,PISF 2026 (domain level placeholder),"Identity, authentication including multi-factor authentication, privileged access and access reviews",PISF-IAM
+PISF 2026,PISF-NET,Network security and segmentation,PISF 2026 (domain level placeholder),Network protection and segmentation of critical systems,PISF-NET
+PISF 2026,PISF-OT,OT and safety systems,PISF 2026 (domain level placeholder),Protection of operational technology and critical infrastructure control systems,PISF-OT
+PISF 2026,PISF-APP,Application and API security,PISF 2026 (domain level placeholder),Secure development and testing of applications and APIs,PISF-APP
+PISF 2026,PISF-DAT,Data protection and privacy,PISF 2026 (domain level placeholder),"Data classification, encryption and protection of personal data",PISF-DAT
+PISF 2026,PISF-CLD,Cloud security,PISF 2026 (domain level placeholder),Secure use and configuration of cloud services,PISF-CLD
+PISF 2026,PISF-LOG,"Logging, monitoring and detection",PISF 2026 (domain level placeholder),"Security logging, monitoring and incident detection",PISF-LOG
+PISF 2026,PISF-BDR,Backup and disaster recovery,PISF 2026 (domain level placeholder),"Backups, business continuity and disaster recovery",PISF-BDR
+PISF 2026,PISF-TPR,Third-party and supply chain,PISF 2026 (domain level placeholder),Security requirements and oversight for vendors and suppliers,PISF-TPR
+PISF 2026,PISF-AI,AI governance,PISF 2026 (domain level placeholder),Governance of artificial intelligence systems,PISF-AI

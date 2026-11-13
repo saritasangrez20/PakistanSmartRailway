@@ -1,0 +1,58 @@
+framework,req_id,title,group,description,match_key
+IEC 62443,62443-3-3 SR 1.1,Human user identification and authentication,FR 1 Identification and authentication control,OT and industrial control system requirement: human user identification and authentication,62443-3-3 SR 1.1
+IEC 62443,62443-3-3 SR 1.2,Software process and device identification and authentication,FR 1 Identification and authentication control,OT and industrial control system requirement: software process and device identification and authentication,62443-3-3 SR 1.2
+IEC 62443,62443-3-3 SR 1.3,Account management,FR 1 Identification and authentication control,OT and industrial control system requirement: account management,62443-3-3 SR 1.3
+IEC 62443,62443-3-3 SR 1.4,Identifier management,FR 1 Identification and authentication control,OT and industrial control system requirement: identifier management,62443-3-3 SR 1.4
+IEC 62443,62443-3-3 SR 1.5,Authenticator management,FR 1 Identification and authentication control,OT and industrial control system requirement: authenticator management,62443-3-3 SR 1.5
+IEC 62443,62443-3-3 SR 1.6,Wireless access management,FR 1 Identification and authentication control,OT and industrial control system requirement: wireless access management,62443-3-3 SR 1.6
+IEC 62443,62443-3-3 SR 1.7,Strength of password-based authentication,FR 1 Identification and authentication control,OT and industrial control system requirement: strength of password-based authentication,62443-3-3 SR 1.7
+IEC 62443,62443-3-3 SR 1.8,Public key infrastructure certificates,FR 1 Identification and authentication control,OT and industrial control system requirement: public key infrastructure certificates,62443-3-3 SR 1.8
+IEC 62443,62443-3-3 SR 1.9,Strength of public key authentication,FR 1 Identification and authentication control,OT and industrial control system requirement: strength of public key authentication,62443-3-3 SR 1.9
+IEC 62443,62443-3-3 SR 1.10,Authenticator feedback,FR 1 Identification and authentication control,OT and industrial control system requirement: authenticator feedback,62443-3-3 SR 1.10
+IEC 62443,62443-3-3 SR 1.11,Unsuccessful login attempts,FR 1 Identification and authentication control,OT and industrial control system requirement: unsuccessful login attempts,62443-3-3 SR 1.11
+IEC 62443,62443-3-3 SR 1.12,System use notification,FR 1 Identification and authentication control,OT and industrial control system requirement: system use notification,62443-3-3 SR 1.12
+IEC 62443,62443-3-3 SR 1.13,Access via untrusted networks,FR 1 Identification and authentication control,OT and industrial control system requirement: access via untrusted networks,62443-3-3 SR 1.13
+IEC 62443,62443-3-3 SR 2.1,Authorization enforcement,FR 2 Use control,OT and industrial control system requirement: authorization enforcement,62443-3-3 SR 2.1
+IEC 62443,62443-3-3 SR 2.2,Wireless use control,FR 2 Use control,OT and industrial control system requirement: wireless use control,62443-3-3 SR 2.2
+IEC 62443,62443-3-3 SR 2.3,Use control for portable and mobile devices,FR 2 Use control,OT and industrial control system requirement: use control for portable and mobile devices,62443-3-3 SR 2.3
+IEC 62443,62443-3-3 SR 2.4,Mobile code,FR 2 Use control,OT and industrial control system requirement: mobile code,62443-3-3 SR 2.4
+IEC 62443,62443-3-3 SR 2.5,Session lock,FR 2 Use control,OT and industrial control system requirement: session lock,62443-3-3 SR 2.5
+IEC 62443,62443-3-3 SR 2.6,Remote session termination,FR 2 Use control,OT and industrial control system requirement: remote session termination,62443-3-3 SR 2.6
+IEC 62443,62443-3-3 SR 2.7,Concurrent session control,FR 2 Use control,OT and industrial control system requirement: concurrent session control,62443-3-3 SR 2.7
+IEC 62443,62443-3-3 SR 2.8,Auditable events,FR 2 Use control,OT and industrial control system requirement: auditable events,62443-3-3 SR 2.8
+IEC 62443,62443-3-3 SR 2.9,Audit storage capacity,FR 2 Use control,OT and industrial control system requirement: audit storage capacity,62443-3-3 SR 2.9
+IEC 62443,62443-3-3 SR 2.10,Response to audit processing failures,FR 2 Use control,OT and industrial control system requirement: response to audit processing failures,62443-3-3 SR 2.10
+IEC 62443,62443-3-3 SR 2.11,Timestamps,FR 2 Use control,OT and industrial control system requirement: timestamps,62443-3-3 SR 2.11
+IEC 62443,62443-3-3 SR 2.12,Non-repudiation,FR 2 Use control,OT and industrial control system requirement: non-repudiation,62443-3-3 SR 2.12
+IEC 62443,62443-3-3 SR 3.1,Communication integrity,FR 3 System integrity,OT and industrial control system requirement: communication integrity,62443-3-3 SR 3.1
+IEC 62443,62443-3-3 SR 3.2,Malicious code protection,FR 3 System integrity,OT and industrial control system requirement: malicious code protection,62443-3-3 SR 3.2
+IEC 62443,62443-3-3 SR 3.3,Security functionality verification,FR 3 System integrity,OT and industrial control system requirement: security functionality verification,62443-3-3 SR 3.3
+IEC 62443,62443-3-3 SR 3.4,Software and information integrity,FR 3 System integrity,OT and industrial control system requirement: software and information integrity,62443-3-3 SR 3.4
+IEC 62443,62443-3-3 SR 3.5,Input validation,FR 3 System integrity,OT and industrial control system requirement: input validation,62443-3-3 SR 3.5
+IEC 62443,62443-3-3 SR 3.6,Deterministic output,FR 3 System integrity,OT and industrial control system requirement: deterministic output,62443-3-3 SR 3.6
+IEC 62443,62443-3-3 SR 3.7,Error handling,FR 3 System integrity,OT and industrial control system requirement: error handling,62443-3-3 SR 3.7
+IEC 62443,62443-3-3 SR 3.8,Session integrity,FR 3 System integrity,OT and industrial control system requirement: session integrity,62443-3-3 SR 3.8
+IEC 62443,62443-3-3 SR 3.9,Protection of audit information,FR 3 System integrity,OT and industrial control system requirement: protection of audit information,62443-3-3 SR 3.9
+IEC 62443,62443-3-3 SR 4.1,Information confidentiality,FR 4 Data confidentiality,OT and industrial control system requirement: information confidentiality,62443-3-3 SR 4.1
+IEC 62443,62443-3-3 SR 4.2,Information persistence,FR 4 Data confidentiality,OT and industrial control system requirement: information persistence,62443-3-3 SR 4.2
+IEC 62443,62443-3-3 SR 4.3,Use of cryptography,FR 4 Data confidentiality,OT and industrial control system requirement: use of cryptography,62443-3-3 SR 4.3
+IEC 62443,62443-3-3 SR 5.1,Network segmentation,FR 5 Restricted data flow,OT and industrial control system requirement: network segmentation,62443-3-3 SR 5.1
+IEC 62443,62443-3-3 SR 5.2,Zone boundary protection,FR 5 Restricted data flow,OT and industrial control system requirement: zone boundary protection,62443-3-3 SR 5.2
+IEC 62443,62443-3-3 SR 5.3,General purpose person-to-person communication restrictions,FR 5 Restricted data flow,OT and industrial control system requirement: general purpose person-to-person communication restrictions,62443-3-3 SR 5.3
+IEC 62443,62443-3-3 SR 5.4,Application partitioning,FR 5 Restricted data flow,OT and industrial control system requirement: application partitioning,62443-3-3 SR 5.4
+IEC 62443,62443-3-3 SR 6.1,Audit log accessibility,FR 6 Timely response to events,OT and industrial control system requirement: audit log accessibility,62443-3-3 SR 6.1
+IEC 62443,62443-3-3 SR 6.2,Continuous monitoring,FR 6 Timely response to events,OT and industrial control system requirement: continuous monitoring,62443-3-3 SR 6.2
+IEC 62443,62443-3-3 SR 7.1,Denial of service protection,FR 7 Resource availability,OT and industrial control system requirement: denial of service protection,62443-3-3 SR 7.1
+IEC 62443,62443-3-3 SR 7.2,Resource management,FR 7 Resource availability,OT and industrial control system requirement: resource management,62443-3-3 SR 7.2
+IEC 62443,62443-3-3 SR 7.3,Control system backup,FR 7 Resource availability,OT and industrial control system requirement: control system backup,62443-3-3 SR 7.3
+IEC 62443,62443-3-3 SR 7.4,Control system recovery and reconstitution,FR 7 Resource availability,OT and industrial control system requirement: control system recovery and reconstitution,62443-3-3 SR 7.4
+IEC 62443,62443-3-3 SR 7.5,Emergency power,FR 7 Resource availability,OT and industrial control system requirement: emergency power,62443-3-3 SR 7.5
+IEC 62443,62443-3-3 SR 7.6,Network and security configuration settings,FR 7 Resource availability,OT and industrial control system requirement: network and security configuration settings,62443-3-3 SR 7.6
+IEC 62443,62443-3-3 SR 7.7,Least functionality,FR 7 Resource availability,OT and industrial control system requirement: least functionality,62443-3-3 SR 7.7
+IEC 62443,62443-3-3 SR 7.8,Control system component inventory,FR 7 Resource availability,OT and industrial control system requirement: control system component inventory,62443-3-3 SR 7.8
+IEC 62443,62443-2-1,Security program requirements for IACS asset owners,Policies and procedures,"Asset owner cyber security management system for OT: inventory, risk, policies, patching and exceptions",62443-2-1
+IEC 62443,62443-2-4,Security program requirements for IACS service providers,Policies and procedures,Requirements for integration and maintenance service providers including vendor remote access,62443-2-4
+NIST SP 800-82,SP800-82 OT program,Establishing an OT cybersecurity program,NIST SP 800-82 Rev 3,OT security programme governance roles and policies,SP800-82
+NIST SP 800-82,SP800-82 OT risk,Risk management for OT systems,NIST SP 800-82 Rev 3,OT specific risk assessment including safety and availability impacts,SP800-82
+NIST SP 800-82,SP800-82 OT architecture,OT cybersecurity architecture,NIST SP 800-82 Rev 3,"Defense in depth, network segmentation and zones between IT and OT, boundary protection",SP800-82
+NIST SP 800-82,SP800-82 OT controls,Applying security controls to OT,NIST SP 800-82 Rev 3,"Access control, patching of legacy systems, monitoring and incident response adapted to OT",SP800-82

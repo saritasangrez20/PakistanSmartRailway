@@ -1,0 +1,69 @@
+evidence_id,control_id,evidence_item,evidence_type,owner,frequency,availability,audited,audit_ref,source
+EV-001,CTL-01,Network architecture diagram,Document,OT/Engineering,Annual review,Partial,Y,AUD-01,A2 control matrix
+EV-002,CTL-01,Firewall rule exports,Config,OT/Engineering,On change,Partial,Y,AUD-01,A2 control matrix
+EV-003,CTL-01,Zone and conduit register,Register,OT/Engineering,Quarterly review,Partial,Y,AUD-01,A2 control matrix
+EV-004,CTL-02,PAM session recordings,Log,CISO,Continuous,Not available,N,,A2 control matrix
+EV-005,CTL-02,Vendor access request register,Register,CISO,Quarterly review,Not available,N,,A2 control matrix
+EV-006,CTL-03,OT asset register,Register,OT/Engineering,Quarterly review,Partial,N,,A2 control matrix
+EV-007,CTL-03,Signed exception register with review dates,Register,OT/Engineering,Quarterly review,Partial,N,,A2 control matrix
+EV-008,CTL-04,Command audit logs,Log,OT/Engineering,Continuous,Not available,N,,A2 control matrix
+EV-009,CTL-04,Periodic integrity check reports,Report,OT/Engineering,Quarterly,Not available,N,,A2 control matrix
+EV-010,CTL-05,Device inventory with credential status,Register,OT/Engineering,Quarterly review,Not available,N,,A2 control matrix
+EV-011,CTL-05,Credential rotation records,Record,OT/Engineering,Per event,Not available,N,,A2 control matrix
+EV-012,CTL-06,Data validation rules,Document,Maintenance / Data & AI,Annual review,Not available,N,,A2 control matrix
+EV-013,CTL-06,Rejected reading logs,Log,Maintenance / Data & AI,Continuous,Not available,N,,A2 control matrix
+EV-014,CTL-07,MFA enrolment report by account type,Report,CISO,Quarterly,Partial,Y,AUD-02,A2 control matrix
+EV-015,CTL-07,Authentication logs,Log,CISO,Continuous,Partial,Y,AUD-02,A2 control matrix
+EV-016,CTL-08,PAM vault inventory,Register,CISO,Quarterly review,Partial,N,,A2 control matrix
+EV-017,CTL-08,Standing entitlement reports,Report,CISO,Quarterly,Partial,N,,A2 control matrix
+EV-018,CTL-09,Signed access review records,Record,CIO,Per event,Not available,N,,A2 control matrix
+EV-019,CTL-09,HR to IT deprovisioning tickets,Record,CIO,Per event,Not available,N,,A2 control matrix
+EV-020,CTL-10,Role definitions,Document,Passenger Services / Data Owner,Annual review,Available,Y,AUD-03,A2 control matrix
+EV-021,CTL-10,Database entitlement matrix,Register,Passenger Services / Data Owner,Quarterly review,Available,Y,AUD-03,A2 control matrix
+EV-022,CTL-11,API gateway configuration,Config,CIO,On change,Partial,N,,A2 control matrix
+EV-023,CTL-11,Authorisation test results,Report,CIO,Quarterly,Partial,N,,A2 control matrix
+EV-024,CTL-12,Penetration test reports,Report,CIO,Quarterly,Not available,N,,A2 control matrix
+EV-025,CTL-12,SAST and DAST output with retest evidence,Report,CIO,Quarterly,Not available,N,,A2 control matrix
+EV-026,CTL-13,Token validation logs,Log,Passenger Services,Continuous,Partial,N,,A2 control matrix
+EV-027,CTL-13,Fare anomaly and chargeback reports,Report,Passenger Services,Quarterly,Partial,N,,A2 control matrix
+EV-028,CTL-14,Cryptographic standard,Document,CISO,Annual review,Partial,N,,A2 control matrix
+EV-029,CTL-14,Key management and rotation records,Record,CISO,Per event,Partial,N,,A2 control matrix
+EV-030,CTL-15,Monitoring alert rules,Config,CISO,On change,Not available,N,,A2 control matrix
+EV-031,CTL-15,SIEM use case definitions,Document,CISO,Annual review,Not available,N,,A2 control matrix
+EV-032,CTL-16,Baseline documents,Document,CIO,Annual review,Not available,N,,A2 control matrix
+EV-033,CTL-16,Posture management reports,Report,CIO,Quarterly,Not available,N,,A2 control matrix
+EV-034,CTL-16,Public access scan results,Report,CIO,Quarterly,Not available,N,,A2 control matrix
+EV-035,CTL-17,Scan reports,Report,CIO,Quarterly,Partial,N,,A2 control matrix
+EV-036,CTL-17,Patch compliance dashboard,Report,CIO,Quarterly,Partial,N,,A2 control matrix
+EV-037,CTL-17,OT possession schedule,Document,CIO,Annual review,Partial,N,,A2 control matrix
+EV-038,CTL-18,Backup job reports,Report,CIO,Quarterly,Available,Y,AUD-04,A2 control matrix
+EV-039,CTL-18,Immutability settings,Config,CIO,On change,Available,Y,AUD-04,A2 control matrix
+EV-040,CTL-18,Credential separation evidence,Record,CIO,Per event,Available,Y,AUD-04,A2 control matrix
+EV-041,CTL-19,Restore test records with timings,Record,CIO,Per event,Not available,N,,A2 control matrix
+EV-042,CTL-19,DR exercise reports and findings,Report,CIO,Quarterly,Not available,N,,A2 control matrix
+EV-043,CTL-20,AI system inventory,Register,Maintenance / Data & AI,Quarterly review,Not available,Y,AUD-05,A2 control matrix
+EV-044,CTL-20,Model registry,Register,Maintenance / Data & AI,Quarterly review,Not available,Y,AUD-05,A2 control matrix
+EV-045,CTL-20,Dataset approval records,Record,Maintenance / Data & AI,Per event,Not available,Y,AUD-05,A2 control matrix
+EV-046,CTL-21,Drift metrics over time,Report,Maintenance / Data & AI,Quarterly,Not available,N,,A2 control matrix
+EV-047,CTL-21,Engineer sign-off records on flagged defects,Record,Maintenance / Data & AI,Per event,Not available,N,,A2 control matrix
+EV-048,CTL-22,Filter configuration,Config,CISO,On change,Available,N,,A2 control matrix
+EV-049,CTL-22,Phishing simulation results,Report,CISO,Quarterly,Available,N,,A2 control matrix
+EV-050,CTL-22,Training completion rates,Report,CISO,Quarterly,Available,N,,A2 control matrix
+EV-051,CTL-23,Vendor register,Register,CISO / Procurement,Quarterly review,Not available,Y,AUD-06,A2 control matrix
+EV-052,CTL-23,Contract security clauses,Document,CISO / Procurement,Annual review,Not available,Y,AUD-06,A2 control matrix
+EV-053,CTL-23,Pre-onboarding assessments,Record,CISO / Procurement,Per event,Not available,Y,AUD-06,A2 control matrix
+EV-054,CTL-24,Logging standard,Document,CISO,Annual review,Partial,Y,AUD-07,A2 control matrix
+EV-055,CTL-24,Log source coverage matrix,Register,CISO,Quarterly review,Partial,Y,AUD-07,A2 control matrix
+EV-056,CTL-24,Quarterly coverage review,Report,CISO,Quarterly,Partial,Y,AUD-07,A2 control matrix
+EV-057,CTL-25,Exercise programme schedule,Document,CISO,Annual review,Not available,N,,A3 lessons learned
+EV-058,CTL-25,Tabletop exercise reports,Report,CISO,Quarterly,Not available,N,,A3 lessons learned
+EV-059,CTL-25,Timed restore drill results,Report,CISO,Quarterly,Not available,N,,A3 lessons learned
+EV-060,,Asset inventory with criticality scoring,Register,CISO,Annual review,Available,N,,A1 Section C
+EV-061,,Risk register with likelihood and impact justification,Register,Risk Management,Annual review,Available,N,,A1 Section D
+EV-062,,Risk treatment plan for High and Critical risks,Document,Risk Committee,Annual review,Available,N,,A2 Section A
+EV-063,,Compliance heat map by domain and framework,Report,Compliance,Annual review,Available,N,,A2 Section D
+EV-064,,Audit plan with findings and recommendations,Report,Internal Audit,Annual review,Available,N,,A2 Section E
+EV-065,,IAM design (identity to monitoring pipeline),Document,CISO,Annual review,Available,N,,A3 IAM
+EV-066,,Data classification scheme,Document,CISO,Annual review,Available,N,,A3 Data classification
+EV-067,,RTO and RPO targets per asset,Document,CIO,Annual review,Available,N,,A3 BC/DR
+EV-068,,Incident response scenario and post-incident review,Report,CISO,Annual review,Available,N,,A3 Incident scenario

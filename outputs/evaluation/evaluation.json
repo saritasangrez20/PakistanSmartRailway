@@ -1,0 +1,286 @@
+{
+  "summary": {
+    "process": "Control mapping and gap analysis",
+    "backend": "ollama",
+    "model": "qwen2.5:7b",
+    "run_at": "2026-11-13T16:22:08+00:00",
+    "controls": 25,
+    "suggestions": 139,
+    "trust_score_pct": 88.5,
+    "correct": 123,
+    "incorrect": 16,
+    "total": 139,
+    "recall_primary_pct": 72.6,
+    "f1_pct": 79.8,
+    "hallucinated_ids_rejected": 2,
+    "format_repaired_ids": 10,
+    "parse_failures": 0,
+    "injection_flagged_controls": 0,
+    "flagged_for_priority_review_pct": 29.5,
+    "human_verified_pct": 100.0,
+    "human_rejected": 18,
+    "human_accepted": 121,
+    "human_trust_score_pct": 87.1,
+    "manual_minutes": 650,
+    "ai_runtime_minutes": 46.27,
+    "human_review_minutes": 75,
+    "ai_assisted_minutes": 121.3,
+    "automation_gain_pct": 81.3,
+    "manual_measured": true,
+    "review_measured": true,
+    "human_approval": "Required"
+  },
+  "per_family": [
+    {
+      "family": "CIS Controls",
+      "recommended": 28,
+      "correct": 27,
+      "trust_score_pct": 96.4,
+      "primary": 18,
+      "primary_found": 15,
+      "recall_pct": 83.3
+    },
+    {
+      "family": "COBIT",
+      "recommended": 13,
+      "correct": 7,
+      "trust_score_pct": 53.8,
+      "primary": 1,
+      "primary_found": 1,
+      "recall_pct": 100.0
+    },
+    {
+      "family": "ISO 27001",
+      "recommended": 31,
+      "correct": 29,
+      "trust_score_pct": 93.5,
+      "primary": 20,
+      "primary_found": 14,
+      "recall_pct": 70.0
+    },
+    {
+      "family": "NIST AI RMF",
+      "recommended": 5,
+      "correct": 3,
+      "trust_score_pct": 60.0,
+      "primary": 5,
+      "primary_found": 3,
+      "recall_pct": 60.0
+    },
+    {
+      "family": "NIST CSF",
+      "recommended": 22,
+      "correct": 19,
+      "trust_score_pct": 86.4,
+      "primary": 5,
+      "primary_found": 4,
+      "recall_pct": 80.0
+    },
+    {
+      "family": "OT (IEC 62443 / SP 800-82)",
+      "recommended": 8,
+      "correct": 8,
+      "trust_score_pct": 100.0,
+      "primary": 9,
+      "primary_found": 4,
+      "recall_pct": 44.4
+    },
+    {
+      "family": "PISF 2026",
+      "recommended": 32,
+      "correct": 30,
+      "trust_score_pct": 93.8,
+      "primary": 4,
+      "primary_found": 4,
+      "recall_pct": 100.0
+    }
+  ],
+  "errors": [
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-02",
+      "match_key": "COBIT APO01"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-02",
+      "match_key": "COBIT APO13"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-06",
+      "match_key": "COBIT APO01"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-06",
+      "match_key": "CSF IDENTIFY"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-07",
+      "match_key": "COBIT APO01"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-08",
+      "match_key": "COBIT APO01"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-08",
+      "match_key": "PISF-AST"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-09",
+      "match_key": "COBIT APO01"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-13",
+      "match_key": "A.8.15"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-13",
+      "match_key": "A.8.29"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-16",
+      "match_key": "AI RMF MEASURE"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-17",
+      "match_key": "CIS 1"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-21",
+      "match_key": "AI RMF GOVERN"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-21",
+      "match_key": "CSF GOVERN"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-22",
+      "match_key": "CSF GOVERN"
+    },
+    {
+      "type": "False positive (not in acceptable set)",
+      "control_id": "CTL-24",
+      "match_key": "PISF-AST"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-01",
+      "match_key": "SP800-82"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-02",
+      "match_key": "A.5.15"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-03",
+      "match_key": "SP800-82"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-04",
+      "match_key": "62443-3-3 SR 3.1"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-05",
+      "match_key": "62443-3-3 SR 1.1"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-06",
+      "match_key": "62443-3-3 SR 3.4"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-06",
+      "match_key": "AI RMF MAP"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-08",
+      "match_key": "CIS 5"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-13",
+      "match_key": "CIS 13"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-15",
+      "match_key": "A.8.16"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-16",
+      "match_key": "CIS 5"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-17",
+      "match_key": "A.8.8"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-21",
+      "match_key": "AI RMF MANAGE"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-23",
+      "match_key": "A.5.19"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-23",
+      "match_key": "A.5.21"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-25",
+      "match_key": "A.5.24"
+    },
+    {
+      "type": "False negative (A2/A3 mapping missed)",
+      "control_id": "CTL-25",
+      "match_key": "CSF RESPOND"
+    }
+  ],
+  "gap_agreement": {
+    "requirements": 235,
+    "same_status": 133,
+    "agreement_pct": 56.6
+  },
+  "backend_comparison": [
+    {
+      "backend": "retrieval",
+      "trust_score_pct": 90.6,
+      "recall_primary_pct": 50.0,
+      "f1_pct": 64.4,
+      "runtime_seconds": 0.12
+    },
+    {
+      "backend": "ollama",
+      "trust_score_pct": 88.5,
+      "recall_primary_pct": 72.6,
+      "f1_pct": 79.8,
+      "runtime_seconds": 2776.15
+    }
+  ]
+}

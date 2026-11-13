@@ -1,0 +1,44 @@
+area,item_id,item,status,reference
+IAM,IAM-01,Identities provisioned and removed automatically from HR records,N,CTL-09
+IAM,IAM-02,MFA on all privileged remote and administrative access,P,CTL-07; AUD-02
+IAM,IAM-03,Vendor access is time-limited and brokered through a jump host,N,CTL-02
+IAM,IAM-04,RBAC enforced on Restricted data,Y,CTL-10; AUD-03
+IAM,IAM-05,Administrative accounts held in a PAM vault with checkout,P,CTL-08
+IAM,IAM-06,Object-level authorisation on passenger APIs,P,CTL-11
+IAM,IAM-07,Periodic access recertification by business owners,N,CTL-09; PIR-03
+IAM,IAM-08,IoT devices have unique identities with no default credentials,N,CTL-05
+IAM,IAM-09,Authentication logs centralised in the SIEM,P,CTL-24
+IAM,IAM-10,IAM architecture documented from identity to monitoring,Y,A3 IAM design
+BCDR,BCDR-01,RTO and RPO defined for every critical asset,Y,A3 BC/DR table; assets.csv
+BCDR,BCDR-02,Business impact analysis completed,N,Planned in the final report
+BCDR,BCDR-03,Warm DR site available,Y,AST-15
+BCDR,BCDR-04,Continuous replication from primary to DR,Y,A3 DR architecture
+BCDR,BCDR-05,Immutable or offline backups isolated from production credentials,Y,CTL-18; AUD-04
+BCDR,BCDR-06,Restores timed and tested,N,CTL-19; PIR-04
+BCDR,BCDR-07,DR failover exercised,N,CTL-19
+BCDR,BCDR-08,RTO achieved in the last test or incident,N,PIR-04 (61 hrs against 8 hrs)
+BCDR,BCDR-09,OT safety verification before control systems return to service,Y,A3 DR architecture
+BCDR,BCDR-10,Manual fallback procedures for ticketing and gates,Y,A3 containment phase
+IR,IR-01,Incident response plan with defined roles,Y,A3 preparation phase
+IR,IR-02,SOC staffed 24x7,Y,AST-06
+IR,IR-03,Detection coverage for IT and cloud,P,CTL-24; AUD-07
+IR,IR-04,Detection coverage for OT and IoT,N,CTL-24; AUD-07
+IR,IR-05,Detection of bulk data exfiltration,N,CTL-15; PIR-05
+IR,IR-06,Plan exercised through tabletops,N,CTL-25; PIR-07
+IR,IR-07,Vendor incident notification SLA,N,CTL-23; PIR-01
+IR,IR-08,Law enforcement referral path (NCCIA under PECA 2016),Y,A3 containment phase
+IR,IR-09,Passenger notification procedure,P,A3 containment phase (done ad hoc)
+IR,IR-10,Lessons learned process,Y,A3 lessons learned phase
+IR,IR-11,SOAR playbooks for common incidents,N,No SOAR in place
+AI,AI-01,AI system inventory,N,CTL-20; AUD-05
+AI,AI-02,Model registry and version control,N,CTL-20; AUD-05
+AI,AI-03,Approved training datasets,N,CTL-20
+AI,AI-04,Model drift monitoring,N,CTL-21
+AI,AI-05,Human review of safety-relevant AI outputs,N,CTL-21
+AI,AI-06,AI risks recorded in the risk register,Y,R-11
+AI,AI-07,Access to AI data pipelines restricted,P,R-11 treatment
+AI,AI-08,AI incident management procedure,N,None
+AI,AI-09,Telemetry validated before AI use,N,CTL-06
+AI,AI-10,No confidential data sent to external AI services,Y,AI mapper runs on local Ollama
+AI,AI-11,Human approval of AI automation outputs,Y,AI mapper review workflow
+AI,AI-12,AI automation card and own-AI risk assessment,Y,docs/ai_automation_card.md

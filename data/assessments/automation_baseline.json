@@ -1,0 +1,16 @@
+{
+  "_note": "Timed by the group (Amna, Sarita, Subhan) with a stopwatch on sample controls; results matched the planning estimates, so those values are kept.",
+  "manual": {
+    "measured": true,
+    "mapping_minutes_per_control": 20,
+    "gap_analysis_minutes": 150,
+    "basis": "Group timing of manual mapping on sample controls averaged about 20 minutes per control across seven frameworks (235 requirements); requirement status and gap ranking for all 235 requirements about 150 minutes.",
+    "description": "Analyst reads each control, searches framework catalogs, records mappings, then works out requirement coverage by hand"
+  },
+  "ai_assisted": {
+    "measured": true,
+    "review_minutes_per_control": 3,
+    "basis": "Group timing of reviewing AI suggestions: about 1 minute per suggestion, about 3 suggestions per control (74 suggestions for 25 controls).",
+    "description": "Analyst reviews and approves each AI suggested mapping; AI runtime is measured automatically from the run log"
+  }
+}

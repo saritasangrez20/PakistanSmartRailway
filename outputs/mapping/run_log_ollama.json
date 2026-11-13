@@ -1,0 +1,310 @@
+{
+  "backend": "ollama",
+  "model": "qwen2.5:7b",
+  "run_at": "2026-11-13T16:22:08+00:00",
+  "runtime_seconds": 2776.15,
+  "controls": 25,
+  "mappings": 139,
+  "rejected_ids_total": 2,
+  "repaired_ids_total": 10,
+  "parse_failures": 0,
+  "injection_flagged_controls": [],
+  "per_control": [
+    {
+      "control_id": "CTL-01",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 117.2,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-02",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 148.61,
+      "mappings": 11
+    },
+    {
+      "control_id": "CTL-03",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 94.74,
+      "mappings": 4
+    },
+    {
+      "control_id": "CTL-04",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 112.65,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-05",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [
+        {
+          "raw": "ISO 27001 A.5.17",
+          "resolved": "A.5.17"
+        },
+        {
+          "raw": "ISO 27001 A.8.5",
+          "resolved": "A.8.5"
+        },
+        {
+          "raw": "NIST CSF PR.AA",
+          "resolved": "PR.AA"
+        }
+      ],
+      "parse_error": null,
+      "seconds": 160.73,
+      "mappings": 10
+    },
+    {
+      "control_id": "CTL-06",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [
+        {
+          "raw": "ID: 62443-3-3 SR 3.5",
+          "resolved": "62443-3-3 SR 3.5"
+        },
+        {
+          "raw": "ID: A.8.15",
+          "resolved": "A.8.15"
+        },
+        {
+          "raw": "ID: PISF-AI",
+          "resolved": "PISF-AI"
+        },
+        {
+          "raw": "ID: APO01",
+          "resolved": "APO01"
+        },
+        {
+          "raw": "ID: ID.AM",
+          "resolved": "ID.AM"
+        }
+      ],
+      "parse_error": null,
+      "seconds": 97.05,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-07",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 95.68,
+      "mappings": 4
+    },
+    {
+      "control_id": "CTL-08",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [
+        {
+          "raw": "COBIT APO01",
+          "resolved": "APO01"
+        },
+        {
+          "raw": "ISO 27001 A.5.18",
+          "resolved": "A.5.18"
+        }
+      ],
+      "parse_error": null,
+      "seconds": 125.54,
+      "mappings": 7
+    },
+    {
+      "control_id": "CTL-09",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 104.16,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-10",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 100.74,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-11",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 109.12,
+      "mappings": 6
+    },
+    {
+      "control_id": "CTL-12",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 99.5,
+      "mappings": 4
+    },
+    {
+      "control_id": "CTL-13",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 127.01,
+      "mappings": 6
+    },
+    {
+      "control_id": "CTL-14",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 107.87,
+      "mappings": 4
+    },
+    {
+      "control_id": "CTL-15",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 98.95,
+      "mappings": 4
+    },
+    {
+      "control_id": "CTL-16",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [
+        "CIS 5",
+        "MEA05"
+      ],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 156.58,
+      "mappings": 9
+    },
+    {
+      "control_id": "CTL-17",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 118.79,
+      "mappings": 6
+    },
+    {
+      "control_id": "CTL-18",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 102.58,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-19",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 105.7,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-20",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 99.73,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-21",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 101.38,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-22",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 95.66,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-23",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 91.59,
+      "mappings": 4
+    },
+    {
+      "control_id": "CTL-24",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 104.63,
+      "mappings": 5
+    },
+    {
+      "control_id": "CTL-25",
+      "candidates": 35,
+      "injection_flags": [],
+      "rejected_ids": [],
+      "repaired_ids": [],
+      "parse_error": null,
+      "seconds": 99.37,
+      "mappings": 5
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PSR CISO Dashboard</title>
+<style>
+  :root {
+    --surface: #fcfcfb; --card: #ffffff; --border: #e4e3df;
+    --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #77766f;
+    --series-1: #2a78d6; --track: #f0efec; --target: #0b0b0b;
+    --good: #0ca30c; --warning: #fab219; --serious: #ec835a; --critical: #d03b3b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--surface); color: var(--text-primary);
+         font: 12px/1.4 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 18px 16px 12px; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+           border-bottom: 2px solid var(--text-primary); padding-bottom: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  h1 { font-size: 20px; margin: 0; letter-spacing: .02em; }
+  .sub { color: var(--text-secondary); margin-top: 2px; }
+  .overall { text-align: right; }
+  .overall .label { color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+  .overall .value { font-size: 18px; font-weight: 700; }
+  h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-secondary);
+       margin: 0 0 6px; font-weight: 600; }
+  .tiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 12px; }
+  .tile { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; }
+  .tile .k { color: var(--text-secondary); font-size: 11px; }
+  .tile .v { font-size: 22px; font-weight: 700; line-height: 1.15; margin: 2px 0; font-variant-numeric: tabular-nums; }
+  .tile .v small { font-size: 12px; font-weight: 500; color: var(--text-secondary); }
+  .tile .d { color: var(--text-muted); font-size: 10.5px; }
+  .chip { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; color: var(--text-primary); }
+  .chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .panel { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; }
+  ol { margin: 0; padding-left: 18px; }
+  ol li { margin-bottom: 5px; }
+  .meta { color: var(--text-muted); font-size: 10.5px; }
+  .bar-row { display: grid; grid-template-columns: 132px 1fr 44px; align-items: center; gap: 6px; margin: 3px 0; }
+  .bar-row .name { color: var(--text-secondary); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-row .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 11px; }
+  .track { position: relative; height: 10px; background: var(--track); border-radius: 2px; }
+  .fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--series-1); border-radius: 0 4px 4px 0; }
+  .tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--target); }
+  .ai-table { width: 100%; border-collapse: collapse; }
+  .ai-table td:first-child { color: var(--text-secondary); padding-right: 8px; }
+  .ai-table td { padding: 3px 0; border-bottom: 1px solid var(--border); }
+  .ai-table td:last-child { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .big { font-size: 26px; font-weight: 700; }
+  .note { margin-top: 10px; color: var(--text-muted); font-size: 10px; }
+  @media (max-width: 900px) { .tiles { grid-template-columns: repeat(3, 1fr); } .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+  @page { size: A4 landscape; margin: 8mm; }
+  @media print { body { background: #fff; font-size: 10.5px; } .page { max-width: none; padding: 0; }
+    .tile .v { font-size: 18px; } .tile { padding: 6px 8px; } .tiles { gap: 6px; margin-bottom: 8px; }
+    .grid { gap: 8px; } .panel { padding: 8px 10px; } ol li { margin-bottom: 3px; } .big { font-size: 20px; }
+    header { margin-bottom: 8px; } .note { margin-top: 6px; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div>
+      <h1>ENTERPRISE INFORMATION ASSURANCE DASHBOARD</h1>
+      <div class="sub">Pakistan Smart Railways (PSR) · CISO executive view · generated 2026-11-13</div>
+    </div>
+    <div class="overall">
+      <div class="label">Overall IA status</div>
+      <div class="value">DEVELOPING</div>
+      <div class="meta">from governance maturity 1.9/5</div>
+    </div>
+  </header>
+
+  <div class="tiles">
+  
+    <div class="tile" title="Average of 10 capability scores">
+      <div class="k">Governance maturity</div>
+      <div class="v">1.9<small> / 5</small></div>
+      <div class="chip"><i style="background: var(--serious)"></i>Weak</div>
+      <div class="d">Year 3 target 3.7</div>
+    </div>
+  
+    <div class="tile" title="Average current residual L x I">
+      <div class="k">Overall risk score</div>
+      <div class="v">11.9<small> / 25</small></div>
+      <div class="chip"><i style="background: var(--serious)"></i>High</div>
+      <div class="d">inherent 13.8, target 7.2</div>
+    </div>
+  
+    <div class="tile" title="Risks rated High or Critical after current controls">
+      <div class="k">High / Critical risks</div>
+      <div class="v">14<small> of 17</small></div>
+      <div class="chip"><i style="background: var(--critical)"></i>Act now</div>
+      <div class="d">5 Critical inherent</div>
+    </div>
+  
+    <div class="tile" title="Implemented / applicable controls">
+      <div class="k">Control effectiveness</div>
+      <div class="v">12.0<small>%</small></div>
+      <div class="chip"><i style="background: var(--critical)"></i>Critical</div>
+      <div class="d">weighted 30.0%</div>
+    </div>
+  
+    <div class="tile" title="A2 heat map, weighted">
+      <div class="k">Compliance</div>
+      <div class="v">37.9<small>%</small></div>
+      <div class="chip"><i style="background: var(--serious)"></i>Weak</div>
+      <div class="d">22.75 of 60 requirement cells</div>
+    </div>
+  
+    <div class="tile" title="A2 audit plus A3 post-incident review">
+      <div class="k">Audit findings</div>
+      <div class="v">13</div>
+      <div class="chip"><i style="background: var(--critical)"></i>Act now</div>
+      <div class="d">3 Critical, 9 High</div>
+    </div>
+  
+    <div class="tile" title="Gap controls that treat a Critical risk">
+      <div class="k">Critical control gaps</div>
+      <div class="v">4</div>
+      <div class="chip"><i style="background: var(--critical)"></i>Act now</div>
+      <div class="d">CTL-12, CTL-15, CTL-16, CTL-25</div>
+    </div>
+  
+    <div class="tile" title="IAM checklist, Y=1 P=0.5 N=0">
+      <div class="k">IAM readiness</div>
+      <div class="v">40.0<small>%</small></div>
+      <div class="chip"><i style="background: var(--serious)"></i>Weak</div>
+      <div class="d">4 of 10 checks</div>
+    </div>
+  
+    <div class="tile" title="BC/DR checklist">
+      <div class="k">BC/DR readiness</div>
+      <div class="v">60.0<small>%</small></div>
+      <div class="chip"><i style="background: var(--warning)"></i>Moderate</div>
+      <div class="d">6 of 10 checks</div>
+    </div>
+  
+    <div class="tile" title="Incident response checklist">
+      <div class="k">Incident readiness</div>
+      <div class="v">45.5<small>%</small></div>
+      <div class="chip"><i style="background: var(--serious)"></i>Weak</div>
+      <div class="d">5 of 11 checks</div>
+    </div>
+  
+    <div class="tile" title="AI readiness = obtained / maximum x 10">
+      <div class="k">AI governance readiness</div>
+      <div class="v">3.75<small> / 10</small></div>
+      <div class="chip"><i style="background: var(--serious)"></i>Weak</div>
+      <div class="d">4.5 of 12 checks</div>
+    </div>
+  
+    <div class="tile" title="Automation gain of control mapping">
+      <div class="k">AI automation impact</div>
+      <div class="v">81.3<small>%</small></div>
+      <div class="chip"><i style="background: var(--good)"></i>Strong</div>
+      <div class="d">trust score 88.5%</div>
+    </div>
+  
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>Top 5 risks (current residual)</h2>
+      <ol>
+      
+        <li><b>R-06</b> Broken access control in app and portal APIs <span class="meta">· 16/25 Critical (inherent 16)</span></li>
+      
+        <li><b>R-03</b> Unpatched legacy and end-of-life OT <span class="meta">· 15/25 High (inherent 20)</span></li>
+      
+        <li><b>R-05</b> Ransomware on ticketing and reservations <span class="meta">· 15/25 High (inherent 20)</span></li>
+      
+        <li><b>R-09</b> Mass exfiltration of passenger data <span class="meta">· 15/25 High (inherent 20)</span></li>
+      
+        <li><b>R-01</b> Compromise of the centralized train control system <span class="meta">· 15/25 High (inherent 15)</span></li>
+      
+      </ol>
+      <h2 style="margin-top:10px">Top 5 recommendations</h2>
+      <ol>
+      
+        <li><b>CTL-07</b> Multi-factor authentication <span class="meta">· Partial · owner CISO</span></li>
+      
+        <li><b>CTL-25</b> Incident and recovery exercise programme <span class="meta">· Gap · owner CISO</span></li>
+      
+        <li><b>CTL-12</b> Application and API security testing <span class="meta">· Gap · owner CIO</span></li>
+      
+        <li><b>CTL-02</b> Controlled OT remote access <span class="meta">· Gap · owner CISO</span></li>
+      
+        <li><b>CTL-01</b> IT/OT network segmentation <span class="meta">· Partial · owner OT/Engineering</span></li>
+      
+      </ol>
+    </div>
+
+    <div class="panel">
+      <h2>Governance maturity by capability (score / 5, bar = target Year 3)</h2>
+      
+      <div class="bar-row" title="Governance: 2.0 of 5, Year 3 target 4.0">
+        <div class="name">Governance</div>
+        <div class="track"><div class="fill" style="width: 40.0%"></div>
+          <div class="tick" style="left: calc(80.0% - 1px)"></div></div>
+        <div class="val">2 → 4</div>
+      </div>
+      
+      <div class="bar-row" title="Risk Management: 3.0 of 5, Year 3 target 4.0">
+        <div class="name">Risk Management</div>
+        <div class="track"><div class="fill" style="width: 60.0%"></div>
+          <div class="tick" style="left: calc(80.0% - 1px)"></div></div>
+        <div class="val">3 → 4</div>
+      </div>
+      
+      <div class="bar-row" title="IAM: 2.0 of 5, Year 3 target 4.0">
+        <div class="name">IAM</div>
+        <div class="track"><div class="fill" style="width: 40.0%"></div>
+          <div class="tick" style="left: calc(80.0% - 1px)"></div></div>
+        <div class="val">2 → 4</div>
+      </div>
+      
+      <div class="bar-row" title="Data Protection: 2.0 of 5, Year 3 target 4.0">
+        <div class="name">Data Protection</div>
+        <div class="track"><div class="fill" style="width: 40.0%"></div>
+          <div class="tick" style="left: calc(80.0% - 1px)"></div></div>
+        <div class="val">2 → 4</div>
+      </div>
+      
+      <div class="bar-row" title="Incident Response: 2.0 of 5, Year 3 target 4.0">
+        <div class="name">Incident Response</div>
+        <div class="track"><div class="fill" style="width: 40.0%"></div>
+          <div class="tick" style="left: calc(80.0% - 1px)"></div></div>
+        <div class="val">2 → 4</div>
+      </div>
+      
+      <div class="bar-row" title="BC/DR: 2.0 of 5, Year 3 target 4.0">
+        <div class="name">BC/DR</div>
+        <div class="track"><div class="fill" style="width: 40.0%"></div>
+          <div class="tick" style="left: calc(80.0% - 1px)"></div></div>
+        <div class="val">2 → 4</div>
+      </div>
+      
+      <div class="bar-row" title="AI Governance: 1.0 of 5, Year 3 target 3.0">
+        <div class="name">AI Governance</div>
+        <div class="track"><div class="fill" style="width: 20.0%"></div>
+          <div class="tick" style="left: calc(60.0% - 1px)"></div></div>
+        <div class="val">1 → 3</div>
+      </div>
+      
+      <div class="bar-row" title="OT Security: 1.0 of 5, Year 3 target 3.0">
+        <div class="name">OT Security</div>
+        <div class="track"><div class="fill" style="width: 20.0%"></div>
+          <div class="tick" style="left: calc(60.0% - 1px)"></div></div>
+        <div class="val">1 → 3</div>
+      </div>
+      
+      <div class="bar-row" title="Supply Chain: 1.0 of 5, Year 3 target 3.0">
+        <div class="name">Supply Chain</div>
+        <div class="track"><div class="fill" style="width: 20.0%"></div>
+          <div class="tick" style="left: calc(60.0% - 1px)"></div></div>
+        <div class="val">1 → 3</div>
+      </div>
+      
+      <div class="bar-row" title="Audit: 3.0 of 5, Year 3 target 4.0">
+        <div class="name">Audit</div>
+        <div class="track"><div class="fill" style="width: 60.0%"></div>
+          <div class="tick" style="left: calc(80.0% - 1px)"></div></div>
+        <div class="val">3 → 4</div>
+      </div>
+      
+      <h2 style="margin-top:10px">Compliance by framework (A2 heat map, %)</h2>
+      
+      <div class="bar-row" title="ISO 27001: 44.2% compliant">
+        <div class="name">ISO 27001</div>
+        <div class="track"><div class="fill" style="width: 44.2%"></div></div>
+        <div class="val">44.2%</div>
+      </div>
+      
+      <div class="bar-row" title="NIST CSF: 42.3% compliant">
+        <div class="name">NIST CSF</div>
+        <div class="track"><div class="fill" style="width: 42.3%"></div></div>
+        <div class="val">42.3%</div>
+      </div>
+      
+      <div class="bar-row" title="IEC 62443 / NIST SP 800-82: 27.8% compliant">
+        <div class="name">IEC 62443 / NIST SP 800-82</div>
+        <div class="track"><div class="fill" style="width: 27.8%"></div></div>
+        <div class="val">27.8%</div>
+      </div>
+      
+      <div class="bar-row" title="NIST AI RMF: 16.7% compliant">
+        <div class="name">NIST AI RMF</div>
+        <div class="track"><div class="fill" style="width: 16.7%"></div></div>
+        <div class="val">16.7%</div>
+      </div>
+      
+      <div class="bar-row" title="PISF 2026: 38.5% compliant">
+        <div class="name">PISF 2026</div>
+        <div class="track"><div class="fill" style="width: 38.5%"></div></div>
+        <div class="val">38.5%</div>
+      </div>
+      
+      <div class="bar-row" title="CIS Controls: 38.9% compliant">
+        <div class="name">CIS Controls</div>
+        <div class="track"><div class="fill" style="width: 38.9%"></div></div>
+        <div class="val">38.9%</div>
+      </div>
+      
+    </div>
+
+    <div class="panel">
+      <h2>AI automation</h2>
+      
+      <table class="ai-table">
+        <tr><td>Process</td><td>Control mapping and gap analysis</td></tr>
+        <tr><td>Method</td><td>Ollama LLM (qwen2.5:7b) + retrieval</td></tr>
+        <tr><td>Manual effort</td><td>10.8 hrs</td></tr>
+        <tr><td>AI assisted effort</td><td>2.0 hrs</td></tr>
+        <tr><td>Human approval</td><td>Required</td></tr>
+        <tr><td>AI Trust Score</td><td>123/139 = 88.5%</td></tr>
+        <tr><td>Accepted by reviewers</td><td>121/139 = 87.1%</td></tr>
+        <tr><td>Recall of manual mapping</td><td>72.6%</td></tr>
+        <tr><td>Hallucinated IDs blocked</td><td>2</td></tr>
+      </table>
+      <div style="margin-top:8px">Estimated improvement <span class="big">81.3%</span></div>
+      
+      
+      <h2 style="margin-top:10px">Risk position</h2>
+      <table class="ai-table">
+        <tr><td>Inherent average</td><td>13.76/25</td></tr>
+        <tr><td>Current residual average</td><td>11.94/25</td></tr>
+        <tr><td>Target after treatment</td><td>7.24/25</td></tr>
+        <tr><td>Evidence available</td><td>25.0% of 68 items</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="note">All values are calculated by <code>scoring.py</code> and <code>evaluate.py</code> from the master registers
+  (assets, risks, controls, compliance, evidence, audit findings). Control effectiveness counts Implemented controls only;
+  weighted figure treats Partial as 0.5. Compliance uses the A2 weights (Compliant 1, Partial 0.5, Weak 0.25, Non-compliant 0).</div>
+</div>
+</body>
+</html>
