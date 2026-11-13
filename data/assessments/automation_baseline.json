@@ -1,0 +1,14 @@
+{
+  "_note": "Manual figures are ESTIMATES until the group times a real manual mapping. Replace them with measured values and set measured to true.",
+  "manual": {
+    "measured": false,
+    "mapping_minutes_per_control": 15,
+    "gap_analysis_minutes": 120,
+    "description": "Analyst reads each control, searches framework catalogs, records mappings, then works out requirement coverage by hand"
+  },
+  "ai_assisted": {
+    "measured": false,
+    "review_minutes_per_control": 4,
+    "description": "Analyst reviews and approves each AI suggested mapping; AI runtime is measured automatically from the run log"
+  }
+}

@@ -1,0 +1,14 @@
+data_id,data_set,classification,primary_asset,other_assets,data_owner,protection_priority,handling_rules
+DATA-01,"Timetables, fares, station information and public notices",Public,AST-10,,Passenger Services,Integrity,Integrity checks so published information cannot be altered
+DATA-02,Staff email and staff directory,Internal,AST-13,,IT Department,Confidentiality,Staff login with MFA
+DATA-03,Crew work schedules and rosters,Confidential,AST-12,,Railway Operations,Availability,"RBAC, encryption, access logged"
+DATA-04,Vendor contracts and vendor register,Confidential,AST-09,AST-13,CISO / Procurement,Confidentiality,"RBAC, encryption, access logged"
+DATA-05,CCTV footage,Confidential,AST-14,,Physical Security,Confidentiality,"RBAC, encryption, access logged"
+DATA-06,SIEM logs and audit reports,Confidential,AST-06,AST-09,CISO,Integrity,"RBAC, encryption, access logged"
+DATA-07,"Passenger identity, contact and travel records",Restricted,AST-04,AST-03;AST-09;AST-15,Passenger Services / Data Owner,Confidentiality,"RBAC (CTL-10), encryption at rest and in transit with managed keys (CTL-14), database activity monitoring (CTL-15), no copies outside production"
+DATA-08,Booking records,Restricted,AST-03,AST-04;AST-10;AST-15,Passenger Services,Confidentiality,"RBAC (CTL-10), encryption with managed keys (CTL-14), database activity monitoring (CTL-15)"
+DATA-09,Payment tokens,Restricted,AST-03,AST-10;AST-11,Passenger Services,Confidentiality,"Tokenised, encryption with managed keys (CTL-14), no copies outside production"
+DATA-10,Movement authorities and train control configuration,Critical,AST-01,AST-15,OT/Engineering,Integrity and availability,"OT-only access through a jump host with MFA (CTL-02, CTL-07), command and integrity monitoring (CTL-04), isolated backups (CTL-18)"
+DATA-11,Signalling and interlocking logic,Critical,AST-02,,OT/Engineering,Integrity and availability,"OT-only access through a jump host with MFA (CTL-02, CTL-07), command and integrity monitoring (CTL-04), isolated backups (CTL-18)"
+DATA-12,Safety-relevant sensor telemetry,Critical,AST-08,AST-07,OT/Engineering,Integrity,"Device authentication (CTL-05), telemetry validation before use (CTL-06)"
+DATA-13,Predictive maintenance model and its training data,Critical,AST-07,AST-09,Maintenance / Data & AI,Integrity,"AI governance and approved datasets (CTL-20), drift monitoring with human review (CTL-21), isolated backups (CTL-18)"

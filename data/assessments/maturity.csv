@@ -1,0 +1,11 @@
+capability,score,target_year3,rationale,evidence_refs
+Governance,2,4,"Governance structure and business owners are defined (A1) but the policy set is not formalised, the CISO reports through the CIO and the heat map rates governance Partial to Non-compliant",A1 Section B; CMP-01 to CMP-06
+Risk Management,3,4,"Asset and risk registers with defined scales, justified scores and a treatment plan for every High and Critical risk; rated Compliant against ISO 27001 and NIST CSF",A1 Section D; A2 Section A; CMP-13; CMP-14
+IAM,2,4,"RBAC is implemented (CTL-10) but MFA and PAM are Partial, and JML and vendor access are Gaps (CTL-02, CTL-09); a dormant admin account was the A3 escalation path",CTL-02; CTL-07; CTL-08; CTL-09; CTL-10; PIR-03
+Data Protection,2,4,"Data classification scheme exists (A3) and RBAC is implemented, but encryption is Partial and there is no database activity monitoring",CTL-10; CTL-14; CTL-15; PIR-05
+Incident Response,2,4,"IR plan with defined roles and a 24x7 SOC exist, but the plan was never exercised and OT, IoT and bulk exfiltration are not detected",A3 incident scenario; CTL-24; CTL-25; PIR-07
+BC/DR,2,4,"Immutable backups and a warm DR site exist, but restores were never timed; the A3 restore took 61 hrs against an 8 hr RTO",CTL-18; CTL-19; PIR-04
+AI Governance,1,3,"The predictive maintenance model runs in production with no inventory, dataset approval, version control or drift monitoring",CTL-20; CTL-21; AUD-05
+OT Security,1,3,"OT is rated Weak against every applicable framework; segmentation is Partial and command integrity and IoT device authentication are Gaps",CTL-01; CTL-04; CTL-05; AUD-01
+Supply Chain,1,3,"Vendor contracts are purely commercial with no security annex, assessment or notification SLA; Non-compliant against CIS and IEC 62443",CTL-23; AUD-06; PIR-01
+Audit,3,4,"An audit plan traces requirement, control, evidence, test, finding and recommendation, and findings are tracked; no independent audit committee yet",A2 Section E; audit_findings.csv
