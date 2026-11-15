@@ -106,7 +106,21 @@ register, run `validate`, then `score`, then `dashboard` so the numbers stay in 
 Every number these sections need is already in `outputs/metrics.md` and the registers. Use them; do not
 invent new figures, or the report and dashboard will disagree.
 
-### A. Report sections to write
+### A. Report sections
+
+**A full draft now exists: `docs/FINAL_REPORT.md`, with `docs/PSR_Final_Project_Report_Group07.docx`
+and `.pdf` generated from it (50 pages).** It covers all 26 components the brief lists, in 20
+sections, and every figure in it comes from `outputs/metrics.md` or the registers. What is left is
+for the group to read it, challenge anything they disagree with, and redraw the five text diagrams
+(zone architecture, data flows, DR, SOC, IAM pipeline) as proper figures if they want to.
+
+To regenerate the Word and PDF files after editing the markdown:
+
+```bash
+pandoc docs/FINAL_REPORT.md -o docs/PSR_Final_Project_Report_Group07.docx --toc --toc-depth=2
+```
+
+The table below maps each brief component to the section that covers it.
 
 | # | Section | Source to use | Owner | Done |
 |---|---|---|---|---|
