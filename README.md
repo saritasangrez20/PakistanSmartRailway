@@ -1,5 +1,7 @@
 # Pakistan Smart Railways (PSR): Information Assurance, GRC and AI automation
 
+**New to the project? Start with [docs/HANDOVER.md](docs/HANDOVER.md)** (what is done, results, and the to do list).
+
 Final project for CY3003 Information Assurance. PSR is a hypothetical smart railway (IT, OT, cloud, IoT
 and AI) carried through Assignments 1 to 3. This repository holds the five master registers, the code
 that turns them into the course metrics, the AI automation (control mapping and gap analysis on a local
