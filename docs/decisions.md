@@ -38,11 +38,20 @@ Where Assignments 1 to 3 disagreed, one option was chosen and applied everywhere
 
 ## Reference mapping (ground truth)
 
-`data/ground_truth/reference_mapping.csv` has 244 control to requirement pairs:
+`data/ground_truth/reference_mapping.csv` has 259 control to requirement pairs:
 
 * 62 from the group's own work (A2 control matrix, plus CTL-25 from A3): the **primary** set, used for recall
-* 182 added as a reviewer: other requirements a control clearly satisfies, used so the AI is not
+* 197 added as a reviewer: other requirements a control clearly satisfies, used so the AI is not
   marked wrong for a valid mapping A2 did not list. **The group should review these rows**
 
 Matching is done at the level A2 mapped at: ISO and CIS controls, IEC 62443 SRs, NIST CSF and AI RMF
 functions, PISF domains. Where A2 wrote only "IEC 62443-3-3" for CTL-06, SR 3.4 and SR 3.5 were used.
+
+### Rows added while reviewing the AI output
+
+15 of the 197 reviewer rows were added during review of the reviewed Ollama run, and 12 of those 15
+are pairs the AI had suggested. Grading a run against a reference its own output has extended
+flatters the score, so those rows carry `added_during_review = Y` and `evaluate.py` reports a second
+**frozen Trust Score** that leaves them out. Both figures go in the report: 88.5% on the full
+reference, 79.9% frozen. The rows were kept rather than deleted because the mappings are correct on
+their merits; the reporting is what had to change.

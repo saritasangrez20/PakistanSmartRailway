@@ -1,8 +1,9 @@
 """Evaluate the AI mapper: AI Trust Score, recall, error lists and Automation Gain.
 
 Ground truth: data/ground_truth/reference_mapping.csv
-    source A2 / A3   the mapping the group made by hand in the assignments (primary set)
-    source Reviewer  further mappings a human reviewer accepts as correct (acceptable set)
+    source A2 / A3            the mapping the group made by hand in the assignments (primary set)
+    source Reviewer           further mappings a human reviewer accepts as correct (acceptable set)
+    added_during_review = Y   acceptable rows added while reviewing THIS run's output
 
 Comparison is at the level each framework was mapped by hand (match_key): ISO 27001 and CIS
 controls, IEC 62443 SRs, NIST CSF and AI RMF functions, PISF domains.
@@ -10,9 +11,17 @@ controls, IEC 62443 SRs, NIST CSF and AI RMF functions, PISF domains.
 Metrics
     Trust Score (accuracy) = correct recommendations / total recommendations x 100
                              (correct = in the acceptable set; this is precision)
+    Trust Score (frozen)   = the same, counting only reference rows that existed before this run
+                             was reviewed. Reported because 15 acceptable rows were added during
+                             review, 12 of which the AI had suggested; grading against a reference
+                             the output has already influenced flatters the headline figure.
     Recall (primary)       = primary mappings the AI found / all primary mappings x 100
     Automation Gain        = (manual minutes - AI assisted minutes) / manual minutes x 100
-                             AI assisted minutes = measured runtime + human review time
+                             AI assisted minutes = measured runtime + human review time,
+                             where review time is per suggestion, not per control
+
+No F1 is reported: precision is measured against the acceptable set and recall against the primary
+set, so the two have different denominators and their harmonic mean would not mean anything.
 
 Run:  python run.py evaluate
 """
@@ -40,13 +49,17 @@ def score_mapping(mapping: pd.DataFrame, reference: pd.DataFrame) -> dict:
     acceptable = set(zip(reference.control_id, reference.match_key))
     primary_ref = reference[reference.source != "Reviewer"]
     primary = set(zip(primary_ref.control_id, primary_ref.match_key))
+    # rows added to the reference while reviewing this run: excluded from the frozen score
+    added = reference.get("added_during_review")
+    post_run = set() if added is None else set(
+        zip(reference[added == "Y"].control_id, reference[added == "Y"].match_key))
+    frozen = acceptable - post_run
 
     correct = predicted & acceptable
     incorrect = predicted - acceptable
     found_primary = predicted & primary
     precision = pct(len(correct), len(predicted))
     recall = pct(len(found_primary), len(primary))
-    f1 = round(2 * precision * recall / (precision + recall), 1) if precision + recall else 0.0
 
     per_family = []
     for family in sorted(set(fam)):
@@ -63,7 +76,12 @@ def score_mapping(mapping: pd.DataFrame, reference: pd.DataFrame) -> dict:
                for c, k in sorted(primary - predicted)])
     return {"recommended": len(predicted), "correct": len(correct), "incorrect": len(incorrect),
             "trust_score_pct": precision, "primary_total": len(primary), "primary_found": len(found_primary),
-            "recall_primary_pct": recall, "f1_pct": f1, "per_family": per_family, "errors": errors}
+            "recall_primary_pct": recall,
+            "reference_rows": len(acceptable), "reference_added_during_review": len(post_run),
+            "reference_added_that_ai_suggested": len(post_run & predicted),
+            "correct_frozen": len(predicted & frozen),
+            "trust_score_frozen_pct": pct(len(predicted & frozen), len(predicted)),
+            "per_family": per_family, "errors": errors}
 
 
 def gap_agreement() -> dict | None:
@@ -77,15 +95,22 @@ def gap_agreement() -> dict | None:
     return {"requirements": len(both), "same_status": agree, "agreement_pct": pct(agree, len(both))}
 
 
-def automation_gain(log: dict, controls: int) -> dict:
+def automation_gain(log: dict, controls: int, suggestions: int) -> dict:
+    """Review time is charged per suggestion, because that is what a reviewer actually reads.
+
+    An earlier version charged a flat 3 minutes per control. That was set when the run produced 74
+    suggestions; the reviewed run produced 139, so a per control figure understates the review and
+    overstates the gain.
+    """
     base = json.loads((ASSESSMENTS / "automation_baseline.json").read_text(encoding="utf-8"))
     m, a = base["manual"], base["ai_assisted"]
     manual = m["mapping_minutes_per_control"] * controls + m["gap_analysis_minutes"]
     runtime_min = log["runtime_seconds"] / 60
-    review = a["review_minutes_per_control"] * controls
+    review = a["review_minutes_per_suggestion"] * suggestions
     ai_total = runtime_min + review
     return {"manual_minutes": round(manual, 1), "ai_runtime_minutes": round(runtime_min, 2),
             "human_review_minutes": round(review, 1), "ai_assisted_minutes": round(ai_total, 1),
+            "review_minutes_per_suggestion": a["review_minutes_per_suggestion"],
             "automation_gain_pct": pct(manual - ai_total, manual),
             "manual_measured": m.get("measured", False), "review_measured": a.get("measured", False)}
 
@@ -97,14 +122,19 @@ def evaluate(path: Path) -> dict:
     log = json.loads((MAPPING_DIR / f"run_log_{backend}.json").read_text(encoding="utf-8"))
     scores = score_mapping(mapping, reference)
     reviewed = mapping[mapping.human_decision != ""]
-    gain = automation_gain(log, log["controls"])
+    gain = automation_gain(log, log["controls"], len(mapping))
     summary = {
         "process": "Control mapping and gap analysis",
         "backend": backend, "model": log.get("model"), "run_at": log["run_at"],
         "controls": log["controls"], "suggestions": len(mapping),
         "trust_score_pct": scores["trust_score_pct"], "correct": scores["correct"],
         "incorrect": scores["incorrect"], "total": scores["recommended"],
-        "recall_primary_pct": scores["recall_primary_pct"], "f1_pct": scores["f1_pct"],
+        "trust_score_frozen_pct": scores["trust_score_frozen_pct"],
+        "correct_frozen": scores["correct_frozen"],
+        "reference_rows": scores["reference_rows"],
+        "reference_added_during_review": scores["reference_added_during_review"],
+        "reference_added_that_ai_suggested": scores["reference_added_that_ai_suggested"],
+        "recall_primary_pct": scores["recall_primary_pct"],
         "hallucinated_ids_rejected": log["rejected_ids_total"],
         "format_repaired_ids": log.get("repaired_ids_total", 0), "parse_failures": log["parse_failures"],
         "injection_flagged_controls": len(log["injection_flagged_controls"]),
@@ -131,19 +161,26 @@ def to_markdown(result: dict, comparison: list[dict]) -> str:
              f"| Incorrect recommendations | {s['incorrect']} |",
              f"| Total | {s['total']} |",
              f"| **Trust Score (accuracy)** | **{s['correct']}/{s['total']} = {s['trust_score_pct']}%** |",
+             f"| Trust Score on the frozen reference | {s['correct_frozen']}/{s['total']} = "
+             f"{s['trust_score_frozen_pct']}% |",
              f"| Recall of the A2/A3 manual mapping | {s['recall_primary_pct']}% |",
-             f"| F1 | {s['f1_pct']}% |",
              f"| Real IDs in the wrong format, repaired by guardrail | {s['format_repaired_ids']} |",
              f"| Invented IDs rejected by guardrail | {s['hallucinated_ids_rejected']} |",
              f"| Suggestions flagged for priority human review | {s['flagged_for_priority_review_pct']}% |",
              f"| Suggestions verified by a human so far | {s['human_verified_pct']}% |",
              f"| Human review: accepted / reviewed | {s['human_accepted']}/{s['human_accepted'] + s['human_rejected']} "
              f"= {s['human_trust_score_pct']}% |", "",
+             f"The reference mapping holds {s['reference_rows']} acceptable pairs. "
+             f"{s['reference_added_during_review']} of them were added while reviewing this run's output, "
+             f"and {s['reference_added_that_ai_suggested']} of those were pairs the AI had suggested. "
+             "The frozen Trust Score excludes them, so it is the figure to quote when the question is how "
+             "accurate the model was against a reference it had not already influenced.", "",
              "## Automation Gain" + est, "",
              "| | Minutes |", "|---|---|",
              f"| Manual mapping and gap analysis | {s['manual_minutes']} |",
              f"| AI runtime (measured) | {s['ai_runtime_minutes']} |",
-             f"| Human review of AI output | {s['human_review_minutes']} |",
+             f"| Human review of AI output ({s['suggestions']} suggestions x "
+             f"{s['review_minutes_per_suggestion']} min) | {s['human_review_minutes']} |",
              f"| AI assisted total | {s['ai_assisted_minutes']} |",
              f"| **Automation Gain** | **{s['automation_gain_pct']}%** |", "",
              "## By framework", "",
@@ -156,9 +193,10 @@ def to_markdown(result: dict, comparison: list[dict]) -> str:
         lines += ["", f"Gap analysis agreement with the human reference mapping: {g['same_status']} of "
                   f"{g['requirements']} requirements get the same status ({g['agreement_pct']}%)."]
     if len(comparison) > 1:
-        lines += ["", "## Backend comparison", "", "| Backend | Trust % | Recall % | F1 % | Runtime (s) |", "|---|---|---|---|---|"]
-        lines += [f"| {c['backend']} | {c['trust_score_pct']} | {c['recall_primary_pct']} | {c['f1_pct']} | "
-                  f"{c['runtime_seconds']} |" for c in comparison]
+        lines += ["", "## Backend comparison", "",
+                  "| Backend | Trust % | Trust % (frozen) | Recall % | Runtime (s) |", "|---|---|---|---|---|"]
+        lines += [f"| {c['backend']} | {c['trust_score_pct']} | {c['trust_score_frozen_pct']} | "
+                  f"{c['recall_primary_pct']} | {c['runtime_seconds']} |" for c in comparison]
     lines += ["", "Full error list: `outputs/evaluation/errors.csv`."]
     return "\n".join(lines) + "\n"
 
@@ -173,7 +211,8 @@ def main(mapping_path: str | None = None) -> dict:
             r = evaluate(p)["summary"]
             log = json.loads((MAPPING_DIR / f"run_log_{backend}.json").read_text(encoding="utf-8"))
             comparison.append({"backend": backend, "trust_score_pct": r["trust_score_pct"],
-                               "recall_primary_pct": r["recall_primary_pct"], "f1_pct": r["f1_pct"],
+                               "trust_score_frozen_pct": r["trust_score_frozen_pct"],
+                               "recall_primary_pct": r["recall_primary_pct"],
                                "runtime_seconds": log["runtime_seconds"]})
     result["backend_comparison"] = comparison
     EVAL_DIR.mkdir(parents=True, exist_ok=True)

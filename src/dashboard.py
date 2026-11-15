@@ -117,16 +117,28 @@ def export_pdf(html_path: Path, pdf_path: Path) -> bool:
         try:
             browser = p.chromium.launch()
         except Exception:
-            found = sorted(glob.glob("/opt/pw-browsers/chromium-*/chrome-linux*/chrome"))
+            # fall back to a browser already on the machine before asking for a download
+            found = (sorted(glob.glob("/opt/pw-browsers/chromium-*/chrome-linux*/chrome")) +
+                     [p for p in ("/usr/bin/chromium", "/usr/bin/chromium-browser",
+                                  "/usr/bin/google-chrome", "/usr/bin/google-chrome-stable")
+                      if Path(p).exists()])
             if not found:
                 print("Chromium not found: run `python -m playwright install chromium`, or print the HTML to PDF.")
                 return False
             browser = p.chromium.launch(executable_path=found[-1], args=["--no-sandbox"])
         page = browser.new_page()
         page.goto(html_path.resolve().as_uri())
-        page.pdf(path=str(pdf_path), format="A4", landscape=True, print_background=True,
+        # The brief asks for ONE page. Different Chromium builds lay the panels out slightly
+        # differently, so measure the printed height and scale to fit instead of trusting the CSS.
+        page.emulate_media(media="print")
+        page.set_viewport_size({"width": 1063, "height": 733})  # A4 landscape less 8mm margins, at 96dpi
+        content_px = page.evaluate("document.querySelector('.page').scrollHeight")
+        scale = max(0.1, min(1.0, 733 / content_px)) if content_px else 1.0
+        page.pdf(path=str(pdf_path), format="A4", landscape=True, print_background=True, scale=scale,
                  margin={"top": "8mm", "bottom": "8mm", "left": "8mm", "right": "8mm"})
         browser.close()
+    if scale < 1.0:
+        print(f"Scaled to {scale:.0%} so the dashboard stays on one page.")
     return True
 
 

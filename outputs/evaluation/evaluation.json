@@ -10,8 +10,12 @@
     "correct": 123,
     "incorrect": 16,
     "total": 139,
+    "trust_score_frozen_pct": 79.9,
+    "correct_frozen": 111,
+    "reference_rows": 259,
+    "reference_added_during_review": 15,
+    "reference_added_that_ai_suggested": 12,
     "recall_primary_pct": 72.6,
-    "f1_pct": 79.8,
     "hallucinated_ids_rejected": 2,
     "format_repaired_ids": 10,
     "parse_failures": 0,
@@ -23,9 +27,10 @@
     "human_trust_score_pct": 87.1,
     "manual_minutes": 650,
     "ai_runtime_minutes": 46.27,
-    "human_review_minutes": 75,
-    "ai_assisted_minutes": 121.3,
-    "automation_gain_pct": 81.3,
+    "human_review_minutes": 139,
+    "ai_assisted_minutes": 185.3,
+    "review_minutes_per_suggestion": 1,
+    "automation_gain_pct": 71.5,
     "manual_measured": true,
     "review_measured": true,
     "human_approval": "Required"
@@ -271,15 +276,15 @@
     {
       "backend": "retrieval",
       "trust_score_pct": 90.6,
+      "trust_score_frozen_pct": 87.1,
       "recall_primary_pct": 50.0,
-      "f1_pct": 64.4,
       "runtime_seconds": 0.12
     },
     {
       "backend": "ollama",
       "trust_score_pct": 88.5,
+      "trust_score_frozen_pct": 79.9,
       "recall_primary_pct": 72.6,
-      "f1_pct": 79.8,
       "runtime_seconds": 2776.15
     }
   ]

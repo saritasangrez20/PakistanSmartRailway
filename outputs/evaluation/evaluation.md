@@ -10,13 +10,15 @@ Backend: **ollama**, model `qwen2.5:7b`, run 2026-11-13T16:22:08+00:00
 | Incorrect recommendations | 16 |
 | Total | 139 |
 | **Trust Score (accuracy)** | **123/139 = 88.5%** |
+| Trust Score on the frozen reference | 111/139 = 79.9% |
 | Recall of the A2/A3 manual mapping | 72.6% |
-| F1 | 79.8% |
 | Real IDs in the wrong format, repaired by guardrail | 10 |
 | Invented IDs rejected by guardrail | 2 |
 | Suggestions flagged for priority human review | 29.5% |
 | Suggestions verified by a human so far | 100.0% |
 | Human review: accepted / reviewed | 121/139 = 87.1% |
+
+The reference mapping holds 259 acceptable pairs. 15 of them were added while reviewing this run's output, and 12 of those were pairs the AI had suggested. The frozen Trust Score excludes them, so it is the figure to quote when the question is how accurate the model was against a reference it had not already influenced.
 
 ## Automation Gain
 
@@ -24,9 +26,9 @@ Backend: **ollama**, model `qwen2.5:7b`, run 2026-11-13T16:22:08+00:00
 |---|---|
 | Manual mapping and gap analysis | 650 |
 | AI runtime (measured) | 46.27 |
-| Human review of AI output | 75 |
-| AI assisted total | 121.3 |
-| **Automation Gain** | **81.3%** |
+| Human review of AI output (139 suggestions x 1 min) | 139 |
+| AI assisted total | 185.3 |
+| **Automation Gain** | **71.5%** |
 
 ## By framework
 
@@ -44,9 +46,9 @@ Gap analysis agreement with the human reference mapping: 133 of 235 requirements
 
 ## Backend comparison
 
-| Backend | Trust % | Recall % | F1 % | Runtime (s) |
+| Backend | Trust % | Trust % (frozen) | Recall % | Runtime (s) |
 |---|---|---|---|---|
-| retrieval | 90.6 | 50.0 | 64.4 | 0.12 |
-| ollama | 88.5 | 72.6 | 79.8 | 2776.15 |
+| retrieval | 90.6 | 87.1 | 50.0 | 0.12 |
+| ollama | 88.5 | 79.9 | 72.6 | 2776.15 |
 
 Full error list: `outputs/evaluation/errors.csv`.

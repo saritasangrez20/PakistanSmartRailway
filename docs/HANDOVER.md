@@ -68,9 +68,10 @@ testing, CTL-02 brokered vendor access, CTL-01 default-deny IT/OT segmentation.
 |---|---|
 | Task | Map 25 controls to 235 requirements in 7 frameworks, then find gaps |
 | Trust Score (accuracy) | **123 / 139 = 88.5%** |
+| Trust Score, frozen reference | **111 / 139 = 79.9%** (excludes 15 reference rows added while reviewing this run, 12 of which the AI had suggested) |
 | Accepted by reviewers | 121 / 139 = 87.1% |
 | Recall of our A2/A3 manual mapping | **72.6%** |
-| Automation Gain | **81.3%** (650 min by hand, 121 min with AI and review) |
+| Automation Gain | **71.5%** (650 min by hand, 185 min with AI and review at 1 min per suggestion) |
 | Truly invented IDs (blocked) | 2 |
 | Badly formatted real IDs (repaired) | 10 |
 | No-LLM search baseline | 90.6% trust but only 50% recall, so the LLM is worth using |
@@ -144,5 +145,6 @@ invent new figures, or the report and dashboard will disagree.
 * **How is residual risk calculated?** Each risk moves from inherent towards its target in proportion to how many of its controls are in place (Implemented 1, Partial 0.5, Gap 0).
 * **Why a local LLM?** Control data is confidential; Ollama keeps it on our machine (data leakage control).
 * **How do you know the AI is accurate?** Graded against our A2/A3 manual mapping plus reviewer additions; 88.5% trust, 72.6% recall; every suggestion approved by a named reviewer.
+* **Why two Trust Scores?** 15 reference rows were added while we reviewed this run, and 12 of them were pairs the AI had suggested, so the full-reference 88.5% is graded partly against the model's own output. The frozen score, 79.9%, excludes those rows. Quote the frozen one when the question is accuracy.
 * **What went wrong with the AI?** Our guardrail rejected 69 correct IDs because of formatting; we found it in the logs and fixed it. Only 2 truly invented IDs remained.
 * **What can't the AI do?** Judge whether a control is actually implemented; it only maps. Weak on COBIT and OT.
