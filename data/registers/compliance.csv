@@ -1,0 +1,79 @@
+req_id,domain,framework,applicable,rating,weight,linked_controls,source
+CMP-01,Governance and policy,ISO 27001,Y,Partially compliant,0.5,CTL-22,A2 Section D heat map
+CMP-02,Governance and policy,NIST CSF,Y,Partially compliant,0.5,CTL-22,A2 Section D heat map
+CMP-03,Governance and policy,CIS Controls,N,N/A,,,A2 Section D heat map
+CMP-04,Governance and policy,IEC 62443 / NIST SP 800-82,Y,Weak,0.25,CTL-22,A2 Section D heat map
+CMP-05,Governance and policy,NIST AI RMF,Y,Non-compliant,0.0,CTL-22,A2 Section D heat map
+CMP-06,Governance and policy,PISF 2026,Y,Partially compliant,0.5,CTL-22,A2 Section D heat map
+CMP-07,Asset management,ISO 27001,Y,Partially compliant,0.5,CTL-03,A2 Section D heat map
+CMP-08,Asset management,NIST CSF,Y,Partially compliant,0.5,CTL-03,A2 Section D heat map
+CMP-09,Asset management,CIS Controls,Y,Partially compliant,0.5,CTL-03,A2 Section D heat map
+CMP-10,Asset management,IEC 62443 / NIST SP 800-82,Y,Weak,0.25,CTL-03,A2 Section D heat map
+CMP-11,Asset management,NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-12,Asset management,PISF 2026,Y,Partially compliant,0.5,CTL-03,A2 Section D heat map
+CMP-13,Risk management,ISO 27001,Y,Compliant,1.0,,A2 Section D heat map
+CMP-14,Risk management,NIST CSF,Y,Compliant,1.0,,A2 Section D heat map
+CMP-15,Risk management,CIS Controls,N,N/A,,,A2 Section D heat map
+CMP-16,Risk management,IEC 62443 / NIST SP 800-82,Y,Partially compliant,0.5,,A2 Section D heat map
+CMP-17,Risk management,NIST AI RMF,Y,Weak,0.25,,A2 Section D heat map
+CMP-18,Risk management,PISF 2026,Y,Partially compliant,0.5,,A2 Section D heat map
+CMP-19,Identity and access management,ISO 27001,Y,Partially compliant,0.5,CTL-02;CTL-07;CTL-08;CTL-09,A2 Section D heat map
+CMP-20,Identity and access management,NIST CSF,Y,Partially compliant,0.5,CTL-02;CTL-07;CTL-08;CTL-09,A2 Section D heat map
+CMP-21,Identity and access management,CIS Controls,Y,Partially compliant,0.5,CTL-02;CTL-07;CTL-08;CTL-09,A2 Section D heat map
+CMP-22,Identity and access management,IEC 62443 / NIST SP 800-82,Y,Weak,0.25,CTL-02;CTL-07;CTL-08;CTL-09,A2 Section D heat map
+CMP-23,Identity and access management,NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-24,Identity and access management,PISF 2026,Y,Partially compliant,0.5,CTL-02;CTL-07;CTL-08;CTL-09,A2 Section D heat map
+CMP-25,Network security and segmentation,ISO 27001,Y,Partially compliant,0.5,CTL-01,A2 Section D heat map
+CMP-26,Network security and segmentation,NIST CSF,Y,Partially compliant,0.5,CTL-01,A2 Section D heat map
+CMP-27,Network security and segmentation,CIS Controls,Y,Partially compliant,0.5,CTL-01,A2 Section D heat map
+CMP-28,Network security and segmentation,IEC 62443 / NIST SP 800-82,Y,Partially compliant,0.5,CTL-01,A2 Section D heat map
+CMP-29,Network security and segmentation,NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-30,Network security and segmentation,PISF 2026,Y,Partially compliant,0.5,CTL-01,A2 Section D heat map
+CMP-31,OT and safety systems,ISO 27001,Y,Weak,0.25,CTL-01;CTL-02;CTL-03;CTL-04;CTL-05;CTL-17,A2 Section D heat map
+CMP-32,OT and safety systems,NIST CSF,Y,Weak,0.25,CTL-01;CTL-02;CTL-03;CTL-04;CTL-05;CTL-17,A2 Section D heat map
+CMP-33,OT and safety systems,CIS Controls,N,N/A,,,A2 Section D heat map
+CMP-34,OT and safety systems,IEC 62443 / NIST SP 800-82,Y,Weak,0.25,CTL-01;CTL-02;CTL-03;CTL-04;CTL-05;CTL-17,A2 Section D heat map
+CMP-35,OT and safety systems,NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-36,OT and safety systems,PISF 2026,Y,Weak,0.25,CTL-01;CTL-02;CTL-03;CTL-04;CTL-05;CTL-17,A2 Section D heat map
+CMP-37,Application and API security,ISO 27001,Y,Partially compliant,0.5,CTL-11;CTL-12;CTL-13,A2 Section D heat map
+CMP-38,Application and API security,NIST CSF,Y,Partially compliant,0.5,CTL-11;CTL-12;CTL-13,A2 Section D heat map
+CMP-39,Application and API security,CIS Controls,Y,Weak,0.25,CTL-11;CTL-12;CTL-13,A2 Section D heat map
+CMP-40,Application and API security,IEC 62443 / NIST SP 800-82,N,N/A,,,A2 Section D heat map
+CMP-41,Application and API security,NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-42,Application and API security,PISF 2026,Y,Weak,0.25,CTL-11;CTL-12;CTL-13,A2 Section D heat map
+CMP-43,Data protection and privacy,ISO 27001,Y,Partially compliant,0.5,CTL-10;CTL-14,A2 Section D heat map
+CMP-44,Data protection and privacy,NIST CSF,Y,Partially compliant,0.5,CTL-10;CTL-14,A2 Section D heat map
+CMP-45,Data protection and privacy,CIS Controls,Y,Partially compliant,0.5,CTL-10;CTL-14,A2 Section D heat map
+CMP-46,Data protection and privacy,IEC 62443 / NIST SP 800-82,N,N/A,,,A2 Section D heat map
+CMP-47,Data protection and privacy,NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-48,Data protection and privacy,PISF 2026,Y,Partially compliant,0.5,CTL-10;CTL-14,A2 Section D heat map
+CMP-49,Cloud security,ISO 27001,Y,Weak,0.25,CTL-16,A2 Section D heat map
+CMP-50,Cloud security,NIST CSF,Y,Weak,0.25,CTL-16,A2 Section D heat map
+CMP-51,Cloud security,CIS Controls,Y,Weak,0.25,CTL-16,A2 Section D heat map
+CMP-52,Cloud security,IEC 62443 / NIST SP 800-82,N,N/A,,,A2 Section D heat map
+CMP-53,Cloud security,NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-54,Cloud security,PISF 2026,Y,Weak,0.25,CTL-16,A2 Section D heat map
+CMP-55,"Logging, monitoring and detection",ISO 27001,Y,Partially compliant,0.5,CTL-15;CTL-24,A2 Section D heat map
+CMP-56,"Logging, monitoring and detection",NIST CSF,Y,Partially compliant,0.5,CTL-15;CTL-24,A2 Section D heat map
+CMP-57,"Logging, monitoring and detection",CIS Controls,Y,Partially compliant,0.5,CTL-15;CTL-24,A2 Section D heat map
+CMP-58,"Logging, monitoring and detection",IEC 62443 / NIST SP 800-82,Y,Weak,0.25,CTL-15;CTL-24,A2 Section D heat map
+CMP-59,"Logging, monitoring and detection",NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-60,"Logging, monitoring and detection",PISF 2026,Y,Partially compliant,0.5,CTL-15;CTL-24,A2 Section D heat map
+CMP-61,Backup and disaster recovery,ISO 27001,Y,Partially compliant,0.5,CTL-18;CTL-19;CTL-25,A2 Section D heat map
+CMP-62,Backup and disaster recovery,NIST CSF,Y,Weak,0.25,CTL-18;CTL-19;CTL-25,A2 Section D heat map
+CMP-63,Backup and disaster recovery,CIS Controls,Y,Partially compliant,0.5,CTL-18;CTL-19;CTL-25,A2 Section D heat map
+CMP-64,Backup and disaster recovery,IEC 62443 / NIST SP 800-82,Y,Weak,0.25,CTL-18;CTL-19;CTL-25,A2 Section D heat map
+CMP-65,Backup and disaster recovery,NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-66,Backup and disaster recovery,PISF 2026,Y,Partially compliant,0.5,CTL-18;CTL-19;CTL-25,A2 Section D heat map
+CMP-67,Third-party and supply chain,ISO 27001,Y,Weak,0.25,CTL-23,A2 Section D heat map
+CMP-68,Third-party and supply chain,NIST CSF,Y,Weak,0.25,CTL-23,A2 Section D heat map
+CMP-69,Third-party and supply chain,CIS Controls,Y,Non-compliant,0.0,CTL-23,A2 Section D heat map
+CMP-70,Third-party and supply chain,IEC 62443 / NIST SP 800-82,Y,Non-compliant,0.0,CTL-23,A2 Section D heat map
+CMP-71,Third-party and supply chain,NIST AI RMF,N,N/A,,,A2 Section D heat map
+CMP-72,Third-party and supply chain,PISF 2026,Y,Weak,0.25,CTL-23,A2 Section D heat map
+CMP-73,AI governance,ISO 27001,Y,Non-compliant,0.0,CTL-06;CTL-20;CTL-21,A2 Section D heat map
+CMP-74,AI governance,NIST CSF,Y,Non-compliant,0.0,CTL-06;CTL-20;CTL-21,A2 Section D heat map
+CMP-75,AI governance,CIS Controls,N,N/A,,,A2 Section D heat map
+CMP-76,AI governance,IEC 62443 / NIST SP 800-82,N,N/A,,,A2 Section D heat map
+CMP-77,AI governance,NIST AI RMF,Y,Weak,0.25,CTL-06;CTL-20;CTL-21,A2 Section D heat map
+CMP-78,AI governance,PISF 2026,Y,Non-compliant,0.0,CTL-06;CTL-20;CTL-21,A2 Section D heat map

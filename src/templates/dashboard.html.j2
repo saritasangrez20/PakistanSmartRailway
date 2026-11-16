@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PSR Information Assurance Dashboard</title>
+{% include "style.html.j2" %}
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark"><span class="badge">PSR</span> Assurance</div>
+      <div class="org">{{ org }}<br>CY3003 Information Assurance</div>
+    </div>
+    <nav id="nav">
+      <div class="group">Overview</div>
+      <a href="#exec" class="on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="2" width="5" height="5" rx="1"/><rect x="9.5" y="2" width="5" height="5" rx="1"/><rect x="1.5" y="9" width="5" height="5" rx="1"/><rect x="9.5" y="9" width="5" height="5" rx="1"/></svg>Executive view</a>
+      <div class="group">Registers</div>
+      <a href="#risk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 1.8 15 14H1z"/><path d="M8 6v3.5M8 11.6v.6"/></svg>Risk register</a>
+      <a href="#controls"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 1.6 13.8 4v4.2c0 3-2.4 5.2-5.8 6.2-3.4-1-5.8-3.2-5.8-6.2V4z"/><path d="m5.6 8 1.8 1.8 3-3.4"/></svg>Controls</a>
+      <a href="#compliance"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="1.6" width="11" height="12.8" rx="1.4"/><path d="M5.4 5.2h5.2M5.4 8h5.2M5.4 10.8h3"/></svg>Compliance</a>
+      <a href="#gaps"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6.5 2h-4v12h11V6.5"/><path d="M9.5 2h4v4M13.5 2 8 7.5"/></svg>Framework gaps</a>
+      <a href="#assets"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 1.8 14.2 5 8 8.2 1.8 5z"/><path d="M1.8 8.2 8 11.4l6.2-3.2M1.8 11.2 8 14.4l6.2-3.2"/></svg>Assets &amp; data</a>
+      <a href="#audit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="4.6"/><path d="m10.4 10.4 3.4 3.4"/></svg>Audit &amp; evidence</a>
+      <div class="group">Programme</div>
+      <a href="#maturity"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1.8 13.4h12.4"/><path d="M3.6 13.4V9M7.2 13.4V6M10.8 13.4V7.6M14 13.4V3.4"/></svg>Maturity &amp; roadmap</a>
+      <a href="#ai"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.4" y="4.4" width="9.2" height="8" rx="1.6"/><path d="M8 1.6v2.8M6.2 7.6v1.6M9.8 7.6v1.6M1.6 7.4h1.8M12.6 7.4h1.8"/></svg>AI automation</a>
+    </nav>
+    <footer>
+      Generated {{ generated }}<br>
+      Every figure is calculated by <code>scoring.py</code> and <code>evaluate.py</code> from the master
+      registers. Nothing on this page is typed in by hand.
+    </footer>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <h1>Enterprise Information Assurance Dashboard</h1>
+      <span class="crumb" id="crumb">Executive view</span>
+      <span class="spacer"></span>
+      <span class="status-pill"><i id="statusDot" class="bg-critical" style="width:7px;height:7px;border-radius:50%;display:inline-block"></i> {{ m.maturity.status }} · {{ m.maturity.score }}/5</span>
+      <button class="btn" id="themeBtn" title="Switch between light and dark">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3.1 3.1l1.1 1.1M11.8 11.8l1.1 1.1M12.9 3.1l-1.1 1.1M4.2 11.8l-1.1 1.1"/></svg>
+        Theme
+      </button>
+      <button class="btn" onclick="window.print()">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4.4 6V2h7.2v4"/><rect x="2" y="6" width="12" height="5.2" rx="1.2"/><path d="M4.4 11.2V14h7.2v-2.8"/></svg>
+        Print one-pager
+      </button>
+    </div>
+
+    <!-- =============== EXECUTIVE VIEW (the section that prints) =============== -->
+    <section class="sec page" id="exec">
+      <header>
+        <div class="eyebrow">Board and CISO view</div>
+        <h2>Where PSR stands today</h2>
+        <p class="lede">Twelve measures calculated from the five master registers. The three panels under them
+        answer the questions a board asks in order: what is most dangerous now, how far governance is from
+        target, and what the AI automation actually bought us. This is the section that prints, on one A4 page.</p>
+      </header>
+
+      <div class="print-head">
+        <div>
+          <h1>ENTERPRISE INFORMATION ASSURANCE DASHBOARD</h1>
+          <div class="sub">{{ org }} · CISO executive view · generated {{ generated }}</div>
+        </div>
+        <div class="right">
+          <div class="meta">Overall IA status</div>
+          <div style="font-size:15px;font-weight:700">{{ m.maturity.status }}</div>
+          <div class="meta">from governance maturity {{ m.maturity.score }}/5</div>
+        </div>
+      </div>
+
+      <div class="grid tiles" style="margin-bottom:16px">
+      {% for t in tiles %}
+        <div class="tile" data-tip="{{ t.help }}">
+          <div class="k">{{ t.label }}</div>
+          <div class="v">{{ t.value }}{% if t.unit %}<small>{{ t.unit }}</small>{% endif %}</div>
+          <div class="foot"><span class="badge"><i class="bg-{{ t.status }}"></i>{{ t.status_label }}</span>
+            <span class="d">{{ t.detail }}</span></div>
+        </div>
+      {% endfor %}
+      </div>
+
+      <div class="grid g3">
+        <div class="card">
+          <h3>Top 5 risks, current residual</h3>
+          <ol class="rank">
+          {% for r in m.risk.top5 %}
+            <li><b>{{ r.risk_id }}</b> {{ r.title }}
+              <span class="meta">· {{ r.current }}/25 {{ r.rating }} (inherent {{ r.inherent }})</span></li>
+          {% endfor %}
+          </ol>
+          <h3 style="margin-top:14px">Top 5 recommendations</h3>
+          <ol class="rank">
+          {% for x in m.recommendations %}
+            <li><b>{{ x.control_id }}</b> {{ x.control }}
+              <span class="meta">· {{ x.status }} · owner {{ x.owner }}</span></li>
+          {% endfor %}
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>Governance maturity by capability <span class="aside">bar = Year 3 target</span></h3>
+          {% for name, score in m.maturity.by_capability.items() %}
+          <div class="bar-row" style="--label:128px" data-tip="{{ name }}: {{ score }} of 5 today, Year 3 target {{ targets[name] }}">
+            <div class="name">{{ name }}</div>
+            <div class="track"><div class="fill" style="width: {{ score / 5 * 100 }}%"></div>
+              <div class="tick" style="left: calc({{ targets[name] / 5 * 100 }}% - 1px)"></div></div>
+            <div class="val">{{ '%.0f' % score }} → {{ '%.0f' % targets[name] }}</div>
+          </div>
+          {% endfor %}
+          <h3 style="margin-top:14px">Compliance by framework <span class="aside">A2 heat map</span></h3>
+          {% for fw, pct in m.compliance.by_framework_pct.items() %}
+          <div class="bar-row" style="--label:128px" data-tip="{{ fw }}: {{ pct }}% of applicable requirement cells satisfied">
+            <div class="name">{{ fw }}</div>
+            <div class="track"><div class="fill" style="width: {{ pct }}%"></div></div>
+            <div class="val">{{ pct }}%</div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="card">
+          <h3>AI automation of control mapping</h3>
+          {% if ai %}
+          <table class="kv">
+            <tr><td>Process</td><td>{{ ai.process }}</td></tr>
+            <tr><td>Method</td><td>{{ ai.method }}</td></tr>
+            <tr><td>Manual effort</td><td>{{ ai.manual_hrs }} hrs</td></tr>
+            <tr><td>AI assisted effort</td><td>{{ ai.ai_hrs }} hrs</td></tr>
+            <tr><td>Human approval</td><td>{{ ai.human_approval }}</td></tr>
+            <tr><td>AI Trust Score</td><td>{{ ai.correct }}/{{ ai.total }} = {{ ai.trust_score_pct }}%</td></tr>
+            {% if ai.trust_score_frozen_pct is defined %}<tr><td>Trust Score, frozen reference</td><td>{{ ai.correct_frozen }}/{{ ai.total }} = {{ ai.trust_score_frozen_pct }}%</td></tr>{% endif %}
+            {% if ai.human_verified_pct == 100 %}<tr><td>Accepted by reviewers</td><td>{{ ai.human_accepted }}/{{ ai.human_accepted + ai.human_rejected }} = {{ ai.human_trust_score_pct }}%</td></tr>{% endif %}
+            <tr><td>Recall of manual mapping</td><td>{{ ai.recall_primary_pct }}%</td></tr>
+            <tr><td>Hallucinated IDs blocked</td><td>{{ ai.hallucinated_ids_rejected }}</td></tr>
+          </table>
+          <div style="margin-top:9px">Estimated improvement <span class="big">{{ ai.automation_gain_pct }}%</span></div>
+          {% else %}
+          <p class="meta">Run <code>python run.py map</code> and <code>python run.py evaluate</code> to fill this panel.</p>
+          {% endif %}
+          <h3 style="margin-top:14px">Risk position</h3>
+          <table class="kv">
+            <tr><td>Inherent average</td><td>{{ m.risk.avg_inherent }}/25</td></tr>
+            <tr><td>Current residual average</td><td>{{ m.risk.avg_current }}/25</td></tr>
+            <tr><td>Target after treatment</td><td>{{ m.risk.avg_target }}/25</td></tr>
+            <tr><td>Risk reduced so far</td><td>{{ m.risk.risk_reduction_to_date_pct }}% of {{ m.risk.risk_reduction_planned_pct }}% planned</td></tr>
+            <tr><td>Evidence available</td><td>{{ m.evidence.available_pct }}% of {{ m.evidence['items'] }} items</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="meta" style="margin-top:10px">All values are calculated by <code>scoring.py</code> and
+      <code>evaluate.py</code> from the master registers (assets, risks, controls, compliance, evidence, audit
+      findings). Control effectiveness counts Implemented controls only; the weighted figure treats Partial as
+      0.5. Compliance uses the A2 weights (Compliant 1, Partial 0.5, Weak 0.25, Non-compliant 0).</div>
+    </section>
+
+    <!-- =============== RISK =============== -->
+    <section class="sec" id="risk">
+      <header>
+        <div class="eyebrow">Risk</div>
+        <h2>Risk register and heat map</h2>
+        <p class="lede">Pick inherent, current or target to see where the 17 risks sit on the 5 × 5 matrix.
+        Clicking a cell filters the register underneath it, and clicking a row opens the risk with its scenario,
+        controls, assets and audit findings.</p>
+      </header>
+
+      <div class="grid g2" style="margin-bottom:12px">
+        <div class="card">
+          <h3>Likelihood × impact <span class="aside" id="heatNote"></span></h3>
+          <div class="tabs" id="heatTabs" style="margin-bottom:10px">
+            <button data-mode="inherent" class="on">Inherent</button>
+            <button data-mode="current">Current</button>
+            <button data-mode="target">Target</button>
+          </div>
+          <div style="display:flex;gap:7px;align-items:center">
+            <div class="ax" style="writing-mode:vertical-rl;transform:rotate(180deg)">Likelihood</div>
+            <div class="heat" id="heat" style="flex:1"></div>
+          </div>
+          <div class="axis-title" style="text-align:center;margin-top:7px">Impact →</div>
+          <div class="seg-legend">
+            <span class="chip s-critical"><i class="bg-critical"></i>Critical 16–25</span>
+            <span class="chip s-serious"><i class="bg-serious"></i>High 10–15</span>
+            <span class="chip s-warning"><i class="bg-warning"></i>Medium 5–9</span>
+            <span class="chip s-good"><i class="bg-good"></i>Low 1–4</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Movement from inherent to target</h3>
+          <div id="riskMove"></div>
+          <h3 style="margin-top:16px">Risks by rating <span class="aside">count of 17</span></h3>
+          <div id="riskBands"></div>
+          <h3 style="margin-top:16px">Treatment decision</h3>
+          <div id="riskTreat"></div>
+          <h3 style="margin-top:16px">Risk owners <span class="aside">who answers for it</span></h3>
+          <div id="riskOwners"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Risk register <span class="aside">click a row for the full entry</span></h3>
+        <div class="filters">
+          <label class="search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.4"/><path d="m10.4 10.4 3 3"/></svg>
+            <input id="riskSearch" placeholder="Search risk, scenario, owner, control"></label>
+          <div id="riskChips" class="filters" style="margin:0"></div>
+          <button class="fchip" id="riskReset">Clear</button>
+          <span class="count" id="riskCount"></span>
+        </div>
+        <div class="tbl-wrap"><table class="tbl" id="riskTbl"></table></div>
+      </div>
+    </section>
+
+    <!-- =============== CONTROLS =============== -->
+    <section class="sec" id="controls">
+      <header>
+        <div class="eyebrow">Controls</div>
+        <h2>Control implementation</h2>
+        <p class="lede">25 controls from the A2 matrix with the status that drives control effectiveness and
+        residual risk. A control opens with the risks it treats, the frameworks it maps to, the evidence it
+        needs and whether that evidence exists.</p>
+      </header>
+
+      <div class="grid g3" style="margin-bottom:12px">
+        <div class="card">
+          <h3>Status mix <span class="aside">{{ m.controls.total_controls }} controls</span></h3>
+          <div class="seg" id="ctlSeg"></div>
+          <div class="seg-legend" id="ctlSegLegend"></div>
+          <table class="kv" style="margin-top:12px">
+            <tr><td>Control effectiveness</td><td>{{ m.controls.effectiveness_pct }}%</td></tr>
+            <tr><td>Weighted (Partial = 0.5)</td><td>{{ m.controls.effectiveness_weighted_pct }}%</td></tr>
+            <tr><td>Gap controls on Critical risks</td><td>{{ m.controls.critical_control_gaps }}</td></tr>
+          </table>
+          <h3 style="margin-top:14px">The four that cannot wait</h3>
+          <div id="ctlCritical"></div>
+        </div>
+        <div class="card">
+          <h3>Implementation by domain <span class="aside">weakest first</span></h3>
+          <div id="ctlDomain"></div>
+        </div>
+        <div class="card">
+          <h3>Controls with no evidence yet <span class="aside">evidence register</span></h3>
+          <div id="ctlEvidence"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Control matrix</h3>
+        <div class="filters">
+          <label class="search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.4"/><path d="m10.4 10.4 3 3"/></svg>
+            <input id="ctlSearch" placeholder="Search control, domain, framework, owner"></label>
+          <div id="ctlChips" class="filters" style="margin:0"></div>
+          <select class="sel" id="ctlDomainSel"></select>
+          <span class="count" id="ctlCount"></span>
+        </div>
+        <div class="tbl-wrap"><table class="tbl" id="ctlTbl"></table></div>
+      </div>
+    </section>
+
+    <!-- =============== COMPLIANCE =============== -->
+    <section class="sec" id="compliance">
+      <header>
+        <div class="eyebrow">Compliance</div>
+        <h2>Compliance position</h2>
+        <p class="lede">The A2 heat map scored cell by cell: {{ m.compliance.satisfied }} of
+        {{ m.compliance.applicable }} applicable requirement cells, {{ m.compliance.compliance_pct }}% weighted.
+        Domains are sorted weakest first, because that is the order the remediation plan follows.</p>
+      </header>
+
+      <div class="grid g-2-1" style="margin-bottom:12px">
+        <div class="card">
+          <h3>By domain <span class="aside">weakest first</span></h3>
+          <div id="cmpDomain"></div>
+        </div>
+        <div class="card">
+          <h3>Rating mix <span class="aside">78 heat map cells</span></h3>
+          <div class="seg" id="cmpSeg"></div>
+          <div class="seg-legend" id="cmpSegLegend"></div>
+          <h3 style="margin-top:16px">By framework</h3>
+          <div id="cmpFw"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Requirement cells</h3>
+        <div class="filters">
+          <label class="search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.4"/><path d="m10.4 10.4 3 3"/></svg>
+            <input id="cmpSearch" placeholder="Search requirement, domain, framework"></label>
+          <div id="cmpChips" class="filters" style="margin:0"></div>
+          <span class="count" id="cmpCount"></span>
+        </div>
+        <div class="tbl-wrap"><table class="tbl" id="cmpTbl"></table></div>
+      </div>
+    </section>
+
+    <!-- =============== GAPS =============== -->
+    <section class="sec" id="gaps">
+      <header>
+        <div class="eyebrow">Gap analysis</div>
+        <h2>Framework coverage and the gaps behind it</h2>
+        <p class="lede">Requirement level coverage from the reviewed AI mapping. Coverage is how much of a
+        framework any control touches; compliance of addressed is how well the controls that do touch it are
+        working. Gaps are ranked by the highest inherent risk behind them, not by framework order.</p>
+      </header>
+
+      <div class="grid g2" style="margin-bottom:12px">
+        <div class="card">
+          <h3>Coverage by framework <span class="aside">235 requirements catalogued</span></h3>
+          <div id="gapCov"></div>
+        </div>
+        <div class="card">
+          <h3>Compliance of what is addressed</h3>
+          <div id="gapQual"></div>
+          <div class="meta" style="margin-top:10px">OT and AI RMF are the weak pair: the two frameworks with
+          the lowest coverage sit over the two domains holding the most dangerous risks. PISF 2026 is still a
+          domain level placeholder.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Gap register <span class="aside">52 gaps, highest inherent risk first</span></h3>
+        <div class="filters">
+          <label class="search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.4"/><path d="m10.4 10.4 3 3"/></svg>
+            <input id="gapSearch" placeholder="Search requirement, framework, control"></label>
+          <div id="gapChips" class="filters" style="margin:0"></div>
+          <span class="count" id="gapCount"></span>
+        </div>
+        <div class="tbl-wrap"><table class="tbl" id="gapTbl"></table></div>
+      </div>
+    </section>
+
+    <!-- =============== ASSETS =============== -->
+    <section class="sec" id="assets">
+      <header>
+        <div class="eyebrow">Assets and data</div>
+        <h2>What PSR has to protect</h2>
+        <p class="lede">15 assets across IT, OT, cloud, IoT and AI, and the 13 data sets that live on them.
+        RTO and RPO come from the BC/DR work; an asset opens with the risks and data sets attached to it.</p>
+      </header>
+
+      <div class="grid g3" style="margin-bottom:12px">
+        <div class="card"><h3>Assets by zone</h3><div id="astZone"></div></div>
+        <div class="card"><h3>Assets by criticality</h3><div id="astCrit"></div></div>
+        <div class="card"><h3>Data by classification</h3><div id="datClass"></div></div>
+      </div>
+
+      <div class="grid g2">
+        <div class="card">
+          <h3>Asset inventory</h3>
+          <div class="filters">
+            <label class="search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.4"/><path d="m10.4 10.4 3 3"/></svg>
+              <input id="astSearch" placeholder="Search asset, owner, zone"></label>
+            <span class="count" id="astCount"></span>
+          </div>
+          <div class="tbl-wrap"><table class="tbl" id="astTbl"></table></div>
+        </div>
+        <div class="card">
+          <h3>Data inventory</h3>
+          <div class="filters">
+            <label class="search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.4"/><path d="m10.4 10.4 3 3"/></svg>
+              <input id="datSearch" placeholder="Search data set, owner, classification"></label>
+            <span class="count" id="datCount"></span>
+          </div>
+          <div class="tbl-wrap"><table class="tbl" id="datTbl"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============== AUDIT =============== -->
+    <section class="sec" id="audit">
+      <header>
+        <div class="eyebrow">Assurance</div>
+        <h2>Audit findings, evidence and readiness</h2>
+        <p class="lede">13 findings and one observation from the A2 audit plan and the A3 post-incident review,
+        all still open. The readiness checklists are the Y / P / N answers that produce the IAM, BC/DR, incident
+        and AI readiness figures on the executive view.</p>
+      </header>
+
+      <div class="grid g3" style="margin-bottom:12px">
+        <div class="card">
+          <h3>Findings by severity</h3>
+          <div id="fndSev"></div>
+          <table class="kv" style="margin-top:12px">
+            <tr><td>Open findings</td><td>{{ m.audit.open }} of {{ m.audit.findings }}</td></tr>
+            <tr><td>Observations</td><td>{{ m.audit.observations }}</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3>Evidence availability <span class="aside">{{ m.evidence['items'] }} items</span></h3>
+          <div class="seg" id="evSeg"></div>
+          <div class="seg-legend" id="evSegLegend"></div>
+          <table class="kv" style="margin-top:12px">
+            <tr><td>Available</td><td>{{ m.evidence.available_pct }}%</td></tr>
+            <tr><td>Tested in the audit</td><td>{{ m.evidence.audited_items }} items</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3>Readiness checklists</h3>
+          <div id="rdyBars"></div>
+          <div class="meta" style="margin-top:10px">Y = 1, P = 0.5, N = 0. AI readiness is reported out of 10.</div>
+        </div>
+      </div>
+
+      <div class="grid g2">
+        <div class="card">
+          <h3>Audit findings</h3>
+          <div class="filters">
+            <label class="search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.4"/><path d="m10.4 10.4 3 3"/></svg>
+              <input id="fndSearch" placeholder="Search finding, control, owner"></label>
+            <div id="fndChips" class="filters" style="margin:0"></div>
+            <span class="count" id="fndCount"></span>
+          </div>
+          <div class="tbl-wrap"><table class="tbl" id="fndTbl"></table></div>
+        </div>
+        <div class="card">
+          <h3>Readiness items</h3>
+          <div class="filters">
+            <div id="rdyChips" class="filters" style="margin:0"></div>
+            <span class="count" id="rdyCount"></span>
+          </div>
+          <div class="tbl-wrap"><table class="tbl" id="rdyTbl"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============== MATURITY =============== -->
+    <section class="sec" id="maturity">
+      <header>
+        <div class="eyebrow">Programme</div>
+        <h2>Maturity and the three year roadmap</h2>
+        <p class="lede">Governance maturity is {{ m.maturity.score }} of 5, which puts PSR in
+        {{ m.maturity.status }}. The Year 3 target of {{ m.maturity.target_year3 }} needs the whole roadmap, not
+        just the Year 1 controls. Hover a capability to see the evidence its score was read from.</p>
+      </header>
+
+      <div class="card" style="margin-bottom:12px">
+        <h3>Capability scores <span class="aside">bar = Year 3 target</span></h3>
+        <div id="matBars"></div>
+      </div>
+
+      <div class="roadmap" id="roadmap"></div>
+      <div class="meta" style="margin-top:10px">Phasing follows control status and the risk each control treats:
+      Year 1 takes the Gap controls sitting on Critical risks, Year 2 the remaining Gap controls, Year 3 matures
+      the Partial ones and holds the result. The written roadmap, with owners and dependencies, is in the final
+      report.</div>
+    </section>
+
+    <!-- =============== AI =============== -->
+    <section class="sec" id="ai">
+      <header>
+        <div class="eyebrow">AI automation</div>
+        <h2>Mapping 25 controls to 235 requirements</h2>
+        <p class="lede">A local Ollama model shortlisted requirement matches for each control, and all
+        {{ m.ai_automation.suggestions }} suggestions were reviewed by a named person before anything reached
+        the gap analysis. Two Trust Scores are reported because 15 reference rows were added during the review,
+        12 of them pairs the model itself had suggested.</p>
+      </header>
+
+      <div class="grid g3" style="margin-bottom:16px" id="aiTiles"></div>
+
+      <div class="grid g-2-1" style="margin-bottom:12px">
+        <div class="card">
+          <h3>Where the model is reliable, and where it is not
+            <span class="aside">trust against recall, per framework</span></h3>
+          <div id="aiFamily"></div>
+          <div class="meta" style="margin-top:10px">A framework with high trust and low recall is one the model
+          is quiet about rather than wrong about. COBIT and OT are the two that carry mandatory human review.</div>
+        </div>
+        <div class="card">
+          <h3>Against a no-LLM baseline <span class="aside">same guardrails, retrieval only</span></h3>
+          <div id="aiBackends"></div>
+        </div>
+      </div>
+
+      <div class="grid g2">
+        <div class="card">
+          <h3>Accuracy, graded two ways</h3>
+          <div id="aiAcc"></div>
+          <div class="meta" style="margin-top:10px">Quote the frozen score when the question is accuracy. No F1
+          is reported: precision is measured against the acceptable set and recall against the primary set, so
+          the two have different denominators.</div>
+        </div>
+        <div class="card">
+          <h3>Effort, manual against AI assisted</h3>
+          <div id="aiEffort"></div>
+          <table class="kv" style="margin-top:12px">
+            <tr><td>Model runtime</td><td>{{ m.ai_automation.ai_runtime_minutes }} min</td></tr>
+            <tr><td>Human review</td><td>{{ m.ai_automation.human_review_minutes }} min at {{ m.ai_automation.review_minutes_per_suggestion }} min per suggestion</td></tr>
+            <tr><td>Automation Gain</td><td>{{ m.ai_automation.automation_gain_pct }}%</td></tr>
+            <tr><td>Guardrail: invented IDs blocked</td><td>{{ m.ai_automation.hallucinated_ids_rejected }}</td></tr>
+            <tr><td>Guardrail: formats repaired</td><td>{{ m.ai_automation.format_repaired_ids }}</td></tr>
+            <tr><td>Prompt injection flags</td><td>{{ m.ai_automation.injection_flagged_controls }}</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-foot">
+      {{ org }} · CY3003 Information Assurance final project · dashboard generated {{ generated }}.
+      The one page executive view is what prints; every other section is a drill-down into the same registers.
+    </footer>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="dhead">
+    <div><div class="meta" id="dKind"></div><div class="t" id="dTitle"></div></div>
+    <span style="flex:1"></span>
+    <button class="btn" id="dClose">Close</button>
+  </div>
+  <div class="dbody" id="dBody"></div>
+</aside>
+<div id="tip"></div>
+
+<script id="psr-data" type="application/json">{{ data_json | safe }}</script>
+<script>
+(function () {
+  "use strict";
+  const D = JSON.parse(document.getElementById("psr-data").textContent);
+  const M = D.metrics;
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const ids = v => String(v || "").split(";").map(s => s.trim()).filter(Boolean);
+  const esc = s => String(s === null || s === undefined ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const by = (list, key) => { const m = {}; list.forEach(r => { m[r[key]] = r; }); return m; };
+
+  const RISK = by(D.risks, "risk_id"), CTL = by(D.controls, "control_id"), AST = by(D.assets, "asset_id");
+  const band = s => s >= 16 ? "critical" : s >= 10 ? "serious" : s >= 5 ? "warning" : "good";
+  const bandName = s => s >= 16 ? "Critical" : s >= 10 ? "High" : s >= 5 ? "Medium" : "Low";
+  const sevClass = s => ({ Critical: "critical", High: "serious", Medium: "warning", Low: "good" })[s] || "good";
+  const statusClass = s => ({ Implemented: "good", Partial: "warning", Gap: "critical" })[s] || "good";
+  const ratingClass = s => ({ Compliant: "good", "Partially compliant": "warning", Weak: "serious",
+    "Non-compliant": "critical" })[s] || "good";
+  const availClass = s => ({ Available: "good", Partial: "warning", "Not available": "critical" })[s] || "good";
+  // Status reads from the dot, the way current product tables do it; the label stays in text ink so a
+  // table of 17 rows does not turn into a wall of colour.
+  const pill = (text, cls) => '<span class="pill"><i class="bg-' + cls + '"></i>' + esc(text) + "</span>";
+
+  /* ---------- theme ---------- */
+  const root = document.documentElement;
+  try { const saved = localStorage.getItem("psr-theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+  $("#themeBtn").addEventListener("click", () => {
+    const dark = getComputedStyle(root).getPropertyValue("--plane").trim().indexOf("#0d") === 0;
+    const next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("psr-theme", next); } catch (e) {}
+  });
+  $("#statusDot").className = "bg-" + (M.maturity.score >= 3.5 ? "good" : M.maturity.score >= 2.5 ? "warning" : "serious");
+
+  /* ---------- tooltips ---------- */
+  const tip = $("#tip");
+  document.addEventListener("mousemove", e => {
+    const t = e.target.closest("[data-tip]");
+    if (!t) { tip.classList.remove("on"); return; }
+    tip.innerHTML = t.getAttribute("data-tip");
+    tip.classList.add("on");
+    const r = tip.getBoundingClientRect();
+    tip.style.left = Math.min(Math.max(8, e.clientX - r.width / 2), innerWidth - r.width - 8) + "px";
+    tip.style.top = (e.clientY - r.height - 12 < 8 ? e.clientY + 16 : e.clientY - r.height - 12) + "px";
+  });
+
+  /* ---------- nav scroll spy ---------- */
+  const links = $$("#nav a[href]"), secs = links.map(a => $(a.getAttribute("href")));
+  const crumb = $("#crumb");
+  function spy() {
+    let i = 0;
+    secs.forEach((s, k) => { if (s && s.getBoundingClientRect().top <= 140) i = k; });
+    links.forEach((a, k) => a.classList.toggle("on", k === i));
+    crumb.textContent = links[i].textContent.trim();
+  }
+  addEventListener("scroll", spy, { passive: true }); spy();
+
+  /* ---------- chart builders ---------- */
+  function bars(host, rows, opts) {
+    const o = opts || {};
+    const max = o.max || Math.max.apply(null, rows.map(r => r.value).concat([1]));
+    host.innerHTML = rows.map(r => {
+      const w = r.value <= 0 ? 0 : Math.max(1.5, r.value / max * 100);
+      const colour = r.status ? "var(--" + r.status + ")" : "var(--series-1)";
+      const tick = r.target === undefined ? "" :
+        '<div class="tick" style="left: calc(' + (r.target / max * 100) + '% - 1px)"></div>';
+      return '<div class="bar-row"' + (o.label ? ' style="--label:' + o.label + '"' : "") +
+        ' data-tip="' + esc(r.tip || (r.name + ": " + r.display)) + '">' +
+        '<div class="name">' + esc(r.name) + "</div>" +
+        '<div class="track"><div class="fill" style="width:' + w + '%;background:' + colour + '"></div>' + tick + "</div>" +
+        '<div class="val">' + esc(r.display) + "</div></div>";
+    }).join("");
+  }
+  function segment(host, legendHost, parts) {
+    const total = parts.reduce((a, p) => a + p.value, 0) || 1;
+    host.innerHTML = parts.filter(p => p.value > 0).map(p =>
+      '<span style="width:' + (p.value / total * 100) + '%;background:var(--' + p.status + ')" data-tip="' +
+      esc(p.name + ": " + p.value + " of " + total) + '"></span>').join("");
+    if (legendHost) legendHost.innerHTML = parts.map(p =>
+      '<span class="chip s-' + p.status + '"><i class="bg-' + p.status + '"></i>' + esc(p.name) + " " + p.value +
+      "</span>").join("");
+  }
+  const counts = (list, key) => {
+    const m = new Map();
+    list.forEach(r => { const k = r[key] || "Unspecified"; m.set(k, (m.get(k) || 0) + 1); });
+    return Array.from(m.entries());
+  };
+
+  /* ---------- generic table ---------- */
+  function Table(opts) {
+    const host = $(opts.el), state = { sort: opts.sort, dir: opts.dir || "desc", q: "", filter: null };
+    function sorted(rows) {
+      if (!state.sort) return rows;
+      const k = state.sort, s = state.dir === "asc" ? 1 : -1;
+      return rows.slice().sort((a, b) => {
+        const x = a[k], y = b[k], nx = parseFloat(x), ny = parseFloat(y);
+        if (!isNaN(nx) && !isNaN(ny) && String(x).trim() !== "" && String(y).trim() !== "") return (nx - ny) * s;
+        return String(x).localeCompare(String(y)) * s;
+      });
+    }
+    function visible() {
+      let rows = opts.rows();
+      if (state.filter) rows = rows.filter(state.filter);
+      if (state.q) {
+        const q = state.q.toLowerCase();
+        rows = rows.filter(r => opts.searchKeys.some(k => String(r[k] || "").toLowerCase().indexOf(q) >= 0));
+      }
+      return sorted(rows);
+    }
+    function draw() {
+      const rows = visible();
+      host.innerHTML = "<thead><tr>" + opts.cols.map(c =>
+        '<th data-k="' + c.key + '">' + esc(c.label) +
+        (state.sort === c.key ? ' <span class="arrow">' + (state.dir === "asc" ? "▲" : "▼") + "</span>" : "") +
+        "</th>").join("") + "</tr></thead><tbody>" +
+        (rows.length ? rows.map(r =>
+          '<tr data-id="' + esc(r[opts.idKey]) + '">' + opts.cols.map(c =>
+            '<td class="' + (c.cls || "") + '">' + (c.render ? c.render(r) : esc(r[c.key])) + "</td>").join("") +
+          "</tr>").join("")
+          : '<tr><td colspan="' + opts.cols.length + '"><div class="empty-note">Nothing matches that filter.</div></td></tr>') +
+        "</tbody>";
+      if (opts.count) $(opts.count).textContent = rows.length + " of " + opts.rows().length;
+      $$("th", host).forEach(th => th.addEventListener("click", () => {
+        const k = th.getAttribute("data-k");
+        if (state.sort === k) state.dir = state.dir === "asc" ? "desc" : "asc";
+        else { state.sort = k; state.dir = "asc"; }
+        draw();
+      }));
+      if (opts.onRow) $$("tbody tr[data-id]", host).forEach(tr =>
+        tr.addEventListener("click", () => opts.onRow(tr.getAttribute("data-id"))));
+    }
+    if (opts.search) $(opts.search).addEventListener("input", e => { state.q = e.target.value; draw(); });
+    return { draw, setFilter(f) { state.filter = f; draw(); } };
+  }
+
+  function chips(host, values, onPick) {
+    const h = $(host);
+    h.innerHTML = values.map(v => '<button class="fchip" data-v="' + esc(v) + '">' + esc(v) + "</button>").join("");
+    const picked = new Set();
+    $$("button", h).forEach(b => b.addEventListener("click", () => {
+      const v = b.getAttribute("data-v");
+      if (picked.has(v)) picked.delete(v); else picked.add(v);
+      $$("button", h).forEach(x => x.classList.toggle("on", picked.has(x.getAttribute("data-v"))));
+      onPick(picked);
+    }));
+    return { clear() { picked.clear(); $$("button", h).forEach(x => x.classList.remove("on")); } };
+  }
+
+  /* ---------- drill-down drawer ---------- */
+  const drawer = $("#drawer"), scrim = $("#scrim");
+  function closeDrawer() {
+    drawer.classList.remove("open"); scrim.classList.remove("open"); drawer.setAttribute("aria-hidden", "true");
+    document.dispatchEvent(new CustomEvent("psr:drawer", { detail: { open: false } }));
+  }
+  $("#dClose").addEventListener("click", closeDrawer);
+  scrim.addEventListener("click", closeDrawer);
+  addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+
+  let lastOrigin = null;
+  document.addEventListener("pointerdown", e => { lastOrigin = { x: e.clientX, y: e.clientY }; }, true);
+
+  function open(kind, id) {
+    const b = builders[kind]; if (!b) return;
+    const v = b(id); if (!v) return;
+    $("#dKind").textContent = v.kind; $("#dTitle").innerHTML = v.title; $("#dBody").innerHTML = v.body;
+    drawer.classList.add("open"); scrim.classList.add("open"); drawer.setAttribute("aria-hidden", "false");
+    $("#dBody").scrollTop = 0;
+    document.dispatchEvent(new CustomEvent("psr:drawer", { detail: { open: true, origin: lastOrigin } }));
+    $$(".link[data-open]", $("#dBody")).forEach(a => a.addEventListener("click", () => {
+      const p = a.getAttribute("data-open").split(":"); open(p[0], p[1]);
+    }));
+  }
+  const linkChips = (kind, list) => list.length
+    ? '<div class="links">' + list.map(x => '<button class="link" data-open="' + kind + ":" + esc(x) + '">' +
+        esc(x) + (kind === "control" && CTL[x] ? " " + esc(CTL[x].control_name) : "") +
+        (kind === "risk" && RISK[x] ? " " + esc(RISK[x].risk_title) : "") +
+        (kind === "asset" && AST[x] ? " " + esc(AST[x].asset_name) : "") + "</button>").join("") + "</div>"
+    : '<p class="meta">None recorded.</p>';
+  const kvTable = pairs => '<table class="kv">' + pairs.filter(p => p[1] !== "" && p[1] !== undefined)
+    .map(p => "<tr><td>" + esc(p[0]) + "</td><td>" + (p[2] ? p[1] : esc(p[1])) + "</td></tr>").join("") + "</table>";
+  const miniRows = rows => '<table class="mini"><tbody>' + rows.join("") + "</tbody></table>";
+
+  const builders = {
+    risk(id) {
+      const r = RISK[id]; if (!r) return null;
+      const findings = D.findings.filter(f => ids(f.control_id).some(c => ids(r.control_ids).indexOf(c) >= 0));
+      return {
+        kind: "Risk · " + r.category, title: r.risk_id + " " + esc(r.risk_title),
+        body: "<h4>Scenario</h4><p>" + esc(r.risk_scenario) + "</p>" +
+          "<h4>Score</h4>" + kvTable([
+            ["Inherent", r.likelihood + " × " + r.impact + " = " + r.inherent_score + " " +
+              pill(r.inherent_rating, band(r.inherent_score)), true],
+            ["Current residual", r.current_likelihood + " × " + r.current_impact + " = " + r.current_score + " " +
+              pill(r.current_rating, band(r.current_score)), true],
+            ["Target", r.target_likelihood + " × " + r.target_impact + " = " + r.target_score + " " +
+              pill(r.target_rating, band(r.target_score)), true],
+            ["Control credit applied", (Math.round(r.control_credit * 1000) / 10) + "%"],
+            ["Treatment", r.treatment], ["Owner", r.risk_owner]]) +
+          "<h4>Threat and weakness</h4><p><b>Source:</b> " + esc(r.threat_source) + "</p><p><b>Weakness:</b> " +
+          esc(r.vulnerability) + "</p>" +
+          "<h4>Why the target is what it is</h4><p>" + esc(r.target_rationale) + "</p>" +
+          "<h4>Controls treating it</h4>" + linkChips("control", ids(r.control_ids)) +
+          "<h4>Assets exposed</h4>" + linkChips("asset", ids(r.asset_ids)) +
+          "<h4>Audit findings on those controls</h4>" + (findings.length
+            ? miniRows(findings.map(f => "<tr><td><b>" + esc(f.finding_id) + "</b></td><td>" + esc(f.finding) +
+                "</td><td>" + pill(f.severity, sevClass(f.severity)) + "</td></tr>"))
+            : '<p class="meta">None.</p>')
+      };
+    },
+    control(id) {
+      const c = CTL[id]; if (!c) return null;
+      const ev = D.evidence.filter(e => e.control_id === id);
+      const fnd = D.findings.filter(f => ids(f.control_id).indexOf(id) >= 0);
+      const gaps = D.gaps.filter(g => ids(g.mapped_controls).indexOf(id) >= 0);
+      return {
+        kind: "Control · " + c.control_type + " · " + c.domain, title: c.control_id + " " + esc(c.control_name),
+        body: "<p>" + esc(c.description) + "</p>" +
+          kvTable([["Status", pill(c.status, statusClass(c.status)), true], ["Owner", c.owner],
+            ["Framework references", c.framework_refs], ["Source", c.source]]) +
+          (c.planned_action ? "<h4>Planned action</h4><p>" + esc(c.planned_action) + "</p>" : "") +
+          "<h4>Risks it treats</h4>" + linkChips("risk", ids(c.risk_ids)) +
+          "<h4>Evidence</h4>" + (ev.length
+            ? '<table class="mini"><thead><tr><th>Item</th><th>Frequency</th><th>Availability</th></tr></thead><tbody>' +
+              ev.map(e => "<tr><td>" + esc(e.evidence_item) + "</td><td>" + esc(e.frequency) + "</td><td>" +
+                pill(e.availability, availClass(e.availability)) + "</td></tr>").join("") + "</tbody></table>"
+            : "<p>" + esc(c.evidence_required) + "</p>") +
+          "<h4>Audit findings</h4>" + (fnd.length
+            ? miniRows(fnd.map(f => "<tr><td><b>" + esc(f.finding_id) + "</b></td><td>" + esc(f.finding) +
+                "</td><td>" + pill(f.severity, sevClass(f.severity)) + "</td></tr>"))
+            : '<p class="meta">None.</p>') +
+          "<h4>Requirement gaps it owns</h4>" + (gaps.length
+            ? miniRows(gaps.slice(0, 12).map(g => "<tr><td><b>" + esc(g.req_id) + "</b></td><td>" + esc(g.title) +
+                "</td><td>" + esc(g.compliance_status) + "</td></tr>"))
+            : '<p class="meta">None.</p>')
+      };
+    },
+    asset(id) {
+      const a = AST[id]; if (!a) return null;
+      const rks = D.risks.filter(r => ids(r.asset_ids).indexOf(id) >= 0);
+      const dat = D.data_inventory.filter(d => d.primary_asset === id || ids(d.other_assets).indexOf(id) >= 0);
+      const mins = v => { const n = parseFloat(v); return isNaN(n) ? "not set" : n >= 60 ? (n / 60) + " hrs" : n + " mins"; };
+      return {
+        kind: "Asset · " + a.asset_type + " · " + a.domain, title: a.asset_id + " " + esc(a.asset_name),
+        body: "<p>" + esc(a.description) + "</p>" +
+          kvTable([["Criticality", a.criticality], ["Classification", a.classification],
+            ["RTO", mins(a.rto_minutes)], ["RPO", mins(a.rpo_minutes)],
+            ["Asset owner", a.asset_owner], ["Business owner", a.business_owner],
+            ["RTO/RPO source", a.rto_rpo_source]]) +
+          "<h4>Risks on this asset</h4>" + (rks.length
+            ? miniRows(rks.map(r => '<tr><td><button class="link" data-open="risk:' + r.risk_id + '">' + r.risk_id +
+                "</button></td><td>" + esc(r.risk_title) + "</td><td>" +
+                pill(r.current_score + " " + r.current_rating, band(r.current_score)) + "</td></tr>"))
+            : '<p class="meta">None.</p>') +
+          "<h4>Data it holds</h4>" + (dat.length
+            ? miniRows(dat.map(d => "<tr><td><b>" + esc(d.data_id) + "</b></td><td>" + esc(d.data_set) +
+                "</td><td>" + esc(d.classification) + "</td></tr>"))
+            : '<p class="meta">None.</p>')
+      };
+    },
+    finding(id) {
+      const f = D.findings.filter(x => x.finding_id === id)[0]; if (!f) return null;
+      return {
+        kind: "Audit finding · " + f.source, title: f.finding_id + " " + esc(f.requirement),
+        body: kvTable([["Severity", pill(f.severity, sevClass(f.severity)), true], ["Result", f.result],
+            ["Status", f.status], ["Owner", f.owner]]) +
+          "<h4>Test performed</h4><p>" + esc(f.test_performed) + "</p>" +
+          "<h4>Finding</h4><p>" + esc(f.finding) + "</p>" +
+          "<h4>Recommendation</h4><p>" + esc(f.recommendation) + "</p>" +
+          "<h4>Controls</h4>" + linkChips("control", ids(f.control_id))
+      };
+    },
+    gap(id) {
+      const g = D.gaps.filter(x => x.gap_id === id)[0]; if (!g) return null;
+      return {
+        kind: "Gap · " + g.family, title: g.gap_id + " " + esc(g.req_id) + " " + esc(g.title),
+        body: kvTable([["Framework", g.framework], ["Compliance status", g.compliance_status],
+            ["Score", g.score], ["Control statuses", g.control_statuses],
+            ["Highest inherent risk behind it", g.max_inherent_risk]]) +
+          "<h4>Mapped controls</h4>" + linkChips("control", ids(g.mapped_controls)) +
+          "<h4>Risks it leaves exposed</h4>" + linkChips("risk", ids(g.linked_risks))
+      };
+    },
+    data(id) {
+      const d = D.data_inventory.filter(x => x.data_id === id)[0]; if (!d) return null;
+      return {
+        kind: "Data set · " + d.classification, title: d.data_id + " " + esc(d.data_set),
+        body: kvTable([["Classification", d.classification], ["Owner", d.data_owner],
+            ["Protection priority", d.protection_priority]]) +
+          "<h4>Handling rules</h4><p>" + esc(d.handling_rules) + "</p>" +
+          "<h4>Assets it lives on</h4>" + linkChips("asset", [d.primary_asset].concat(ids(d.other_assets)).filter(Boolean))
+      };
+    }
+  };
+
+  /* ---------- risk section ---------- */
+  const heatModes = {
+    inherent: { l: "likelihood", i: "impact", note: "before controls" },
+    current: { l: "current_likelihood", i: "current_impact", note: "after the controls in place today" },
+    target: { l: "target_likelihood", i: "target_impact", note: "after the planned treatment" }
+  };
+  const likelihoodNames = { 5: "Very high", 4: "High", 3: "Moderate", 2: "Low", 1: "Rare" };
+  let heatMode = "inherent", heatCell = null;
+
+  function drawHeat() {
+    const mode = heatModes[heatMode], host = $("#heat");
+    $("#heatNote").textContent = mode.note;
+    let html = "";
+    for (let l = 5; l >= 1; l--) {
+      html += '<div class="ax row">' + likelihoodNames[l] + "</div>";
+      for (let i = 1; i <= 5; i++) {
+        const hits = D.risks.filter(r => +r[mode.l] === l && +r[mode.i] === i);
+        const score = l * i, cls = band(score);
+        const sel = heatCell && heatCell[0] === l && heatCell[1] === i;
+        html += '<div class="hcell ' + (hits.length ? "" : "empty ") + (sel ? "sel" : "") + '" data-l="' + l +
+          '" data-i="' + i + '" style="background:color-mix(in srgb, var(--' + cls + ') ' +
+          (hits.length ? 20 : 7) + '%, var(--surface))"' +
+          (hits.length ? ' data-tip="<b>' + score + " " + bandName(score) + "</b><br>" +
+            hits.map(r => r.risk_id + " " + esc(r.risk_title)).join("<br>") + '"' : "") + ">" +
+          (hits.length ? '<div style="text-align:center"><div class="n s-' + cls + '">' + hits.length +
+            '</div><div class="ids">' + hits.map(r => r.risk_id.replace("R-", "")).join(" ") + "</div></div>"
+            : '<span class="meta">·</span>') + "</div>";
+      }
+    }
+    html += '<div class="ax"></div>' + ["Minimal", "Minor", "Moderate", "Major", "Severe"]
+      .map(t => '<div class="ax">' + t + "</div>").join("");
+    host.innerHTML = html;
+    $$(".hcell:not(.empty)", host).forEach(c => c.addEventListener("click", () => {
+      const l = +c.getAttribute("data-l"), i = +c.getAttribute("data-i");
+      heatCell = (heatCell && heatCell[0] === l && heatCell[1] === i) ? null : [l, i];
+      drawHeat(); applyRiskFilter();
+    }));
+  }
+  $$("#heatTabs button").forEach(b => b.addEventListener("click", () => {
+    $$("#heatTabs button").forEach(x => x.classList.remove("on"));
+    b.classList.add("on"); heatMode = b.getAttribute("data-mode"); heatCell = null;
+    drawHeat(); applyRiskFilter();
+  }));
+
+  bars($("#riskMove"), [
+    { name: "Inherent average", value: M.risk.avg_inherent, display: M.risk.avg_inherent + "/25",
+      status: band(M.risk.avg_inherent), tip: "Average likelihood × impact before any control" },
+    { name: "Current residual", value: M.risk.avg_current, display: M.risk.avg_current + "/25",
+      status: band(M.risk.avg_current), tip: "After the controls actually in place: " + M.risk.risk_reduction_to_date_pct + "% down" },
+    { name: "Target after treatment", value: M.risk.avg_target, display: M.risk.avg_target + "/25",
+      status: band(M.risk.avg_target), tip: "If every planned control lands: " + M.risk.risk_reduction_planned_pct + "% down" }
+  ], { max: 25, label: "140px" });
+
+  (function riskBands() {
+    const rows = [["Critical", "critical"], ["High", "serious"], ["Medium", "warning"], ["Low", "good"]];
+    $("#riskBands").innerHTML = ["inherent", "current", "target"].map(k => {
+      const d = M.risk[k + "_by_rating"];
+      return '<div style="margin:9px 0 13px"><div class="meta" style="margin-bottom:4px;text-transform:capitalize">' +
+        k + "</div>" + '<div class="seg">' + rows.filter(r => d[r[0]] > 0).map(r =>
+          '<span style="width:' + (d[r[0]] / M.risk.total_risks * 100) + '%;background:var(--' + r[1] +
+          ')" data-tip="' + k + " " + r[0] + ": " + d[r[0]] + " of " + M.risk.total_risks + '"></span>').join("") +
+        "</div></div>";
+    }).join("") + '<div class="seg-legend">' + rows.map(r =>
+      '<span class="chip s-' + r[1] + '"><i class="bg-' + r[1] + '"></i>' + r[0] + "</span>").join("") + "</div>";
+  })();
+
+  const riskTbl = Table({
+    el: "#riskTbl", rows: () => D.risks, idKey: "risk_id", sort: "current_score", dir: "desc",
+    search: "#riskSearch", count: "#riskCount",
+    searchKeys: ["risk_id", "risk_title", "risk_scenario", "risk_owner", "control_ids", "category", "treatment"],
+    cols: [
+      { key: "risk_id", label: "ID", cls: "id" },
+      { key: "risk_title", label: "Risk" },
+      { key: "category", label: "Category", cls: "wrap" },
+      { key: "inherent_score", label: "Inherent", cls: "num",
+        render: r => r.inherent_score + ' <span class="meta">' + r.likelihood + "×" + r.impact + "</span>" },
+      { key: "current_score", label: "Current", cls: "num",
+        render: r => pill(r.current_score + " " + r.current_rating, band(r.current_score)) },
+      { key: "target_score", label: "Target", cls: "num",
+        render: r => r.target_score + ' <span class="meta">' + r.target_rating + "</span>" },
+      { key: "treatment", label: "Treatment" },
+      { key: "control_ids", label: "Controls", cls: "wrap", render: r => esc(r.control_ids.replace(/;/g, " ")) },
+      { key: "risk_owner", label: "Owner", cls: "wrap" }
+    ],
+    onRow: id => open("risk", id)
+  });
+  (function riskSideBars() {
+    bars($("#riskTreat"), counts(D.risks, "treatment").sort((a, b) => b[1] - a[1]).map(e => ({
+      name: e[0], value: e[1], display: String(e[1]),
+      tip: e[1] + " risks carry the " + e[0] + " decision"
+    })), { label: "140px" });
+    const owners = counts(D.risks, "risk_owner").sort((a, b) => b[1] - a[1]);
+    const shown = owners.slice(0, 6).map(e => ({
+      name: e[0], value: e[1], display: String(e[1]), tip: e[0] + " owns " + e[1] + " risks"
+    }));
+    const rest = owners.slice(6);
+    if (rest.length) shown.push({ name: rest.length + " others, one each", value: rest.length,
+      display: String(rest.length), tip: rest.map(e => e[0]).join(", ") });
+    bars($("#riskOwners"), shown, { label: "148px" });
+  })();
+
+  const riskChipCtl = chips("#riskChips", ["Critical", "High", "Medium"], () => applyRiskFilter());
+  function applyRiskFilter() {
+    const picked = new Set($$("#riskChips button.on").map(b => b.getAttribute("data-v")));
+    const mode = heatModes[heatMode];
+    riskTbl.setFilter(r => {
+      if (picked.size && !picked.has(r.current_rating)) return false;
+      if (heatCell && (+r[mode.l] !== heatCell[0] || +r[mode.i] !== heatCell[1])) return false;
+      return true;
+    });
+  }
+  $("#riskReset").addEventListener("click", () => {
+    riskChipCtl.clear(); heatCell = null; drawHeat(); applyRiskFilter();
+  });
+  drawHeat(); riskTbl.draw();
+
+  /* ---------- controls section ---------- */
+  segment($("#ctlSeg"), $("#ctlSegLegend"), [
+    { name: "Implemented", value: M.controls.by_status.Implemented, status: "good" },
+    { name: "Partial", value: M.controls.by_status.Partial, status: "warning" },
+    { name: "Gap", value: M.controls.by_status.Gap, status: "critical" }
+  ]);
+  (function ctlDomain() {
+    const credit = { Implemented: 1, Partial: 0.5, Gap: 0 }, m = new Map();
+    D.controls.forEach(c => {
+      const d = m.get(c.domain) || { n: 0, s: 0 };
+      d.n += 1; d.s += credit[c.status] || 0; m.set(c.domain, d);
+    });
+    bars($("#ctlDomain"), Array.from(m.entries()).map(e => {
+      const name = e[0], v = e[1], pct = v.s / v.n * 100;
+      return { name, value: pct, display: Math.round(pct) + "%",
+        status: pct >= 75 ? "good" : pct >= 50 ? "warning" : pct >= 25 ? "serious" : "critical",
+        tip: name + ": " + v.s + " of " + v.n + " controls in place, counting Partial as half" };
+    }).sort((a, b) => a.value - b.value), { max: 100, label: "172px" });
+  })();
+  (function ctlEvidence() {
+    const m = new Map();
+    D.evidence.forEach(e => {
+      const d = m.get(e.control_id) || { n: 0, have: 0 };
+      d.n += 1; if (e.availability === "Available") d.have += 1; m.set(e.control_id, d);
+    });
+    const rows = Array.from(m.entries()).filter(e => e[1].have === 0)
+      .map(e => ({ id: e[0], n: e[1].n })).sort((a, b) => b.n - a.n).slice(0, 9);
+    $("#ctlEvidence").innerHTML = miniRows(rows.map(r =>
+      '<tr><td><button class="link" data-open-ctl="' + r.id + '">' + r.id + "</button></td><td>" +
+      esc((CTL[r.id] || {}).control_name || "") + '</td><td class="meta">' + r.n + " items, none held</td></tr>"));
+    $$("[data-open-ctl]", $("#ctlEvidence")).forEach(b =>
+      b.addEventListener("click", () => open("control", b.getAttribute("data-open-ctl"))));
+  })();
+
+  (function ctlCritical() {
+    $("#ctlCritical").innerHTML = miniRows(M.controls.critical_control_gap_ids.map(id =>
+      '<tr><td><button class="link" data-open-ctl="' + id + '">' + id + "</button></td><td>" +
+      esc((CTL[id] || {}).control_name || "") + '</td><td class="meta">' +
+      esc((CTL[id] || {}).owner || "") + "</td></tr>"));
+    $$("[data-open-ctl]", $("#ctlCritical")).forEach(b =>
+      b.addEventListener("click", () => open("control", b.getAttribute("data-open-ctl"))));
+  })();
+
+  const ctlTbl = Table({
+    el: "#ctlTbl", rows: () => D.controls, idKey: "control_id", sort: "control_id", dir: "asc",
+    search: "#ctlSearch", count: "#ctlCount",
+    searchKeys: ["control_id", "control_name", "description", "domain", "framework_refs", "owner", "control_type"],
+    cols: [
+      { key: "control_id", label: "ID", cls: "id" },
+      { key: "control_name", label: "Control" },
+      { key: "control_type", label: "Type" },
+      { key: "domain", label: "Domain", cls: "wrap" },
+      { key: "status", label: "Status", render: c => pill(c.status, statusClass(c.status)) },
+      { key: "risk_ids", label: "Risks", cls: "wrap", render: c => esc(c.risk_ids.replace(/;/g, " ")) },
+      { key: "framework_refs", label: "Frameworks", cls: "wrap" },
+      { key: "owner", label: "Owner", cls: "wrap" }
+    ],
+    onRow: id => open("control", id)
+  });
+  chips("#ctlChips", ["Implemented", "Partial", "Gap"], () => applyCtlFilter());
+  (function ctlDomainSelect() {
+    const sel = $("#ctlDomainSel");
+    const domains = Array.from(new Set(D.controls.map(c => c.domain))).sort();
+    sel.innerHTML = '<option value="">All domains</option>' + domains.map(d => "<option>" + esc(d) + "</option>").join("");
+    sel.addEventListener("change", applyCtlFilter);
+  })();
+  function applyCtlFilter() {
+    const picked = new Set($$("#ctlChips button.on").map(b => b.getAttribute("data-v")));
+    const dom = $("#ctlDomainSel").value;
+    ctlTbl.setFilter(c => (!picked.size || picked.has(c.status)) && (!dom || c.domain === dom));
+  }
+  ctlTbl.draw();
+
+  /* ---------- compliance ---------- */
+  bars($("#cmpDomain"), Object.keys(M.compliance.by_domain_pct).map(name => {
+    const v = M.compliance.by_domain_pct[name];
+    return { name, value: v, display: v + "%",
+      status: v >= 75 ? "good" : v >= 50 ? "warning" : v >= 25 ? "serious" : "critical",
+      tip: name + ": " + v + "% of its applicable cells satisfied" };
+  }).sort((a, b) => a.value - b.value), { max: 100, label: "210px" });
+  bars($("#cmpFw"), Object.keys(M.compliance.by_framework_pct).map(name => ({
+    name, value: M.compliance.by_framework_pct[name], display: M.compliance.by_framework_pct[name] + "%",
+    tip: name + ": " + M.compliance.by_framework_pct[name] + "% weighted"
+  })), { max: 100, label: "150px" });
+  segment($("#cmpSeg"), $("#cmpSegLegend"), [
+    { name: "Compliant", value: M.compliance.by_rating.Compliant, status: "good" },
+    { name: "Partial", value: M.compliance.by_rating["Partially compliant"], status: "warning" },
+    { name: "Weak", value: M.compliance.by_rating.Weak, status: "serious" },
+    { name: "Non-compliant", value: M.compliance.by_rating["Non-compliant"], status: "critical" }
+  ]);
+  const cmpTbl = Table({
+    el: "#cmpTbl", rows: () => D.compliance, idKey: "req_id", sort: "req_id", dir: "asc",
+    search: "#cmpSearch", count: "#cmpCount",
+    searchKeys: ["req_id", "domain", "framework", "rating", "linked_controls"],
+    cols: [
+      { key: "req_id", label: "Cell", cls: "id" },
+      { key: "domain", label: "Domain" },
+      { key: "framework", label: "Framework" },
+      { key: "rating", label: "Rating",
+        render: r => r.applicable === "N" ? '<span class="meta">Not applicable</span>' : pill(r.rating, ratingClass(r.rating)) },
+      { key: "weight", label: "Weight", cls: "num" },
+      { key: "linked_controls", label: "Controls", cls: "wrap",
+        render: r => esc(String(r.linked_controls).replace(/;/g, " ")) }
+    ],
+    onRow: id => {
+      const row = D.compliance.filter(r => r.req_id === id)[0];
+      const first = ids(row.linked_controls)[0];
+      if (first && CTL[first]) open("control", first);
+    }
+  });
+  chips("#cmpChips", ["Compliant", "Partially compliant", "Weak", "Non-compliant"], picked =>
+    cmpTbl.setFilter(r => !picked.size || picked.has(r.rating)));
+  cmpTbl.draw();
+
+  /* ---------- gaps ---------- */
+  const pctStatus = v => v >= 75 ? "good" : v >= 50 ? "warning" : v >= 25 ? "serious" : "critical";
+  bars($("#gapCov"), D.frameworks.map(f => ({
+    name: f.family, value: f.coverage_pct, display: f.coverage_pct + "%", status: pctStatus(f.coverage_pct),
+    tip: f.family + ": " + f.addressed + " of " + f.requirements + " requirements touched by a control"
+  })).sort((a, b) => a.value - b.value), { max: 100, label: "160px" });
+  bars($("#gapQual"), D.frameworks.map(f => ({
+    name: f.family, value: f.compliance_of_addressed_pct, display: f.compliance_of_addressed_pct + "%",
+    status: pctStatus(f.compliance_of_addressed_pct),
+    tip: f.family + ": " + f.satisfied + " satisfied, " + f.partial + " partial, " + f.gap + " gap, of " +
+      f.addressed + " addressed"
+  })).sort((a, b) => a.value - b.value), { max: 100, label: "160px" });
+  const gapTbl = Table({
+    el: "#gapTbl", rows: () => D.gaps, idKey: "gap_id", sort: "max_inherent_risk", dir: "desc",
+    search: "#gapSearch", count: "#gapCount",
+    searchKeys: ["gap_id", "framework", "req_id", "title", "mapped_controls", "linked_risks"],
+    cols: [
+      { key: "gap_id", label: "Gap", cls: "id" },
+      { key: "family", label: "Framework" },
+      { key: "req_id", label: "Requirement", cls: "id" },
+      { key: "title", label: "Title" },
+      { key: "compliance_status", label: "Status",
+        render: g => pill(g.compliance_status, g.score >= 1 ? "good" : g.score >= 0.5 ? "warning" : g.score > 0 ? "serious" : "critical") },
+      { key: "mapped_controls", label: "Controls", cls: "wrap",
+        render: g => esc(g.mapped_controls.replace(/;/g, " ")) },
+      { key: "max_inherent_risk", label: "Max risk", cls: "num",
+        render: g => pill(g.max_inherent_risk, band(g.max_inherent_risk)) }
+    ],
+    onRow: id => open("gap", id)
+  });
+  chips("#gapChips", Array.from(new Set(D.gaps.map(g => g.family))).sort(), picked =>
+    gapTbl.setFilter(g => !picked.size || picked.has(g.family)));
+  gapTbl.draw();
+
+  /* ---------- assets ---------- */
+  const critStatus = { Critical: "critical", High: "serious", Medium: "warning", Low: "good" };
+  bars($("#astZone"), counts(D.assets, "domain").sort((a, b) => b[1] - a[1]).map(e => ({
+    name: e[0], value: e[1], display: String(e[1]), tip: e[1] + " assets in " + e[0]
+  })), { label: "140px" });
+  bars($("#astCrit"), ["Critical", "High", "Medium", "Low"].map(k => {
+    const n = D.assets.filter(a => a.criticality === k).length;
+    return { name: k, value: n, display: String(n), status: critStatus[k], tip: n + " assets rated " + k };
+  }).filter(r => r.value > 0), { label: "90px" });
+  bars($("#datClass"), counts(D.data_inventory, "classification").sort((a, b) => b[1] - a[1]).map(e => ({
+    name: e[0], value: e[1], display: String(e[1]), tip: e[1] + " data sets classified " + e[0]
+  })), { label: "110px" });
+
+  const hrs = v => { const n = parseFloat(v); return isNaN(n) ? "–" : n >= 60 ? (n / 60) + " hr" : n + " min"; };
+  Table({
+    el: "#astTbl", rows: () => D.assets, idKey: "asset_id", sort: "asset_id", dir: "asc",
+    search: "#astSearch", count: "#astCount",
+    searchKeys: ["asset_id", "asset_name", "asset_owner", "business_owner", "domain", "asset_type", "classification"],
+    cols: [
+      { key: "asset_id", label: "ID", cls: "id" },
+      { key: "asset_name", label: "Asset" },
+      { key: "domain", label: "Zone" },
+      { key: "criticality", label: "Criticality", render: a => pill(a.criticality, critStatus[a.criticality] || "good") },
+      { key: "classification", label: "Class" },
+      { key: "rto_minutes", label: "RTO", cls: "num", render: a => hrs(a.rto_minutes) },
+      { key: "rpo_minutes", label: "RPO", cls: "num", render: a => hrs(a.rpo_minutes) }
+    ],
+    onRow: id => open("asset", id)
+  }).draw();
+  Table({
+    el: "#datTbl", rows: () => D.data_inventory, idKey: "data_id", sort: "data_id", dir: "asc",
+    search: "#datSearch", count: "#datCount",
+    searchKeys: ["data_id", "data_set", "classification", "data_owner", "primary_asset"],
+    cols: [
+      { key: "data_id", label: "ID", cls: "id" },
+      { key: "data_set", label: "Data set" },
+      { key: "classification", label: "Classification" },
+      { key: "primary_asset", label: "Primary asset", cls: "id" },
+      { key: "protection_priority", label: "Priority" }
+    ],
+    onRow: id => open("data", id)
+  }).draw();
+
+  /* ---------- audit ---------- */
+  bars($("#fndSev"), ["Critical", "High", "Medium", "Low"].map(k => ({
+    name: k, value: M.audit.by_severity[k], display: String(M.audit.by_severity[k]), status: sevClass(k),
+    tip: M.audit.by_severity[k] + " " + k + " findings, all still open"
+  })).filter(r => r.value > 0), { label: "90px" });
+  segment($("#evSeg"), $("#evSegLegend"), [
+    { name: "Available", value: M.evidence.by_availability.Available, status: "good" },
+    { name: "Partial", value: M.evidence.by_availability.Partial, status: "warning" },
+    { name: "Not available", value: M.evidence.by_availability["Not available"], status: "critical" }
+  ]);
+  bars($("#rdyBars"), [
+    { name: "IAM", value: M.readiness.IAM.pct, display: M.readiness.IAM.pct + "%",
+      tip: "IAM: " + M.readiness.IAM.obtained + " of " + M.readiness.IAM.maximum + " checks" },
+    { name: "BC/DR", value: M.readiness.BCDR.pct, display: M.readiness.BCDR.pct + "%",
+      tip: "BC/DR: " + M.readiness.BCDR.obtained + " of " + M.readiness.BCDR.maximum + " checks" },
+    { name: "Incident response", value: M.readiness.IR.pct, display: M.readiness.IR.pct + "%",
+      tip: "IR: " + M.readiness.IR.obtained + " of " + M.readiness.IR.maximum + " checks" },
+    { name: "AI governance", value: M.readiness.AI.pct, display: M.readiness.AI.score_out_of_10 + "/10",
+      tip: "AI: " + M.readiness.AI.obtained + " of " + M.readiness.AI.maximum + " checks" }
+  ].map(r => Object.assign(r, { status: pctStatus(r.value) })), { max: 100, label: "130px" });
+
+  const fndTbl = Table({
+    el: "#fndTbl", rows: () => D.findings, idKey: "finding_id", sort: "finding_id", dir: "asc",
+    search: "#fndSearch", count: "#fndCount",
+    searchKeys: ["finding_id", "finding", "requirement", "control_id", "owner", "source"],
+    cols: [
+      { key: "finding_id", label: "ID", cls: "id" },
+      { key: "severity", label: "Severity", render: f => pill(f.severity, sevClass(f.severity)) },
+      { key: "control_id", label: "Control", cls: "id", render: f => esc(f.control_id.replace(/;/g, " ")) },
+      { key: "finding", label: "Finding" },
+      { key: "owner", label: "Owner", cls: "wrap" }
+    ],
+    onRow: id => open("finding", id)
+  });
+  chips("#fndChips", ["Critical", "High", "Medium"], picked =>
+    fndTbl.setFilter(f => !picked.size || picked.has(f.severity)));
+  fndTbl.draw();
+
+  const rdyTbl = Table({
+    el: "#rdyTbl", rows: () => D.readiness, idKey: "item_id", sort: "item_id", dir: "asc",
+    count: "#rdyCount", searchKeys: ["item_id", "item", "area", "reference"],
+    cols: [
+      { key: "area", label: "Area" },
+      { key: "item_id", label: "Check", cls: "id" },
+      { key: "item", label: "Question" },
+      { key: "status", label: "Answer",
+        render: r => pill(r.status === "Y" ? "Yes" : r.status === "P" ? "Partial" : "No",
+          r.status === "Y" ? "good" : r.status === "P" ? "warning" : "critical") },
+      { key: "reference", label: "Control", cls: "id" }
+    ],
+    onRow: id => {
+      const row = D.readiness.filter(r => r.item_id === id)[0];
+      const first = ids(row.reference)[0];
+      if (first && CTL[first]) open("control", first);
+    }
+  });
+  chips("#rdyChips", ["IAM", "BCDR", "IR", "AI"], picked =>
+    rdyTbl.setFilter(r => !picked.size || picked.has(r.area)));
+  rdyTbl.draw();
+
+  /* ---------- maturity and roadmap ---------- */
+  bars($("#matBars"), D.maturity.map(r => ({
+    name: r.capability, value: +r.score, target: +r.target_year3, display: r.score + " → " + r.target_year3,
+    status: +r.score >= 3.5 ? "good" : +r.score >= 2.5 ? "warning" : +r.score >= 1.5 ? "serious" : "critical",
+    tip: "<b>" + esc(r.capability) + " " + r.score + "/5, target " + r.target_year3 + "</b><br>" + esc(r.rationale)
+  })), { max: 5, label: "160px" });
+
+  (function roadmap() {
+    const critical = new Set(M.controls.critical_control_gap_ids);
+    const gapCtl = D.controls.filter(c => c.status === "Gap");
+    const year1 = gapCtl.filter(c => critical.has(c.control_id));
+    M.recommendations.forEach(r => {
+      if (!critical.has(r.control_id) && CTL[r.control_id] && CTL[r.control_id].status === "Gap")
+        year1.push(CTL[r.control_id]);
+    });
+    const y1 = new Set(year1.map(c => c.control_id));
+    const year2 = gapCtl.filter(c => !y1.has(c.control_id));
+    const year3 = D.controls.filter(c => c.status === "Partial");
+    const col = (n, title, note, list, extra) => '<div class="year"><div class="yh"><b>Year ' + n + " " + title +
+      "</b><span>" + note + "</span></div><ul>" +
+      list.slice(0, 9).map(c => "<li><b>" + c.control_id + "</b> " + esc(c.control_name) + "</li>").join("") +
+      (list.length > 9 ? '<li class="meta">and ' + (list.length - 9) + " more</li>" : "") + "</ul>" +
+      '<div class="meta">' + extra + "</div></div>";
+    $("#roadmap").innerHTML =
+      col(1, "Foundation", year1.length + " controls", year1,
+        "The Gap controls sitting on Critical risks, plus the rest of the top 5 recommendations.") +
+      col(2, "Integration", year2.length + " controls", year2,
+        "The remaining Gap controls, in the order their risks rank.") +
+      col(3, "Optimization", year3.length + " controls", year3,
+        "Partial controls taken to Implemented and held there, which is what moves effectiveness past 50%. " +
+        "Maturity target " + M.maturity.target_year3 + ".");
+  })();
+
+  /* ---------- AI automation ---------- */
+  (function aiSection() {
+    const a = M.ai_automation;
+    const tiles = [
+      ["Suggestions reviewed", a.suggestions, "good", "every one by a named reviewer"],
+      ["Trust Score", a.trust_score_pct + "%", "good", a.correct + " of " + a.total + " acceptable"],
+      ["Frozen Trust Score", a.trust_score_frozen_pct + "%", "warning", a.correct_frozen + " of " + a.total + ", reference frozen"],
+      ["Recall of A2 mapping", a.recall_primary_pct + "%", "warning", "of the pairs we mapped by hand"],
+      ["Automation Gain", a.automation_gain_pct + "%", "good", a.manual_minutes + " min to " + Math.round(a.ai_assisted_minutes) + " min"],
+      ["Flagged for priority review", a.flagged_for_priority_review_pct + "%", "serious", "low confidence or weak framework"]
+    ];
+    $("#aiTiles").innerHTML = tiles.map(t =>
+      '<div class="tile"><div class="k">' + t[0] + '</div><div class="v">' + t[1] + '</div>' +
+      '<div class="foot"><span class="badge"><i class="bg-' + t[2] + '"></i>' +
+      (t[2] === "good" ? "Holds" : "Watch") + '</span><span class="d">' + t[3] + "</span></div></div>").join("");
+
+    if (D.ai_per_family && D.ai_per_family.length) {
+      $("#aiFamily").innerHTML = '<table class="mini"><thead><tr><th>Framework</th><th>Suggestions</th>' +
+        '<th style="width:38%">Trust</th><th style="width:38%">Recall of our mapping</th></tr></thead><tbody>' +
+        D.ai_per_family.slice().sort((x, y) => x.recall_pct - y.recall_pct).map(f => {
+          const cell = (v, extra) => '<td><div style="display:flex;align-items:center;gap:7px">' +
+            '<div class="track" style="flex:1"><div class="fill" style="width:' + v + '%;background:var(--' +
+            pctStatus(v) + ')"></div></div><span style="width:40px;text-align:right">' + v + "%</span></div>" +
+            '<div class="meta">' + extra + "</div></td>";
+          return "<tr><td><b>" + esc(f.family) + "</b></td><td>" + f.recommended + "</td>" +
+            cell(f.trust_score_pct, f.correct + " of " + f.recommended + " acceptable") +
+            cell(f.recall_pct, f.primary_found + " of " + f.primary + " found") + "</tr>";
+        }).join("") + "</tbody></table>";
+    }
+    if (D.ai_backends && D.ai_backends.length) {
+      const base = D.ai_backends.filter(b => b.backend !== "ollama")[0];
+      if (base) {
+        $("#aiBackends").innerHTML = '<table class="mini"><thead><tr><th></th><th>Local LLM</th><th>' +
+          esc(base.backend) + "</th></tr></thead><tbody>" +
+          [["Trust Score", a.trust_score_pct + "%", base.trust_score_pct + "%"],
+           ["Frozen Trust Score", a.trust_score_frozen_pct + "%", base.trust_score_frozen_pct + "%"],
+           ["Recall", a.recall_primary_pct + "%", base.recall_primary_pct + "%"],
+           ["Runtime", Math.round(a.ai_runtime_minutes) + " min", base.runtime_seconds + " s"]]
+            .map(r => "<tr><td>" + r[0] + "</td><td><b>" + r[1] + "</b></td><td>" + r[2] + "</td></tr>").join("") +
+          "</tbody></table>" +
+          '<div class="meta" style="margin-top:10px">Search alone scores better on precision and finds half as' +
+          " much. The LLM earns its place on recall, which is the number that decides whether a gap is found.</div>";
+      }
+    }
+
+    bars($("#aiAcc"), [
+      { name: "Trust Score", value: a.trust_score_pct, display: a.trust_score_pct + "%", status: "good",
+        tip: "Graded against the full " + a.reference_rows + " row reference: " + a.correct + " of " + a.total },
+      { name: "Frozen reference", value: a.trust_score_frozen_pct, display: a.trust_score_frozen_pct + "%",
+        status: "warning", tip: "Excludes the " + a.reference_added_during_review +
+          " rows added during review, " + a.reference_added_that_ai_suggested + " of which the model had suggested" },
+      { name: "Accepted by reviewers", value: a.human_trust_score_pct, display: a.human_trust_score_pct + "%",
+        status: "good", tip: a.human_accepted + " accepted, " + a.human_rejected + " rejected" },
+      { name: "Recall, primary set", value: a.recall_primary_pct, display: a.recall_primary_pct + "%",
+        status: "warning", tip: "How much of our own A2 and A3 mapping the model found" }
+    ], { max: 100, label: "160px" });
+
+    bars($("#aiEffort"), [
+      { name: "By hand", value: a.manual_minutes, display: Math.round(a.manual_minutes / 6) / 10 + " hrs",
+        status: "critical", tip: "Measured on a sample and scaled to 25 controls" },
+      { name: "Model runtime", value: a.ai_runtime_minutes, display: Math.round(a.ai_runtime_minutes) + " min",
+        status: "warning", tip: "qwen2.5:7b on local hardware, one pass over 25 controls" },
+      { name: "Human review", value: a.human_review_minutes, display: a.human_review_minutes + " min",
+        status: "warning", tip: a.review_minutes_per_suggestion + " min per suggestion, " + a.suggestions + " suggestions" },
+      { name: "AI assisted total", value: a.ai_assisted_minutes,
+        display: Math.round(a.ai_assisted_minutes / 6) / 10 + " hrs", status: "good", tip: "Runtime plus review" }
+    ], { max: a.manual_minutes, label: "150px" });
+  })();
+  window.PSR = { closeDrawer, drawer, scrim, open };
+  document.dispatchEvent(new CustomEvent("psr:ready"));
+})();
+</script>
+<script>{% include "motion.js.j2" %}</script>
+</body>
+</html>

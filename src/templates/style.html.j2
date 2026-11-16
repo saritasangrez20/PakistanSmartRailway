@@ -1,0 +1,410 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  /* Apple styled build of the same dashboard.
+     System colours and the grouped background, SF with size specific tracking, translucent chrome
+     with content scrolling under it, and springs instead of fixed duration curves wherever the
+     reader can touch something. Inter stands in for SF on Linux and Windows. */
+  :root {
+    color-scheme: light;
+    --plane: #f2f2f7;              /* systemGroupedBackground */
+    --surface: #ffffff;            /* secondarySystemGroupedBackground */
+    --inset: rgba(120,120,128,.08);
+    --raised: #ffffff;
+    --chrome: rgba(249,249,251,.72);
+    --border: rgba(60,60,67,.18);
+    --hairline: rgba(60,60,67,.14);
+    --text-primary: #000000;
+    --text-secondary: rgba(60,60,67,.68);
+    --text-muted: rgba(60,60,67,.42);
+    --series-1: #007aff;           /* systemBlue */
+    --track: rgba(120,120,128,.16);
+    --target: rgba(60,60,67,.6);
+    --good: #34c759; --warning: #ffb800; --serious: #ff9500; --critical: #ff3b30;
+    --ink-good: #248a3d; --ink-warning: #b25000; --ink-serious: #c93400; --ink-critical: #d70015;
+    --wash: rgba(120,120,128,.09);
+    --ring: rgba(0,0,0,.04);
+    --shadow-1: 0 1px 2px rgba(0,0,0,.05);
+    --shadow-sheet: -32px 0 64px -24px rgba(0,0,0,.28);
+    --r-card: 16px; --r-ctl: 10px;
+    --ease-out: cubic-bezier(.22,.61,.36,1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --plane: #000000; --surface: #1c1c1e; --inset: rgba(120,120,128,.18); --raised: #2c2c2e;
+      --chrome: rgba(28,28,30,.72);
+      --border: rgba(84,84,88,.6); --hairline: rgba(84,84,88,.42);
+      --text-primary: #ffffff; --text-secondary: rgba(235,235,245,.62); --text-muted: rgba(235,235,245,.36);
+      --series-1: #0a84ff; --track: rgba(120,120,128,.26); --target: rgba(235,235,245,.6);
+      --good: #30d158; --warning: #ffd60a; --serious: #ff9f0a; --critical: #ff453a;
+      --ink-good: #30d158; --ink-warning: #ffd60a; --ink-serious: #ff9f0a; --ink-critical: #ff453a;
+      --wash: rgba(120,120,128,.16); --ring: rgba(0,0,0,.4);
+      --shadow-1: none; --shadow-sheet: -32px 0 64px -24px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --plane: #000000; --surface: #1c1c1e; --inset: rgba(120,120,128,.18); --raised: #2c2c2e;
+    --chrome: rgba(28,28,30,.72);
+    --border: rgba(84,84,88,.6); --hairline: rgba(84,84,88,.42);
+    --text-primary: #ffffff; --text-secondary: rgba(235,235,245,.62); --text-muted: rgba(235,235,245,.36);
+    --series-1: #0a84ff; --track: rgba(120,120,128,.26); --target: rgba(235,235,245,.6);
+    --good: #30d158; --warning: #ffd60a; --serious: #ff9f0a; --critical: #ff453a;
+    --ink-good: #30d158; --ink-warning: #ffd60a; --ink-serious: #ff9f0a; --ink-critical: #ff453a;
+    --wash: rgba(120,120,128,.16); --ring: rgba(0,0,0,.4);
+    --shadow-1: none; --shadow-sheet: -32px 0 64px -24px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--plane); color: var(--text-primary);
+         font: 400 15px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+               Inter, system-ui, sans-serif;
+         letter-spacing: -.006em; font-optical-sizing: auto; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer;
+           -webkit-tap-highlight-color: transparent; }
+  input, select { font: inherit; color: inherit; }
+  .num, .v, .val, table.tbl td, .kv td:last-child { font-variant-numeric: tabular-nums; }
+
+  /* ---------- shell ---------- */
+  .shell { display: grid; grid-template-columns: 264px 1fr; min-height: 100vh; }
+  /* Sidebar is a heavier material than the toolbar: it separates a structural region, so it sits
+     further back and carries more blur. Content scrolls under both. */
+  .sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 20;
+             background: var(--chrome); backdrop-filter: blur(28px) saturate(180%);
+             -webkit-backdrop-filter: blur(28px) saturate(180%);
+             border-right: .5px solid var(--border); display: flex; flex-direction: column; }
+  .brand { padding: 22px 20px 14px; }
+  .brand .mark { display: flex; align-items: center; gap: 11px; font-weight: 600; font-size: 17px;
+                 letter-spacing: -.021em; }
+  .brand .mark span.badge { height: 30px; padding: 0 9px; border-radius: 9px; background: var(--series-1);
+        color: #fff; display: grid; place-items: center; font-size: 11px; font-weight: 700;
+        letter-spacing: .02em; flex: none; border: 0; }
+  .brand .org { color: var(--text-secondary); font-size: 13px; margin-top: 10px; line-height: 1.42;
+                letter-spacing: -.003em; }
+  nav { padding: 2px 10px; flex: 1; }
+  nav .group { color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 16px 10px 6px;
+               letter-spacing: .01em; text-transform: uppercase; }
+  nav a { display: flex; align-items: center; gap: 11px; padding: 8px 10px; border-radius: var(--r-ctl);
+          color: var(--text-primary); text-decoration: none; font-size: 15px; letter-spacing: -.01em; }
+  nav a svg { width: 17px; height: 17px; flex: none; color: var(--series-1); opacity: .9; }
+  nav a:hover { background: var(--wash); }
+  nav a.on { background: var(--series-1); color: #fff; font-weight: 500; }
+  nav a.on svg { color: #fff; opacity: 1; }
+  .sidebar footer { padding: 14px 20px 20px; color: var(--text-muted); font-size: 12px; line-height: 1.45; }
+
+  main { min-width: 0; transform-origin: center left; }
+  /* Floating toolbar. No divider until content is actually underneath it, and then a soft scroll
+     edge rather than a hard 1px line. */
+  .topbar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 14px;
+            padding: 0 26px; height: 54px; background: var(--chrome);
+            backdrop-filter: blur(28px) saturate(180%); -webkit-backdrop-filter: blur(28px) saturate(180%); }
+  .topbar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -14px; height: 14px;
+                   background: linear-gradient(to bottom, var(--ring), transparent); opacity: 0;
+                   transition: opacity .25s ease; pointer-events: none; }
+  .topbar.scrolled::after { opacity: 1; }
+  .topbar h1 { font-size: 15px; font-weight: 600; margin: 0; letter-spacing: -.014em; }
+  .topbar .crumb { color: var(--text-secondary); font-size: 14px; letter-spacing: -.006em; }
+  .topbar .crumb::before { content: "›"; margin-right: 10px; color: var(--text-muted); }
+  .topbar .spacer { flex: 1; }
+  .status-pill { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px; border-radius: 980px;
+                 background: var(--inset); font-size: 13px; font-weight: 500; color: var(--text-primary);
+                 border: 0; letter-spacing: -.006em; }
+  .btn { display: inline-flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: 980px;
+         background: var(--inset); border: 0; font-size: 14px; font-weight: 500; color: var(--series-1);
+         letter-spacing: -.01em; }
+  .btn:hover { background: var(--wash); }
+  .btn svg { width: 15px; height: 15px; }
+
+  .sec { padding: 36px 26px 14px; max-width: 1560px; scroll-margin-top: 54px; }
+  .sec > header { margin-bottom: 20px; }
+  .eyebrow { font-size: 13px; color: var(--series-1); font-weight: 600; letter-spacing: -.003em; }
+  /* Tracking is size specific: the title is large enough to need negative tracking, the body is not. */
+  .sec h2 { font-size: 30px; font-weight: 700; margin: 5px 0 8px; letter-spacing: -.024em; line-height: 1.12; }
+  .sec .lede { color: var(--text-secondary); max-width: 76ch; font-size: 15.5px; letter-spacing: -.006em; }
+
+  .card { background: var(--surface); border: 0; border-radius: var(--r-card); box-shadow: var(--shadow-1);
+          padding: 20px 22px 22px; }
+  .card > h3 { font-size: 15px; font-weight: 600; letter-spacing: -.014em; color: var(--text-primary);
+               margin: 0 0 16px; display: flex; align-items: baseline; gap: 10px; }
+  .card > h3 .aside { margin-left: auto; font-size: 13px; color: var(--text-muted); font-weight: 400;
+                      letter-spacing: -.003em; }
+  .grid { display: grid; gap: 16px; }
+  .grid > * { min-width: 0; }
+  .g2 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g6 { grid-template-columns: repeat(6, 1fr); }
+  .tiles { grid-template-columns: repeat(4, 1fr); }
+  .g-2-1 { grid-template-columns: 2fr 1fr; }
+  .g-1-2 { grid-template-columns: 1fr 2fr; }
+
+  /* ---------- stat tiles ---------- */
+  .tile { background: var(--surface); border: 0; border-radius: var(--r-card); box-shadow: var(--shadow-1);
+          padding: 18px 20px 19px; }
+  .tile .k { color: var(--text-secondary); font-size: 14px; line-height: 1.3; min-height: 36px;
+             letter-spacing: -.006em; }
+  .tile .v { font-size: 34px; font-weight: 700; line-height: 1.08; margin: 4px 0 12px;
+             letter-spacing: -.026em; }
+  .tile .v small { font-size: 16px; font-weight: 500; color: var(--text-muted); letter-spacing: -.01em; }
+  .tile .foot { display: flex; align-items: center; gap: 9px; }
+  .tile .d { color: var(--text-muted); font-size: 13px; line-height: 1.3; letter-spacing: -.003em; }
+
+  /* Tinted badges, the way iOS tints a status: colour carries meaning, the dot keeps it legible
+     for anyone who cannot separate the hues. */
+  .badge, .pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 980px;
+          background: var(--inset); border: 0; font-size: 12.5px; font-weight: 600; color: var(--text-secondary);
+          white-space: nowrap; letter-spacing: -.003em; }
+  .badge i, .chip i, .pill i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex: none; }
+  /* A badge takes the tint of the state it reports. The ink is the accessible variant of the system
+     colour, and the dot stays so the state never rests on hue alone. */
+  .badge:has(.bg-good), .pill:has(.bg-good) {
+    background: color-mix(in srgb, var(--good) 14%, transparent); color: var(--ink-good); }
+  .badge:has(.bg-warning), .pill:has(.bg-warning) {
+    background: color-mix(in srgb, var(--warning) 18%, transparent); color: var(--ink-warning); }
+  .badge:has(.bg-serious), .pill:has(.bg-serious) {
+    background: color-mix(in srgb, var(--serious) 15%, transparent); color: var(--ink-serious); }
+  .badge:has(.bg-critical), .pill:has(.bg-critical) {
+    background: color-mix(in srgb, var(--critical) 14%, transparent); color: var(--ink-critical); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+  .s-good { color: var(--good); } .s-warning { color: var(--warning); }
+  .s-serious { color: var(--serious); } .s-critical { color: var(--critical); }
+  .bg-good { background: var(--good); } .bg-warning { background: var(--warning); }
+  .bg-serious { background: var(--serious); } .bg-critical { background: var(--critical); }
+
+  /* ---------- bars ---------- */
+  .bar-row { display: grid; grid-template-columns: var(--label, 154px) 1fr 58px; align-items: center;
+             gap: 12px; margin: 9px 0; }
+  .bar-row .name { color: var(--text-secondary); font-size: 13.5px; white-space: nowrap; overflow: hidden;
+                   text-overflow: ellipsis; letter-spacing: -.006em; }
+  .bar-row .val { text-align: right; font-size: 13.5px; color: var(--text-primary); font-weight: 500; }
+  .track { position: relative; height: 8px; background: var(--track); border-radius: 980px; }
+  .fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--series-1); border-radius: 980px; }
+  .tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--target);
+          border-radius: 2px; }
+  .seg { display: flex; height: 11px; border-radius: 980px; overflow: hidden; gap: 2px; }
+  .seg > span { display: block; }
+  .seg-legend { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 13px; color: var(--text-secondary);
+                font-size: 13px; }
+
+  /* ---------- heat map ---------- */
+  .heat { display: grid; grid-template-columns: 82px repeat(5, 1fr); gap: 5px; }
+  .heat .hcell { aspect-ratio: 1.12 / 1; border-radius: 13px; display: grid; place-items: center;
+                 position: relative; cursor: pointer; border: 1.5px solid transparent; }
+  .heat .hcell .n { font-size: 21px; font-weight: 700; letter-spacing: -.02em; }
+  .heat .hcell .ids { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .heat .hcell.empty { cursor: default; }
+  .heat .hcell.sel { border-color: var(--series-1); }
+  .heat .ax { color: var(--text-muted); font-size: 13px; display: grid; place-items: center; }
+  .heat .ax.row { justify-content: end; text-align: right; padding-right: 10px; }
+  .axis-title { color: var(--text-muted); font-size: 13px; }
+  /* iOS segmented control */
+  .tabs { display: inline-flex; gap: 0; padding: 2px; background: var(--track); border-radius: 9px;
+          position: relative; }
+  .tabs button { padding: 5px 14px; border-radius: 7px; font-size: 13.5px; font-weight: 500;
+                 color: var(--text-primary); letter-spacing: -.01em; position: relative; z-index: 1; }
+  .tabs button.on { background: transparent; font-weight: 600; }
+  .tabs .ind { position: absolute; top: 2px; bottom: 2px; left: 0; border-radius: 7px;
+               background: var(--surface); box-shadow: 0 3px 8px rgba(0,0,0,.12); z-index: 0; }
+
+  /* ---------- filters + tables ---------- */
+  .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-bottom: 15px; }
+  .search { display: flex; align-items: center; gap: 8px; padding: 7px 12px; border: 0;
+            border-radius: var(--r-ctl); background: var(--inset); min-width: 270px; }
+  .search input { border: 0; outline: 0; background: none; width: 100%; font-size: 14px;
+                  letter-spacing: -.01em; }
+  .search input::placeholder { color: var(--text-muted); }
+  .search svg { width: 15px; height: 15px; color: var(--text-muted); flex: none; }
+  .fchip { padding: 6px 13px; border-radius: 980px; border: 0; background: var(--inset);
+           font-size: 13.5px; font-weight: 500; color: var(--text-primary); letter-spacing: -.01em; }
+  .fchip.on { background: var(--series-1); color: #fff; }
+  .count { color: var(--text-muted); font-size: 13.5px; margin-left: auto; }
+  select.sel { padding: 7px 11px; border: 0; border-radius: var(--r-ctl); background: var(--inset);
+               font-size: 14px; color: var(--text-primary); }
+
+  /* Grouped list rather than a bordered grid: inset separators, no outer rule. */
+  .tbl-wrap { overflow: auto; max-height: 640px; border: 0; border-radius: var(--r-card);
+              background: var(--surface); box-shadow: var(--shadow-1); }
+  table.tbl { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px;
+              letter-spacing: -.006em; }
+  table.tbl th { position: sticky; top: 0; z-index: 2; background: var(--surface); text-align: left;
+                 padding: 13px 16px 9px; font-size: 13px; font-weight: 500; color: var(--text-muted);
+                 border-bottom: .5px solid var(--hairline); white-space: nowrap; cursor: pointer;
+                 user-select: none; }
+  table.tbl th:hover { color: var(--text-primary); }
+  table.tbl th .arrow { color: var(--series-1); font-size: 9px; }
+  table.tbl td { padding: 13px 16px; border-bottom: .5px solid var(--hairline); vertical-align: top;
+                 line-height: 1.4; }
+  table.tbl td:first-child { border-bottom-color: transparent; }
+  table.tbl tbody tr:last-child td { border-bottom: 0; }
+  table.tbl tbody tr { cursor: pointer; }
+  table.tbl tbody tr:hover td { background: var(--wash); }
+  table.tbl td.id { font-weight: 600; white-space: nowrap; }
+  table.tbl td.num { text-align: right; white-space: nowrap; }
+  table.tbl td.wrap { color: var(--text-secondary); }
+  .empty-note { padding: 34px; text-align: center; color: var(--text-muted); font-size: 14px; }
+  .meta { color: var(--text-muted); font-size: 13px; line-height: 1.45; letter-spacing: -.003em; }
+  ol.rank { margin: 0; padding-left: 22px; }
+  ol.rank li { margin-bottom: 10px; padding-left: 3px; }
+  ol.rank li::marker { color: var(--text-muted); font-size: 13px; }
+  .kv { width: 100%; border-collapse: collapse; }
+  .kv td { padding: 9px 0; border-bottom: .5px solid var(--hairline); font-size: 14px;
+           color: var(--text-secondary); }
+  .kv td:first-child { padding-right: 12px; }
+  .kv td:last-child { text-align: right; font-weight: 500; color: var(--text-primary); }
+  .kv tr:last-child td { border-bottom: 0; }
+  .big { font-size: 30px; font-weight: 700; letter-spacing: -.024em; }
+
+  /* ---------- sheet ---------- */
+  .scrim { position: fixed; inset: 0; background: rgba(0,0,0,.32); opacity: 0; pointer-events: none;
+           z-index: 50; }
+  .scrim.open { opacity: 1; pointer-events: auto; }
+  /* Presented as a sheet: a real material arriving, with a grabber that says it can be thrown back. */
+  .drawer { position: fixed; top: 0; right: 0; width: min(620px, 96vw); height: 100vh;
+            background: var(--surface); border: 0; border-radius: var(--r-card) 0 0 var(--r-card);
+            z-index: 51; transform: translateX(100%); display: flex; flex-direction: column;
+            box-shadow: var(--shadow-sheet); touch-action: pan-y; }
+  .drawer.open { transform: none; }   /* the resting state, used when motion is off or JS has not run */
+  .drawer::before { content: ""; position: absolute; left: 7px; top: 50%; width: 5px; height: 42px;
+                    margin-top: -21px; border-radius: 980px; background: var(--track); }
+  .drawer .dhead { padding: 20px 24px 16px 26px; border-bottom: .5px solid var(--hairline); display: flex;
+                   align-items: flex-start; gap: 12px; cursor: grab; }
+  .drawer .dhead:active { cursor: grabbing; }
+  .drawer .dhead .t { font-size: 20px; font-weight: 700; line-height: 1.25; letter-spacing: -.021em;
+                      margin-top: 3px; }
+  .drawer .dbody { padding: 20px 24px 44px 26px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .drawer .dbody h4 { font-size: 13px; font-weight: 600; color: var(--text-muted); margin: 24px 0 10px;
+                      text-transform: uppercase; letter-spacing: .02em; }
+  .drawer .dbody h4:first-child { margin-top: 0; }
+  .drawer .dbody p { margin: 0 0 10px; color: var(--text-secondary); font-size: 14.5px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .link { padding: 6px 12px; border: 0; border-radius: 980px; font-size: 13.5px; background: var(--inset);
+          color: var(--series-1); font-weight: 500; white-space: nowrap; letter-spacing: -.01em; }
+  .mini { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .mini th { text-align: left; color: var(--text-muted); font-weight: 400; padding: 0 10px 7px 0; }
+  .mini td { padding: 9px 10px 9px 0; border-top: .5px solid var(--hairline); color: var(--text-secondary);
+             vertical-align: top; }
+  .mini td:first-child { color: var(--text-primary); white-space: nowrap; font-weight: 500; }
+
+  #tip { position: fixed; z-index: 70; pointer-events: none; opacity: 0;
+         background: var(--chrome); backdrop-filter: blur(24px) saturate(180%);
+         -webkit-backdrop-filter: blur(24px) saturate(180%);
+         color: var(--text-primary); padding: 8px 12px; border-radius: 11px; font-size: 13px;
+         max-width: 320px; line-height: 1.4; box-shadow: 0 12px 32px -12px rgba(0,0,0,.4);
+         transition: opacity .12s ease; }
+  #tip.on { opacity: 1; }
+
+  .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .year { border: 0; border-radius: var(--r-card); background: var(--surface); box-shadow: var(--shadow-1);
+          padding: 20px 22px; }
+  .year .yh { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+  .year .yh b { font-size: 16px; font-weight: 600; letter-spacing: -.016em; }
+  .year .yh span { color: var(--text-muted); font-size: 13px; margin-left: auto; }
+  .year ul { margin: 0 0 14px; padding-left: 0; list-style: none; }
+  .year li { margin-bottom: 8px; color: var(--text-secondary); font-size: 14px; }
+  .year li b { color: var(--text-primary); font-weight: 600; }
+
+  footer.page-foot { padding: 28px 26px 48px; color: var(--text-muted); font-size: 13px; max-width: 1560px; }
+
+  /* ---------- motion ---------- */
+  /* Feedback lands on pointer down, never on release. Scale is the only thing that moves, so a press
+     can be cancelled by dragging away without anything having to be undone. */
+  .btn, .fchip, .link, .tabs button, nav a, table.tbl tbody tr, .hcell, .tile, .status-pill {
+    transition: background-color .16s ease, color .16s ease, transform .11s var(--ease-out); }
+  .btn:active, .fchip:active, .link:active, .tabs button:active, .status-pill:active { transform: scale(.955); }
+  .tile:active, .hcell:not(.empty):active { transform: scale(.985); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(14px) scale(.985); }
+    .reveal.in { opacity: 1; transform: none;
+                 transition: opacity .5s var(--ease-out), transform .5s var(--ease-out);
+                 transition-delay: var(--d, 0ms); }
+    .fill { transform-origin: left center; transform: scaleX(0); }
+    .in .fill { transform: scaleX(1); transition: transform .7s var(--ease-out);
+                transition-delay: calc(var(--d, 0ms) + 90ms); }
+    .seg > span { transform-origin: left center; transform: scaleX(0); }
+    .in .seg > span { transform: scaleX(1); transition: transform .6s var(--ease-out);
+                      transition-delay: calc(var(--d, 0ms) + 110ms); }
+    .heat .hcell:not(.empty):hover { transform: scale(1.04); }
+    html.theming, html.theming * { transition: background-color .34s ease, color .34s ease,
+                                               border-color .34s ease !important; }
+    /* The sheet pushes its parent back, the way a card modal does on iOS. */
+    body.sheet-open main { transform: scale(.982) translateX(-10px); border-radius: 14px; overflow: hidden;
+                           transition: transform .42s var(--ease-out), border-radius .42s var(--ease-out); }
+    main { transition: transform .42s var(--ease-out), border-radius .42s var(--ease-out); }
+    .scrim { transition: opacity .32s var(--ease-out); }
+  }
+
+  /* Reduced transparency makes every material solid rather than frosted; reduced motion keeps the
+     feedback but drops the travel. */
+  @media (prefers-reduced-motion: reduce) {
+    .drawer { transition: opacity .2s ease; }
+    .scrim { transition: opacity .2s ease; }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .sidebar, .topbar, #tip { background: var(--surface); backdrop-filter: none;
+                              -webkit-backdrop-filter: none; }
+  }
+  @media (prefers-contrast: more) {
+    .card, .tile, .year, .tbl-wrap { border: 1px solid var(--text-secondary); }
+    .badge, .pill { border: 1px solid var(--text-secondary); }
+  }
+
+  @media screen and (max-width: 1240px) {
+    .g6, .tiles { grid-template-columns: repeat(3, 1fr); }
+    .g3, .g-2-1, .g-1-2, .roadmap { grid-template-columns: 1fr; }
+  }
+  @media screen and (max-width: 880px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; border-right: 0; }
+    nav { display: flex; overflow-x: auto; padding: 8px; }
+    nav a { white-space: nowrap; } nav .group { display: none; }
+    .sidebar footer { display: none; }
+    .g6, .g2, .tiles { grid-template-columns: repeat(2, 1fr); }
+    .sec { padding: 24px 16px 8px; }
+    .topbar { padding: 0 16px; }
+    .heat { grid-template-columns: 48px repeat(5, 1fr); }
+    /* On a phone the sheet comes up from the bottom and goes back down the same way. */
+    .drawer { top: auto; bottom: 0; right: 0; width: 100vw; height: 88vh;
+              border-radius: var(--r-card) var(--r-card) 0 0; transform: translateY(100%);
+              touch-action: pan-x; }
+    .drawer::before { left: 50%; top: 8px; width: 38px; height: 5px; margin: 0 0 0 -19px; }
+    .drawer .dhead { padding-top: 24px; }
+  }
+
+  /* ---------- print: one A4 page, no materials, no motion ---------- */
+  @page { size: A4 landscape; margin: 8mm; }
+  @media print {
+    body { background: #fff; font-size: 10px; letter-spacing: 0; }
+    .shell { display: block; }
+    .sidebar, .topbar, .drawer, .scrim, #tip, .sec:not(.page), footer.page-foot { display: none !important; }
+    main { transform: none !important; }
+    .page { padding: 0 2px 0 0 !important; max-width: none; }
+    .page > header { display: none; }
+    .print-head { display: flex !important; padding-bottom: 5px; margin-bottom: 7px; }
+    .print-head h1 { font-size: 13px; }
+    .tiles { grid-template-columns: repeat(6, 1fr) !important; }
+    .grid { gap: 6px !important; }
+    .card { padding: 8px 10px; border-radius: 7px; box-shadow: none; border: .5px solid #d9d9de; }
+    .card > h3 { margin-bottom: 5px; font-size: 10.5px; }
+    .tile { padding: 6px 8px; border-radius: 7px; box-shadow: none; border: .5px solid #d9d9de; }
+    .tile .k { min-height: 0; font-size: 9.5px; } .tile .v { font-size: 17px; margin: 2px 0 1px; }
+    .tile .d { font-size: 9px; } .tile .foot { gap: 5px; }
+    .badge, .pill { font-size: 9px; padding: 0 5px; background: none; }
+    .bar-row { margin: 1px 0; grid-template-columns: 152px 1fr 48px !important; gap: 8px; }
+    .track { height: 6px; } .bar-row .name, .bar-row .val { font-size: 9.5px; }
+    .kv td { padding: 2px 0; font-size: 10px; }
+    ol.rank li { margin-bottom: 1px; font-size: 10px; } .big { font-size: 18px; }
+    .meta { font-size: 9.5px; }
+    .reveal, .reveal.in { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .fill, .seg > span { transform: none !important; }
+    .tabs .ind { display: none; }
+  }
+  .print-head { display: none; justify-content: space-between; align-items: flex-end; gap: 16px;
+                border-bottom: 1.5px solid var(--text-primary); padding-bottom: 7px; margin-bottom: 9px; }
+  .print-head h1 { font-size: 15px; margin: 0; font-weight: 700; letter-spacing: -.02em; }
+  .print-head .sub { color: var(--text-secondary); margin-top: 3px; font-size: 10px; }
+  .print-head .right { text-align: right; }
+</style>

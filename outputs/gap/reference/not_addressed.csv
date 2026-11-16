@@ -1,0 +1,80 @@
+family,framework,req_id,title,mapped_controls,control_statuses,compliance_status,score,linked_risks,max_inherent_risk
+COBIT,COBIT,EDM03,Ensured Risk Optimization,,,Not addressed,0.0,,0
+COBIT,COBIT,APO01,Managed I&T Management Framework,,,Not addressed,0.0,,0
+COBIT,COBIT,APO12,Managed Risk,,,Not addressed,0.0,,0
+COBIT,COBIT,APO13,Managed Security,,,Not addressed,0.0,,0
+COBIT,COBIT,DSS06,Managed Business Process Controls,,,Not addressed,0.0,,0
+COBIT,COBIT,MEA01,Managed Performance and Conformance Monitoring,,,Not addressed,0.0,,0
+COBIT,COBIT,MEA02,Managed System of Internal Control,,,Not addressed,0.0,,0
+COBIT,COBIT,MEA03,Managed Compliance With External Requirements,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.6,Wireless access management,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.8,Public key infrastructure certificates,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.9,Strength of public key authentication,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.10,Authenticator feedback,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.11,Unsuccessful login attempts,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 1.12,System use notification,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.2,Wireless use control,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.3,Use control for portable and mobile devices,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.4,Mobile code,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.5,Session lock,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.7,Concurrent session control,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.9,Audit storage capacity,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.10,Response to audit processing failures,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 2.11,Timestamps,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.6,Deterministic output,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 3.7,Error handling,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 4.2,Information persistence,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 5.3,General purpose person-to-person communication restrictions,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 5.4,Application partitioning,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 7.1,Denial of service protection,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 7.2,Resource management,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 7.5,Emergency power,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 7.6,Network and security configuration settings,,,Not addressed,0.0,,0
+OT (IEC 62443 / SP 800-82),IEC 62443,62443-3-3 SR 7.7,Least functionality,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.1,Policies for information security,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.2,Information security roles and responsibilities,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.4,Management responsibilities,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.5,Contact with authorities,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.6,Contact with special interest groups,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.7,Threat intelligence,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.8,Information security in project management,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.10,Acceptable use of information and other associated assets,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.12,Classification of information,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.13,Labelling of information,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.25,Assessment and decision on information security events,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.28,Collection of evidence,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.31,"Legal, statutory, regulatory and contractual requirements",,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.32,Intellectual property rights,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.33,Protection of records,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.35,Independent review of information security,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.36,"Compliance with policies, rules and standards for information security",,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.5.37,Documented operating procedures,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.6.1,Screening,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.6.2,Terms and conditions of employment,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.6.4,Disciplinary process,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.6.6,Confidentiality or non-disclosure agreements,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.1,Physical security perimeters,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.2,Physical entry,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.3,"Securing offices, rooms and facilities",,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.4,Physical security monitoring,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.5,Protecting against physical and environmental threats,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.6,Working in secure areas,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.7,Clear desk and clear screen,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.8,Equipment siting and protection,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.9,Security of assets off-premises,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.10,Storage media,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.11,Supporting utilities,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.12,Cabling security,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.13,Equipment maintenance,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.7.14,Secure disposal or re-use of equipment,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.1,User endpoint devices,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.4,Access to source code,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.6,Capacity management,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.10,Information deletion,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.11,Data masking,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.21,Security of network services,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.30,Outsourced development,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.31,"Separation of development, test and production environments",,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.33,Test information,,,Not addressed,0.0,,0
+ISO 27001,ISO 27001,A.8.34,Protection of information systems during audit testing,,,Not addressed,0.0,,0
+PISF 2026,PISF 2026,PISF-RSK,Risk management,,,Not addressed,0.0,,0

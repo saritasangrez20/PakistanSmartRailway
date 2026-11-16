@@ -1,0 +1,20 @@
+framework,req_id,title,group,description,match_key
+NIST AI RMF,GOVERN 1,"Policies, processes, procedures and practices for mapping, measuring and managing AI risk are in place and implemented",GOVERN,"AI risk management, govern function",AI RMF GOVERN
+NIST AI RMF,GOVERN 2,Accountability structures so the right teams are responsible for AI risk,GOVERN,"AI risk management, govern function",AI RMF GOVERN
+NIST AI RMF,GOVERN 3,"Workforce diversity, equity, inclusion and accessibility in AI risk decisions",GOVERN,"AI risk management, govern function",AI RMF GOVERN
+NIST AI RMF,GOVERN 4,Organisational culture that considers and communicates AI risk,GOVERN,"AI risk management, govern function",AI RMF GOVERN
+NIST AI RMF,GOVERN 5,Engagement with relevant AI actors and affected stakeholders,GOVERN,"AI risk management, govern function",AI RMF GOVERN
+NIST AI RMF,GOVERN 6,"Policies for third party AI software, data and supply chain risk",GOVERN,"AI risk management, govern function",AI RMF GOVERN
+NIST AI RMF,MAP 1,Context of the AI system established and understood,MAP,"AI risk management, map function",AI RMF MAP
+NIST AI RMF,MAP 2,Categorisation of the AI system,MAP,"AI risk management, map function",AI RMF MAP
+NIST AI RMF,MAP 3,"AI capabilities, targeted usage, goals and expected benefits and costs understood",MAP,"AI risk management, map function",AI RMF MAP
+NIST AI RMF,MAP 4,Risks and benefits mapped for all components including third party data and software,MAP,"AI risk management, map function",AI RMF MAP
+NIST AI RMF,MAP 5,"Impacts to individuals, groups, organisations and society characterised",MAP,"AI risk management, map function",AI RMF MAP
+NIST AI RMF,MEASURE 1,Appropriate methods and metrics identified and applied,MEASURE,"AI risk management, measure function",AI RMF MEASURE
+NIST AI RMF,MEASURE 2,"AI systems evaluated for trustworthy characteristics including validity, safety and security",MEASURE,"AI risk management, measure function",AI RMF MEASURE
+NIST AI RMF,MEASURE 3,Mechanisms for tracking identified AI risks over time such as drift,MEASURE,"AI risk management, measure function",AI RMF MEASURE
+NIST AI RMF,MEASURE 4,Feedback about the efficacy of measurement gathered and assessed,MEASURE,"AI risk management, measure function",AI RMF MEASURE
+NIST AI RMF,MANAGE 1,"AI risks prioritised, responded to and managed based on assessments",MANAGE,"AI risk management, manage function",AI RMF MANAGE
+NIST AI RMF,MANAGE 2,"Strategies to maximise benefits and minimise negative impacts, including human oversight",MANAGE,"AI risk management, manage function",AI RMF MANAGE
+NIST AI RMF,MANAGE 3,AI risks and benefits from third party entities managed,MANAGE,"AI risk management, manage function",AI RMF MANAGE
+NIST AI RMF,MANAGE 4,"Risk treatments including response, recovery and monitoring documented and reviewed",MANAGE,"AI risk management, manage function",AI RMF MANAGE

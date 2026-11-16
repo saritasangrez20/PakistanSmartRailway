@@ -1,0 +1,153 @@
+{% include "motion_entrances.js.j2" %}
+
+/* Motion layer.
+   The entrances above run on every section. What this adds is the part a reader can touch: the detail sheet is
+   spring driven rather than curve driven, tracks the pointer one to one, carries the release
+   velocity into the animation, projects where a flick was going, and can be grabbed and reversed
+   while it is still moving. */
+(function () {
+  "use strict";
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+
+  /* ---------- spring ----------
+     Two parameters, the way Apple exposes them: response is roughly how long it takes to reach the
+     target, damping 1 settles without overshoot and below 1 bounces. A spring is used here instead
+     of a transition because it starts from wherever the value currently is, which is what makes an
+     interruption invisible. */
+  function Spring(onFrame) {
+    let x = 0, v = 0, target = 0, omega = 0, zeta = 1, raf = 0, last = 0, done = null;
+    function step(now) {
+      let dt = Math.min(0.064, (now - last) / 1000) || 0.016;
+      last = now;
+      const sub = 4, h = dt / sub;                       // substeps keep stiff springs stable
+      for (let i = 0; i < sub; i++) {
+        const a = -omega * omega * (x - target) - 2 * zeta * omega * v;
+        v += a * h;
+        x += v * h;
+      }
+      onFrame(x, v);
+      if (Math.abs(x - target) < 0.4 && Math.abs(v) < 6) {
+        x = target; v = 0; raf = 0; onFrame(x, v);
+        if (done) { const d = done; done = null; d(); }
+        return;
+      }
+      raf = requestAnimationFrame(step);
+    }
+    return {
+      get value() { return x; },
+      get velocity() { return v; },
+      get running() { return !!raf; },
+      set(value) { this.stop(); x = value; v = 0; onFrame(x, v); },
+      stop() { if (raf) cancelAnimationFrame(raf); raf = 0; },
+      to(value, opts) {
+        const o = opts || {};
+        target = value;
+        omega = 2 * Math.PI / (o.response || 0.4);
+        zeta = o.damping === undefined ? 1 : o.damping;
+        if (o.velocity !== undefined) v = o.velocity;
+        done = o.onDone || null;
+        if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); }
+      }
+    };
+  }
+
+  // Apple's projection from Designing Fluid Interfaces: where would this come to rest if released
+  // here at this speed. Snapping from the release point instead would make a flick feel dead.
+  const project = (velocity, rate) => (velocity / 1000) * (rate || 0.998) / (1 - (rate || 0.998));
+
+  // Past a boundary, resist progressively rather than stopping dead.
+  const rubber = (over, dim) => (over * dim * 0.55) / (dim + 0.55 * Math.abs(over));
+
+  /* ---------- the detail sheet ---------- */
+  const drawer = document.getElementById("drawer");
+  if (!drawer) return;
+  const vertical = () => innerWidth <= 880;
+  const extent = () => vertical() ? drawer.offsetHeight : drawer.offsetWidth;
+
+  let closed = extent();
+  const paint = x => {
+    drawer.style.transform = vertical() ? "translateY(" + x + "px)" : "translateX(" + x + "px)";
+  };
+  const sheet = Spring(paint);
+  let open = false;
+
+  function present() {
+    closed = extent();
+    open = true; closing = false;
+    document.body.classList.add("sheet-open");
+    if (reduced.matches) { drawer.style.transform = ""; return; }
+    // enter from off screen along the same axis it will leave by
+    sheet.set(sheet.running ? sheet.value : closed);
+    sheet.to(0, { response: 0.42, damping: 0.86 });      // a sheet may overshoot a little, it was thrown
+  }
+
+  let closing = false;
+
+  function dismiss(velocity) {
+    open = false; closing = true;
+    document.body.classList.remove("sheet-open");
+    if (reduced.matches) { drawer.style.transform = ""; closing = false; return; }
+    closed = extent();
+    sheet.to(closed, {
+      response: 0.34, damping: 1, velocity: velocity || 0,
+      onDone: () => { drawer.style.transform = ""; closing = false; }   // stylesheet owns the resting state
+    });
+  }
+
+  // A drag that dismissed the sheet already started its own spring with the release velocity, so the
+  // app's own close event must not restart it from scratch.
+  document.addEventListener("psr:drawer", e => {
+    if (e.detail.open) present();
+    else if (!closing) dismiss();
+  });
+
+  /* ---------- drag to dismiss ----------
+     The header is the handle. Movement tracks the pointer exactly, including the offset from where
+     it was grabbed, and the pointer is captured so tracking survives leaving the element. */
+  const head = drawer.querySelector(".dhead");
+  let dragging = false, startPt = 0, startOffset = 0, history = [];
+
+  head.addEventListener("pointerdown", e => {
+    if (e.target.closest("button")) return;             // the Close button is still a button
+    if (reduced.matches) return;
+    dragging = true;
+    sheet.stop();                                        // grab it mid flight, from where it actually is
+    startPt = vertical() ? e.clientY : e.clientX;
+    startOffset = sheet.value;
+    history = [{ p: startPt, t: performance.now() }];
+    head.setPointerCapture(e.pointerId);
+  });
+
+  head.addEventListener("pointermove", e => {
+    if (!dragging) return;
+    const pt = vertical() ? e.clientY : e.clientX;
+    let next = startOffset + (pt - startPt);
+    if (next < 0) next = rubber(next, extent());         // dragging further open resists
+    sheet.set(next);
+    history.push({ p: pt, t: performance.now() });
+    if (history.length > 6) history.shift();
+  });
+
+  function release(e) {
+    if (!dragging) return;
+    dragging = false;
+    try { head.releasePointerCapture(e.pointerId); } catch (err) {}
+    const now = performance.now();
+    const old = history.find(h => now - h.t < 120) || history[0];
+    const dt = Math.max(16, now - old.t);
+    const pt = vertical() ? e.clientY : e.clientX;
+    const velocity = (pt - old.p) / dt * 1000;           // px per second at the moment of release
+    const landing = sheet.value + project(velocity);     // where the throw was going
+    if (landing > extent() * 0.3) {
+      dismiss(velocity);
+      if (window.PSR) window.PSR.closeDrawer();          // keep the app's state in step
+    } else {
+      // Not far enough: spring home carrying the same velocity, so there is no seam at the handover.
+      sheet.to(0, { response: 0.4, damping: 0.82, velocity: velocity });
+    }
+  }
+  head.addEventListener("pointerup", release);
+  head.addEventListener("pointercancel", release);
+
+  addEventListener("resize", () => { if (open) sheet.set(0); });
+})();

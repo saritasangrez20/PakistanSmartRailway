@@ -1,0 +1,23 @@
+framework,req_id,title,group,description,match_key
+NIST CSF,GV.OC,Organizational Context,GOVERN,Mission stakeholders and legal requirements understood,CSF GOVERN
+NIST CSF,GV.RM,Risk Management Strategy,GOVERN,Risk appetite priorities and assumptions established,CSF GOVERN
+NIST CSF,GV.RR,"Roles, Responsibilities, and Authorities",GOVERN,Cybersecurity roles and accountability established,CSF GOVERN
+NIST CSF,GV.PO,Policy,GOVERN,Cybersecurity policy established communicated and enforced,CSF GOVERN
+NIST CSF,GV.OV,Oversight,GOVERN,Results of risk management activities used to adjust strategy,CSF GOVERN
+NIST CSF,GV.SC,Cybersecurity Supply Chain Risk Management,GOVERN,Supplier and third party cyber risk managed; contract requirements,CSF GOVERN
+NIST CSF,ID.AM,Asset Management,IDENTIFY,Assets data hardware software and services identified and managed,CSF IDENTIFY
+NIST CSF,ID.RA,Risk Assessment,IDENTIFY,Cybersecurity risk to the organisation assets and individuals understood,CSF IDENTIFY
+NIST CSF,ID.IM,Improvement,IDENTIFY,Improvements identified from evaluations tests and exercises,CSF IDENTIFY
+NIST CSF,PR.AA,"Identity Management, Authentication, and Access Control",PROTECT,Access limited to authorised users services and hardware; MFA and least privilege,CSF PROTECT
+NIST CSF,PR.AT,Awareness and Training,PROTECT,Personnel given awareness and training,CSF PROTECT
+NIST CSF,PR.DS,Data Security,PROTECT,Data managed to protect confidentiality integrity and availability; encryption and backups,CSF PROTECT
+NIST CSF,PR.PS,Platform Security,PROTECT,Hardware software and services managed securely; configuration management and patching,CSF PROTECT
+NIST CSF,PR.IR,Technology Infrastructure Resilience,PROTECT,Architecture managed for resilience; network segmentation,CSF PROTECT
+NIST CSF,DE.CM,Continuous Monitoring,DETECT,Assets monitored to find anomalies indicators of compromise and adverse events,CSF DETECT
+NIST CSF,DE.AE,Adverse Event Analysis,DETECT,Anomalies and indicators analysed to characterise events,CSF DETECT
+NIST CSF,RS.MA,Incident Management,RESPOND,Responses to detected incidents managed,CSF RESPOND
+NIST CSF,RS.AN,Incident Analysis,RESPOND,Investigations conducted to support response and recovery,CSF RESPOND
+NIST CSF,RS.CO,Incident Response Reporting and Communication,RESPOND,Response coordinated with stakeholders,CSF RESPOND
+NIST CSF,RS.MI,Incident Mitigation,RESPOND,Activities to prevent expansion of an incident,CSF RESPOND
+NIST CSF,RC.RP,Incident Recovery Plan Execution,RECOVER,Restoration activities performed to ensure availability; restore testing,CSF RECOVER
+NIST CSF,RC.CO,Incident Recovery Communication,RECOVER,Restoration activities coordinated with parties,CSF RECOVER

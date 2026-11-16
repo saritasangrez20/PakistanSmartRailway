@@ -1,0 +1,14 @@
+framework,req_id,title,group,description,match_key
+COBIT,EDM03,Ensured Risk Optimization,COBIT 2019,Board level direction and monitoring of IT risk,COBIT EDM03
+COBIT,APO01,Managed I&T Management Framework,COBIT 2019,Governance structures roles and policies for IT,COBIT APO01
+COBIT,APO10,Managed Vendors,COBIT 2019,Manage IT vendors and supplier contracts and performance,COBIT APO10
+COBIT,APO12,Managed Risk,COBIT 2019,Identify assess and reduce IT related risk,COBIT APO12
+COBIT,APO13,Managed Security,COBIT 2019,Information security management system,COBIT APO13
+COBIT,BAI09,Managed Assets,COBIT 2019,Manage IT assets through their lifecycle,COBIT BAI09
+COBIT,BAI10,Managed Configuration,COBIT 2019,Maintain configuration baselines,COBIT BAI10
+COBIT,DSS04,Managed Continuity,COBIT 2019,Business continuity and disaster recovery plans and testing,COBIT DSS04
+COBIT,DSS05,Managed Security Services,COBIT 2019,"Protect enterprise information: identity and logical access, user accounts, endpoints, network security and monitoring",COBIT DSS05
+COBIT,DSS06,Managed Business Process Controls,COBIT 2019,Business process controls including roles and segregation of duties,COBIT DSS06
+COBIT,MEA01,Managed Performance and Conformance Monitoring,COBIT 2019,Monitor performance and conformance of IT,COBIT MEA01
+COBIT,MEA02,Managed System of Internal Control,COBIT 2019,Monitor and evaluate internal controls and audit,COBIT MEA02
+COBIT,MEA03,Managed Compliance With External Requirements,COBIT 2019,Ensure compliance with laws regulations and contracts,COBIT MEA03
