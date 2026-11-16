@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PSR Information Assurance Dashboard</title>
-{% include "style_" ~ style ~ ".html.j2" %}
+{% include "style.html.j2" %}
 </head>
-<body data-style="{{ style }}">
+<body>
 <div class="shell">
   <aside class="sidebar">
     <div class="brand">
@@ -1282,6 +1282,6 @@
   document.dispatchEvent(new CustomEvent("psr:ready"));
 })();
 </script>
-<script>{% include "motion_" ~ style ~ ".js.j2" %}</script>
+<script>{% include "motion.js.j2" %}</script>
 </body>
 </html>

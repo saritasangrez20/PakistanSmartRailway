@@ -18,13 +18,8 @@ from .config import ASSESSMENTS, OUTPUTS, REGISTERS
 from .scoring import main as compute_metrics
 
 TEMPLATES = Path(__file__).resolve().parent / "templates"
-STYLES = ("base", "apple")
-
-
-def out_paths(style: str) -> tuple[Path, Path]:
-    """Each visual style writes its own pair of files; "base" keeps the names the brief asks for."""
-    stem = "ciso_dashboard" if style == "base" else f"ciso_dashboard_{style}"
-    return OUTPUTS / f"{stem}.html", OUTPUTS / f"{stem}.pdf"
+HTML_OUT = OUTPUTS / "ciso_dashboard.html"
+PDF_OUT = OUTPUTS / "ciso_dashboard.pdf"
 
 
 def pct_status(p: float) -> tuple[str, str]:
@@ -148,7 +143,7 @@ def _evaluation_extras() -> dict:
             "ai_backends": report.get("backend_comparison", [])}
 
 
-def render(metrics: dict, style: str = "base") -> str:
+def render(metrics: dict) -> str:
     env = Environment(loader=FileSystemLoader(TEMPLATES), autoescape=select_autoescape(["html", "j2"]))
     targets = dict(pd.read_csv(ASSESSMENTS / "maturity.csv")[["capability", "target_year3"]].values)
     payload = {"metrics": metrics, **datasets()}
@@ -156,7 +151,7 @@ def render(metrics: dict, style: str = "base") -> str:
     data_json = json.dumps(payload, separators=(",", ":"), default=str).replace("<", "\\u003c")
     return env.get_template("dashboard.html.j2").render(
         m=metrics, org=metrics["organisation"], generated=date.today().isoformat(),
-        tiles=build_tiles(metrics), ai=ai_panel(metrics), data_json=data_json, style=style,
+        tiles=build_tiles(metrics), ai=ai_panel(metrics), data_json=data_json,
         targets={k: float(v) for k, v in targets.items()})
 
 
@@ -195,16 +190,13 @@ def export_pdf(html_path: Path, pdf_path: Path) -> bool:
     return True
 
 
-def main(pdf: bool = True, style: str = "base") -> Path:
-    if style not in STYLES:
-        raise SystemExit(f"Unknown style {style!r}: choose from {', '.join(STYLES)}")
+def main(pdf: bool = True) -> Path:
     metrics = compute_metrics(quiet=True)
-    html_out, pdf_out = out_paths(style)
-    html_out.write_text(render(metrics, style), encoding="utf-8")
-    print(f"Written: {html_out.relative_to(OUTPUTS.parent)}")
-    if pdf and export_pdf(html_out, pdf_out):
-        print(f"Written: {pdf_out.relative_to(OUTPUTS.parent)}")
-    return html_out
+    HTML_OUT.write_text(render(metrics), encoding="utf-8")
+    print(f"Written: {HTML_OUT.relative_to(OUTPUTS.parent)}")
+    if pdf and export_pdf(HTML_OUT, PDF_OUT):
+        print(f"Written: {PDF_OUT.relative_to(OUTPUTS.parent)}")
+    return HTML_OUT
 
 
 if __name__ == "__main__":

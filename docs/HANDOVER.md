@@ -24,7 +24,7 @@ All three are done. What is left is mostly **writing the final report**.
 | Gap analysis | `outputs/gap/gap_summary.md` | 52 requirement gaps ranked by the risk behind them |
 | AI evaluation | `outputs/evaluation/evaluation.md` | Trust Score, recall, Automation Gain, comparison with a no-LLM baseline |
 | CISO dashboard | `outputs/ciso_dashboard.pdf` | One page, all numbers calculated |
-| Dashboard drill-downs | `outputs/ciso_dashboard.html` | The same file is also a nine section site: risk heat map, control matrix, compliance, gaps, assets, audit, maturity, AI. Click any row for the full register entry. Only the executive section prints, so the PDF stays one page |
+| Dashboard drill-downs | `outputs/ciso_dashboard.html` | The same file is also a nine section site: risk heat map, control matrix, compliance, gaps, assets, audit, maturity, AI. Click any row for the full register entry. The detail sheet can be dragged or thrown closed. Only the executive section prints, so the PDF stays one page |
 | AI Automation Card | `docs/ai_automation_card.md` | The 12 item card the brief asks for (ready to paste) |
 | AI governance of our own AI | `docs/ai_governance.md` | The 9 AI risks from the brief, with our controls and who is accountable (ready to paste) |
 | Decisions log | `docs/decisions.md` | Every correction to A1 to A3 and every assumption (read before the viva) |
@@ -97,12 +97,6 @@ python run.py validate
 python run.py score
 python run.py dashboard
 ```
-
-There are two visual builds of the same dashboard from the same data: the default, and an Apple
-styled one rendered with `python run.py dashboard --style apple` (or `--style both`). The Apple build
-writes `outputs/ciso_dashboard_apple.html` and `.pdf`, uses system colours, translucent chrome and
-spring driven motion, and its detail sheet can be dragged or thrown closed. Pick one for the
-submission; both print the same one page executive view.
 
 Open `outputs/ciso_dashboard.html` in a browser for the interactive version: search and filter every register,
 click a heat map cell to filter the risks in it, click any row to open the full entry with its linked controls,
