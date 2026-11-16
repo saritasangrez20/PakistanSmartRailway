@@ -24,6 +24,7 @@ All three are done. What is left is mostly **writing the final report**.
 | Gap analysis | `outputs/gap/gap_summary.md` | 52 requirement gaps ranked by the risk behind them |
 | AI evaluation | `outputs/evaluation/evaluation.md` | Trust Score, recall, Automation Gain, comparison with a no-LLM baseline |
 | CISO dashboard | `outputs/ciso_dashboard.pdf` | One page, all numbers calculated |
+| Dashboard drill-downs | `outputs/ciso_dashboard.html` | The same file is also a nine section site: risk heat map, control matrix, compliance, gaps, assets, audit, maturity, AI. Click any row for the full register entry. Only the executive section prints, so the PDF stays one page |
 | AI Automation Card | `docs/ai_automation_card.md` | The 12 item card the brief asks for (ready to paste) |
 | AI governance of our own AI | `docs/ai_governance.md` | The 9 AI risks from the brief, with our controls and who is accountable (ready to paste) |
 | Decisions log | `docs/decisions.md` | Every correction to A1 to A3 and every assumption (read before the viva) |
@@ -96,6 +97,10 @@ python run.py validate
 python run.py score
 python run.py dashboard
 ```
+
+Open `outputs/ciso_dashboard.html` in a browser for the interactive version: search and filter every register,
+click a heat map cell to filter the risks in it, click any row to open the full entry with its linked controls,
+assets, evidence and findings. The Theme button switches light and dark; Print one-pager produces the PDF.
 
 You do **not** need to re-run the AI (`python run.py map`): it takes 46 minutes and the reviewed results
 are already committed. Only re-run it if you change `data/registers/controls.csv`. After editing any

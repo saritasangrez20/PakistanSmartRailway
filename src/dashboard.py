@@ -14,7 +14,7 @@ from pathlib import Path
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from .config import ASSESSMENTS, OUTPUTS
+from .config import ASSESSMENTS, OUTPUTS, REGISTERS
 from .scoring import main as compute_metrics
 
 TEMPLATES = Path(__file__).resolve().parent / "templates"
@@ -99,12 +99,60 @@ def ai_panel(m: dict) -> dict | None:
             "ai_hrs": round(ai["ai_assisted_minutes"] / 60, 1)}
 
 
+def _rows(path: Path, columns: list[str] | None = None) -> list[dict]:
+    """A CSV as plain records, blanks as empty strings so the browser never sees NaN."""
+    frame = pd.read_csv(path).fillna("")
+    if columns:
+        frame = frame[[c for c in columns if c in frame.columns]]
+    return json.loads(frame.to_json(orient="records"))
+
+
+def datasets() -> dict:
+    """The register rows the drill-down sections read, embedded in the page as JSON.
+
+    Nothing here is recalculated: the scored risk register, the registers and the gap outputs are
+    read as they are, so a table in the browser cannot disagree with metrics.md.
+    """
+    scored = pd.read_csv(OUTPUTS / "risk_register_scored.csv").fillna("")
+    detail = pd.read_csv(REGISTERS / "risks.csv").fillna("")[
+        ["risk_id", "asset_ids", "category", "threat_source", "vulnerability", "target_rationale"]]
+    risks = scored.merge(detail, on="risk_id", how="left").fillna("")
+    return {
+        "risks": json.loads(risks.to_json(orient="records")),
+        "controls": _rows(REGISTERS / "controls.csv"),
+        "assets": _rows(REGISTERS / "assets.csv"),
+        "data_inventory": _rows(REGISTERS / "data_inventory.csv"),
+        "findings": _rows(REGISTERS / "audit_findings.csv"),
+        "compliance": _rows(REGISTERS / "compliance.csv"),
+        "evidence": _rows(REGISTERS / "evidence.csv"),
+        "maturity": _rows(ASSESSMENTS / "maturity.csv"),
+        "readiness": _rows(ASSESSMENTS / "readiness.csv"),
+        "gaps": _rows(OUTPUTS / "gap" / "gap_register.csv"),
+        "frameworks": _rows(OUTPUTS / "gap" / "framework_summary.csv"),
+        **_evaluation_extras(),
+    }
+
+
+def _evaluation_extras() -> dict:
+    """Per framework accuracy and the no-LLM baseline, if evaluate.py has been run."""
+    path = OUTPUTS / "evaluation" / "evaluation.json"
+    if not path.exists():
+        return {"ai_per_family": [], "ai_backends": []}
+    report = json.loads(path.read_text(encoding="utf-8"))
+    return {"ai_per_family": report.get("per_family", []),
+            "ai_backends": report.get("backend_comparison", [])}
+
+
 def render(metrics: dict) -> str:
     env = Environment(loader=FileSystemLoader(TEMPLATES), autoescape=select_autoescape(["html", "j2"]))
     targets = dict(pd.read_csv(ASSESSMENTS / "maturity.csv")[["capability", "target_year3"]].values)
+    payload = {"metrics": metrics, **datasets()}
+    # \u003c keeps a stray "</script>" in any register cell from closing the data block early
+    data_json = json.dumps(payload, separators=(",", ":"), default=str).replace("<", "\\u003c")
     return env.get_template("dashboard.html.j2").render(
         m=metrics, org=metrics["organisation"], generated=date.today().isoformat(),
-        tiles=build_tiles(metrics), ai=ai_panel(metrics), targets={k: float(v) for k, v in targets.items()})
+        tiles=build_tiles(metrics), ai=ai_panel(metrics), data_json=data_json,
+        targets={k: float(v) for k, v in targets.items()})
 
 
 def export_pdf(html_path: Path, pdf_path: Path) -> bool:
