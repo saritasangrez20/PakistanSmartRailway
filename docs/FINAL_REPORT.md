@@ -12,8 +12,6 @@ Group 07
 | Sarita Sangrez | 23i-2088 |
 | Subhan Umer | 23i-2054 |
 
----
-
 ## 0. How to read this report
 
 Every number in this report is calculated, not estimated. All five master registers live in
@@ -29,8 +27,6 @@ to Requirement to Evidence before any scoring runs. Right now it reports zero er
 PSR is hypothetical. We built it for this course and carried it unchanged through Assignments 1 to 4.
 Where those assignments disagreed with each other, one value was chosen and applied everywhere.
 Those corrections are listed in `docs/decisions.md` and summarised in section 20.
-
----
 
 ## 1. Organisation architecture
 
@@ -90,8 +86,6 @@ operational decision support.
 One boundary matters more than all the rest, and that's the one between IT and OT. Section 16 maps it onto the Purdue
 model. Today that boundary is physically present but rule-wise it is open, which is finding AUD-01.
 
----
-
 ## 2. Governance structure
 
 ### 2.1 Roles
@@ -147,8 +141,6 @@ at 3 and not 4 despite the audit plan itself being sound.
 The SOC sits in the first line operationally and reports to the CISO. Deliberately so. Detection
 is an operational activity, and keeping it under the CISO is what gives the second line its own telemetry instead of only the first line's word.
 
----
-
 ## 3. Security policy set
 
 Governance scored 2 out of 5 because the structure exists but the policy set is not formalised. The
@@ -198,8 +190,6 @@ requirement.
 | Audit test | Sample 20 vendor sessions, confirm each has an approval, an expiry and a recording |
 | Finding | PIR-01, Critical. Standing vendor account with no expiry was the entry point in the Assignment 3 incident |
 
----
-
 ## 4. Asset inventory
 
 Criticality runs 1 to 5. Classification follows the highest class of data the asset holds, which is
@@ -225,8 +215,6 @@ why the mobile app (AST-10) is Restricted and not Public. Yes, it serves public 
 
 Seven assets carry criticality 5. Four of them are either OT or feed OT, which is what makes the IT
 to OT boundary the single most important control in the programme.
-
----
 
 ## 5. Data inventory and data flow
 
@@ -291,8 +279,6 @@ That one-way feed is the design decision worth defending. The AI engine reads OT
 writes back to it. So a poisoned model can produce a wrong maintenance recommendation, which
 a human planner reviews, but it cannot issue a command to a train. CTL-05 and CTL-06 are both Gaps,
 so today the telemetry entering that pipe is neither authenticated nor validated. Hence risk R-11.
-
----
 
 ## 6. Risk register and risk calculations
 
@@ -366,8 +352,6 @@ are reviewed annually by the Risk Committee.
 
 Our register respects this. Neither accepted risk touches safety, OT or Restricted data.
 
----
-
 ## 7. Risk treatment and residual risk
 
 ### 7.1 Treatment strategies used
@@ -431,8 +415,6 @@ both its controls (CTL-07 Partial, CTL-22 Implemented) are the furthest along in
 
 Read as a whole, the table says something uncomfortable and it's true. PSR's risk reduction so far has
 come almost entirely from controls that were easy to buy. Controls that would move the Critical risks are the ones nobody has built.
-
----
 
 ## 8. Framework selection and control matrix
 
@@ -535,8 +517,6 @@ CTL-12, CTL-15, CTL-16 and CTL-25.
 
 PISF alignment overall is 38.5%.
 
----
-
 ## 9. Compliance assessment and gap analysis
 
 ### 9.1 Method
@@ -627,14 +607,13 @@ Read properly, it says OT needs its own control programme, not that the existing
 Requirements no control addresses are listed in `outputs/gap/not_addressed.csv`. Most are physical,
 HR or secure-development controls that fall outside the 25 in the register. They belong in the Statement of Applicability discussion and should not be counted as failures.
 
----
-
 ## 10. Audit plan and findings
 
 ### 10.1 Plan
 
-Audit runs the chain Requirement → Control → Evidence → Test → Finding → Recommendation. Evidence
-is graded by how much it can be trusted:
+Each test starts at a requirement, names the control meant to satisfy it, pulls the evidence that
+control produces, examines that evidence, and records a finding with a recommendation wherever the
+evidence does not hold. Evidence is graded by how much it can be trusted:
 
 | Evidence type | Confidence |
 |---|---|
@@ -683,8 +662,6 @@ PSR recovered at all. The observation against it was that recoverability was nev
 observation then became PIR-04 when the restore took 61 hours.
 
 An observation isn't a finding. This one became a finding because nobody acted on it.
-
----
 
 ## 11. IAM architecture
 
@@ -789,8 +766,6 @@ Sample review table:
 
 IAM readiness is 4 of 10 checks, so 40%.
 
----
-
 ## 12. Data protection architecture
 
 ### 12.1 Encryption
@@ -836,8 +811,6 @@ through a legitimate authenticated session. Encryption at rest doesn't stop an a
 
 Residual privacy risk after the planned controls is R-09 at 10 out of 25, down from 20. It does not
 reach Low, and that is deliberate. Any system holding 250,000 passengers' identity data every day carries irreducible exposure.
-
----
 
 ## 13. BIA, RTO/RPO and DR architecture
 
@@ -905,8 +878,6 @@ What it did not do was make recovery fast. BC/DR readiness is 6 of 10, and the f
 on the same theme: no BIA signed off, restores never timed, failover never exercised, RTO never met
 in a test. PSR can recover. What PSR can't say is how long recovery takes, and PIR-04 is what happens when
 you find out during the incident. 61 hours against an 8 hour objective, 53 hours over.
-
----
 
 ## 14. Incident response and SOC architecture
 
@@ -986,8 +957,6 @@ that should not have been open.
 
 Incident readiness is 5 of 11 checks, so 45.5%.
 
----
-
 ## 15. Cloud security
 
 ### 15.1 Shared responsibility
@@ -1048,8 +1017,6 @@ THEN  DENY
 WHY   passenger data sovereignty
 ```
 
----
-
 ## 16. IoT and OT security
 
 ### 16.1 Purdue model
@@ -1104,8 +1071,6 @@ has not moved at all because both of its controls are Gaps.
 Supply chain compliance is 15%, the second weakest domain, and PIR-01 shows what that buys you. The
 entry point in the incident was a vendor account, not an exploit. No vulnerability was used. They just logged in.
 
----
-
 ## 17. Quantum readiness
 
 PSR is not migrating to post-quantum cryptography this year. This section is here to work out which systems will need it and which can wait, because "harvest now, decrypt later" makes the
@@ -1124,8 +1089,6 @@ decision about data lifetime rather than about today's threat.
 That ordering is deliberate and not the obvious one. Most PQC plans start with TLS because it's visible. For a railway, signed firmware comes first, because a signalling controller installed in
 2026 is still in the track in 2046, and whoever can forge its update signature then can push
 whatever they want to it.
-
----
 
 ## 18. AI automation
 
@@ -1240,8 +1203,6 @@ the AI is unreliable. Nothing in the output said so. Accuracy agreed with the gu
 Which is the argument for the human review step existing at all. The model mostly doesn't hallucinate. What it can't do is see when the measurement around it has
 gone wrong.
 
----
-
 ## 19. Maturity assessment and roadmap
 
 ### 19.1 Current maturity
@@ -1331,14 +1292,14 @@ Ranked by the inherent risk exposure each one would reduce. Calculated, not chos
 | 4 | CTL-02 | Remove standing vendor access, time-bound checkout through PAM with MFA | R-01, R-16 | CISO |
 | 5 | CTL-01 | Default-deny between IT and OT, every exception owned and expiring | R-01, R-02, R-03 | OT/Engineering |
 
----
-
 ## 20. Final assurance position
 
 ### 20.1 The dashboard
 
 Our one-page CISO Executive Dashboard is `outputs/ciso_dashboard.pdf`, generated from the registers
-by `dashboard.py`. It's reproduced on the next page.
+by `dashboard.py`. It's reproduced on the next page. The HTML beside it holds the same page plus the
+registers underneath it, so clicking a heat map cell or a control opens the rows the figure was
+calculated from. Printing it gives back the same single page.
 
 | Measure | Result |
 |---|---|

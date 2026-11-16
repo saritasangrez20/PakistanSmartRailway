@@ -129,7 +129,13 @@ To regenerate the Word and PDF files after editing the markdown:
 
 ```bash
 pandoc docs/FINAL_REPORT.md -o docs/PSR_Final_Project_Report_Group07.docx --toc --toc-depth=2
+pandoc docs/FINAL_REPORT.md -t html5 -s --toc --toc-depth=2 -o /tmp/report.html \
+  --metadata title="PSR Final Project Report"
+weasyprint /tmp/report.html docs/PSR_Final_Project_Report_Group07.pdf -s docs/report.css
 ```
+
+`docs/report.css` is the A4 stylesheet for the PDF: page numbers, repeated table headers on tables
+that run over a page, and monospace blocks sized so the widest diagram line still fits the margin.
 
 The table below maps each brief component to the section that covers it.
 
