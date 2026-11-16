@@ -7,6 +7,7 @@ Examples
     python run.py gaps
     python run.py evaluate
     python run.py dashboard
+    python run.py dashboard --style apple
     python run.py all --backend ollama
 """
 from __future__ import annotations
@@ -27,6 +28,8 @@ def main(argv=None) -> int:
     parser.add_argument("--approved-only", action="store_true",
                         help="gaps: only use mappings a human marked as accept")
     parser.add_argument("--no-pdf", action="store_true", help="dashboard: skip the PDF export")
+    parser.add_argument("--style", choices=["base", "apple", "both"], default="base",
+                        help="dashboard: visual style to render (default base)")
     args = parser.parse_args(argv)
 
     steps = ["validate", "score", "map", "gaps", "evaluate", "dashboard"] if args.step == "all" else [args.step]
@@ -54,7 +57,8 @@ def main(argv=None) -> int:
             scoring.main(quiet=True)  # refresh metrics with the AI KPIs
         elif step == "dashboard":
             from src import dashboard
-            dashboard.main(pdf=not args.no_pdf)
+            for style in (["base", "apple"] if args.style == "both" else [args.style]):
+                dashboard.main(pdf=not args.no_pdf, style=style)
     return 0
 
 

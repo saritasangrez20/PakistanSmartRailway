@@ -1,0 +1,114 @@
+/* Motion for the standard dashboard.
+   Rules followed here: feedback on pointer down rather than on release, entrances that run once and
+   never replay, only transform and opacity animated, and nothing at all when the reader has asked
+   for reduced motion or when the page is being printed. */
+(function () {
+  "use strict";
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const $$ = s => Array.from(document.querySelectorAll(s));
+
+  /* ---------- entrances ---------- */
+  // Cards, tiles and roadmap columns fade up once, staggered across a row so the eye reads left to
+  // right. The stagger resets per container, so a six tile row never waits on the row above it.
+  function stage() {
+    if (reduced.matches) return;
+    const groups = $$(".grid, .roadmap, .sec > header");
+    groups.forEach(g => {
+      const kids = g.matches("header") ? [g] : Array.from(g.children);
+      kids.forEach((el, i) => {
+        el.classList.add("reveal");
+        el.style.setProperty("--d", Math.min(i, 7) * 45 + "ms");
+      });
+    });
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        obs.unobserve(e.target);
+        countUp(e.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    $$(".reveal").forEach(el => io.observe(el));
+  }
+
+  /* ---------- count up ---------- */
+  // The headline figure counts to its real value. It animates the first text node only, so the unit
+  // in <small> and any marked up detail are untouched, and it always lands exactly on the number
+  // that scoring.py produced.
+  function countUp(root) {
+    if (reduced.matches) return;
+    const targets = root.matches(".tile") ? [root.querySelector(".v")]
+      : Array.from(root.querySelectorAll(".tile .v, .big"));
+    targets.filter(Boolean).forEach(el => {
+      if (el.dataset.counted) return;
+      const node = el.firstChild;
+      if (!node || node.nodeType !== 3) return;
+      const raw = node.textContent.trim();
+      const m = raw.match(/^(\d+(?:\.\d+)?)(.*)$/);
+      if (!m) return;
+      el.dataset.counted = "1";
+      const end = parseFloat(m[1]), tail = m[2] || "";
+      const dp = (m[1].split(".")[1] || "").length;
+      const dur = 620, t0 = performance.now();
+      const step = now => {
+        const p = Math.min(1, (now - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);          // ease out, settles rather than stops
+        node.textContent = (end * eased).toFixed(dp) + tail;
+        if (p < 1) requestAnimationFrame(step);
+        else node.textContent = m[1] + tail;           // land on the exact figure, not a rounded one
+      };
+      node.textContent = (0).toFixed(dp) + tail;
+      requestAnimationFrame(step);
+    });
+  }
+
+  /* ---------- segmented control ---------- */
+  function tabs() {
+    $$(".tabs").forEach(group => {
+      const ind = document.createElement("span");
+      ind.className = "ind";
+      group.insertBefore(ind, group.firstChild);
+      const move = () => {
+        const on = group.querySelector("button.on");
+        if (!on) return;
+        ind.style.width = on.offsetWidth + "px";
+        ind.style.transform = "translateX(" + (on.offsetLeft - 3) + "px)";
+      };
+      move();
+      group.addEventListener("click", () => requestAnimationFrame(move));
+      addEventListener("resize", move);
+    });
+  }
+
+  /* ---------- theme change ---------- */
+  // A hard repaint between light and dark is a brightness jump; this eases every colour for a third
+  // of a second and then takes the transition back off so scrolling stays cheap.
+  function theme() {
+    const btn = document.getElementById("themeBtn");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      if (reduced.matches) return;
+      document.documentElement.classList.add("theming");
+      setTimeout(() => document.documentElement.classList.remove("theming"), 340);
+    }, true);
+  }
+
+  /* ---------- toolbar separation ---------- */
+  function toolbar() {
+    const bar = document.querySelector(".topbar");
+    if (!bar) return;
+    const set = () => bar.classList.toggle("scrolled", scrollY > 6);
+    addEventListener("scroll", set, { passive: true });
+    set();
+  }
+
+  stage(); tabs(); theme(); toolbar();
+
+  // The drawer is built by the app; all this adds is the content settling in behind it.
+  document.addEventListener("psr:drawer", e => {
+    if (reduced.matches || !e.detail.open) return;
+    const body = document.getElementById("dBody");
+    body.animate([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }],
+      { duration: 280, easing: "cubic-bezier(.22,.61,.36,1)", fill: "both" });
+  });
+})();

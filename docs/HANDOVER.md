@@ -98,6 +98,12 @@ python run.py score
 python run.py dashboard
 ```
 
+There are two visual builds of the same dashboard from the same data: the default, and an Apple
+styled one rendered with `python run.py dashboard --style apple` (or `--style both`). The Apple build
+writes `outputs/ciso_dashboard_apple.html` and `.pdf`, uses system colours, translucent chrome and
+spring driven motion, and its detail sheet can be dragged or thrown closed. Pick one for the
+submission; both print the same one page executive view.
+
 Open `outputs/ciso_dashboard.html` in a browser for the interactive version: search and filter every register,
 click a heat map cell to filter the risks in it, click any row to open the full entry with its linked controls,
 assets, evidence and findings. The Theme button switches light and dark; Print one-pager produces the PDF.
